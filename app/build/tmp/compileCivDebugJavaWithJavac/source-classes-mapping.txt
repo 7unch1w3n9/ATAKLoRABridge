@@ -1,0 +1,12 @@
+com/atakmap/android/LoRaBridge/plugin/LoRaBridgeTool.java
+ com.atakmap.android.LoRaBridge.plugin.LoRaBridgeTool
+com/atakmap/android/LoRaBridge/plugin/BuildConfig.java
+ com.atakmap.android.LoRaBridge.plugin.BuildConfig
+com/atakmap/android/LoRaBridge/LoRaBridgeMapComponent.java
+ com.atakmap.android.LoRaBridge.LoRaBridgeMapComponent
+com/atakmap/android/LoRaBridge/plugin/PluginNativeLoader.java
+ com.atakmap.android.LoRaBridge.plugin.PluginNativeLoader
+com/atakmap/android/LoRaBridge/plugin/LoRaBridgeLifecycle.java
+ com.atakmap.android.LoRaBridge.plugin.LoRaBridgeLifecycle
+com/atakmap/android/LoRaBridge/LoRaBridgeDropDownReceiver.java
+ com.atakmap.android.LoRaBridge.LoRaBridgeDropDownReceiver

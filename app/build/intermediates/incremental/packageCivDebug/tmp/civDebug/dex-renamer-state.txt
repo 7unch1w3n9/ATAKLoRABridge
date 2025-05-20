@@ -1,0 +1,10 @@
+#Mon May 19 18:07:42 CEST 2025
+base.2=Z\:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\dex\\civDebug\\mergeProjectDexCivDebug\\15\\classes.dex
+path.2=15/classes.dex
+base.1=Z\:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\dex\\civDebug\\mergeProjectDexCivDebug\\14\\classes.dex
+path.1=14/classes.dex
+base.0=Z\:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\dex\\civDebug\\mergeProjectDexCivDebug\\0\\classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=0/classes.dex

@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "MERGED_MANIFESTS",
+    "kind": "Directory"
+  },
+  "applicationId": "com.atakmap.android.LoRaBridge.plugin",
+  "variantName": "civDebug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 1,
+      "versionName": "1.0 () - [4.5.1]",
+      "outputFile": "AndroidManifest.xml"
+    }
+  ]
+}

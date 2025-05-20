@@ -1,0 +1,76 @@
+-- Merging decision tree log ---
+meta-data#plugin-api
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:13:9-81
+	android:value
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:13:46-79
+	android:name
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:13:20-45
+manifest
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+	package
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:3:5-52
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:2:5-51
+	android:versionCode
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:1-28:12
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:1:11-69
+	tools:ignore
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:4:5-44
+application
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:6:5-26:19
+	android:extractNativeLibs
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:11:9-41
+	android:label
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:9:9-41
+	android:icon
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:8:9-45
+	android:allowBackup
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:7:9-36
+	android:description
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:10:9-47
+	android:theme
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:12:9-40
+meta-data#app_desc
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:14:9-78
+	android:value
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:14:44-76
+	android:name
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:14:20-43
+activity#com.atakmap.app.component
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:18:8-23:19
+	tools:ignore
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:19:12-39
+	android:name
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:18:18-58
+intent-filter#action:name:com.atakmap.app.component
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:20:12-22:28
+	android:label
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:20:27-59
+action#com.atakmap.app.component
+ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:21:15-66
+	android:name
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml:21:23-63
+uses-sdk
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		ADDED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml
+		INJECTED from Z:\SS2025\Bachelortheis\ATAKAPK\atak-civ\plugins\LoRaBridge\app\src\main\AndroidManifest.xml

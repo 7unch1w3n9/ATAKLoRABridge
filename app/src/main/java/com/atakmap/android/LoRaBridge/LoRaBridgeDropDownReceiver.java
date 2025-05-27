@@ -1,11 +1,15 @@
 
 package com.atakmap.android.LoRaBridge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.atak.plugins.impl.PluginLayoutInflater;
+import com.atakmap.android.LoRaBridge.plugin.databinding.MainLayoutBinding;
+import com.atakmap.android.LoRaBridge.recyclerview.RecyclerViewDropDown;
 import com.atakmap.android.maps.MapView;
 import com.atakmap.android.LoRaBridge.plugin.R;
 import com.atakmap.android.dropdown.DropDown.OnStateListener;
@@ -20,21 +24,29 @@ public class LoRaBridgeDropDownReceiver extends DropDownReceiver implements
             .getSimpleName();
 
     public static final String SHOW_PLUGIN = "com.atakmap.android.plugintemplate.SHOW_PLUGIN";
-    private final View templateView;
+    private final MainLayoutBinding mainLayoutBinding;
     private final Context pluginContext;
+    private final RecyclerViewDropDown recyclerView;
 
     /**************************** CONSTRUCTOR *****************************/
 
     public LoRaBridgeDropDownReceiver(final MapView mapView,
-                                      final Context context) {
+                                      final Context context, Activity activity) {
         super(mapView);
         this.pluginContext = context;
 
         // Remember to use the PluginLayoutInflator if you are actually inflating a custom view
         // In this case, using it is not necessary - but I am putting it here to remind
         // developers to look at this Inflator
-        templateView = PluginLayoutInflater.inflate(context,
-                R.layout.main_layout, null);
+        mainLayoutBinding = MainLayoutBinding.inflate(LayoutInflater.from(context));
+        recyclerView = new RecyclerViewDropDown(getMapView(), pluginContext, activity);
+        mainLayoutBinding.btnOpenContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRetain(true);
+                recyclerView.show();
+            }
+        });
 
     }
 
@@ -55,7 +67,7 @@ public class LoRaBridgeDropDownReceiver extends DropDownReceiver implements
         if (action.equals(SHOW_PLUGIN)) {
 
             Log.d(TAG, "showing plugin drop down");
-            showDropDown(templateView, HALF_WIDTH, FULL_HEIGHT, FULL_WIDTH,
+            showDropDown(mainLayoutBinding.getRoot(), HALF_WIDTH, FULL_HEIGHT, FULL_WIDTH,
                     HALF_HEIGHT, false, this);
         }
     }

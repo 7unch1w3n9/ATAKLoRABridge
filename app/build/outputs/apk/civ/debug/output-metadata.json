@@ -10,9 +10,9 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 1,
-      "versionName": "1.0 () - [4.5.1]",
-      "outputFile": "ATAK-Plugin-LoRaBridge-1.0--4.5.1-civ-debug.apk"
+      "versionCode": 1747751231,
+      "versionName": "1.0 (b0c5cce6) - [4.5.1]",
+      "outputFile": "ATAK-Plugin-LoRaBridge-1.0-b0c5cce6-4.5.1-civ-debug.apk"
     }
   ]
 }

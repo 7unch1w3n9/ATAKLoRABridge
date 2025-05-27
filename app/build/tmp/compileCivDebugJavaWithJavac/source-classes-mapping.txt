@@ -1,12 +1,53 @@
 com/atakmap/android/LoRaBridge/plugin/LoRaBridgeTool.java
  com.atakmap.android.LoRaBridge.plugin.LoRaBridgeTool
-com/atakmap/android/LoRaBridge/plugin/BuildConfig.java
- com.atakmap.android.LoRaBridge.plugin.BuildConfig
 com/atakmap/android/LoRaBridge/LoRaBridgeMapComponent.java
  com.atakmap.android.LoRaBridge.LoRaBridgeMapComponent
+com/atakmap/android/LoRaBridge/CoTListener/MyCotReceiver.java
+ com.atakmap.android.LoRaBridge.CoTListener.MyCotReceiver
 com/atakmap/android/LoRaBridge/plugin/PluginNativeLoader.java
  com.atakmap.android.LoRaBridge.plugin.PluginNativeLoader
-com/atakmap/android/LoRaBridge/plugin/LoRaBridgeLifecycle.java
- com.atakmap.android.LoRaBridge.plugin.LoRaBridgeLifecycle
+com/atakmap/android/LoRaBridge/Database/ChatMessageDao.java
+ com.atakmap.android.LoRaBridge.Database.ChatMessageDao
+com/atakmap/android/LoRaBridge/Database/ChatMessageEntity.java
+ com.atakmap.android.LoRaBridge.Database.ChatMessageEntity
+com/atakmap/android/LoRaBridge/Database/ChatDatabase.java
+ com.atakmap.android.LoRaBridge.Database.ChatDatabase
+com/atakmap/android/LoRaBridge/plugin/databinding/ItemMessageBinding.java
+ com.atakmap.android.LoRaBridge.plugin.databinding.ItemMessageBinding
+com/atakmap/android/LoRaBridge/recyclerview/MessageAdapter.java
+ com.atakmap.android.LoRaBridge.recyclerview.MessageAdapter
+ com.atakmap.android.LoRaBridge.recyclerview.MessageAdapter$ViewHolder
+com/atakmap/android/LoRaBridge/Database/ChatRepository.java
+ com.atakmap.android.LoRaBridge.Database.ChatRepository
+com/atakmap/android/LoRaBridge/plugin/databinding/ItemContactBinding.java
+ com.atakmap.android.LoRaBridge.plugin.databinding.ItemContactBinding
+com/atakmap/android/LoRaBridge/plugin/databinding/MainLayoutBinding.java
+ com.atakmap.android.LoRaBridge.plugin.databinding.MainLayoutBinding
+com/atakmap/android/LoRaBridge/recyclerview/ChatDropDown.java
+ com.atakmap.android.LoRaBridge.recyclerview.ChatDropDown
+com/atakmap/android/LoRaBridge/plugin/databinding/PaneContactsBinding.java
+ com.atakmap.android.LoRaBridge.plugin.databinding.PaneContactsBinding
+com/atakmap/android/LoRaBridge/recyclerview/RecyclerView.java
+ com.atakmap.android.LoRaBridge.recyclerview.RecyclerView
+com/atakmap/android/LoRaBridge/plugin/BuildConfig.java
+ com.atakmap.android.LoRaBridge.plugin.BuildConfig
+com/atakmap/android/LoRaBridge/plugin/databinding/PaneChatBinding.java
+ com.atakmap.android.LoRaBridge.plugin.databinding.PaneChatBinding
+com/atakmap/android/LoRaBridge/recyclerview/ContactAdapter.java
+ com.atakmap.android.LoRaBridge.recyclerview.ContactAdapter
+ com.atakmap.android.LoRaBridge.recyclerview.ContactAdapter$OnContactClickListener
+ com.atakmap.android.LoRaBridge.recyclerview.ContactAdapter$ViewHolder
+com/atakmap/android/LoRaBridge/Database/ChatViewModel.java
+ com.atakmap.android.LoRaBridge.Database.ChatViewModel
 com/atakmap/android/LoRaBridge/LoRaBridgeDropDownReceiver.java
  com.atakmap.android.LoRaBridge.LoRaBridgeDropDownReceiver
+ com.atakmap.android.LoRaBridge.LoRaBridgeDropDownReceiver$1
+com/atakmap/android/LoRaBridge/recyclerview/RecyclerViewDropDown.java
+ com.atakmap.android.LoRaBridge.recyclerview.RecyclerViewDropDown
+com/atakmap/android/LoRaBridge/CoTListener/MyCotListener.java
+ com.atakmap.android.LoRaBridge.CoTListener.MyCotListener
+com/atakmap/android/LoRaBridge/CoTListener/MySendInterceptor.java
+ com.atakmap.android.LoRaBridge.CoTListener.MySendInterceptor
+com/atakmap/android/LoRaBridge/plugin/LoRaBridgeLifecycle.java
+ com.atakmap.android.LoRaBridge.plugin.LoRaBridgeLifecycle
+ com.atakmap.android.LoRaBridge.plugin.LoRaBridgeLifecycle$1

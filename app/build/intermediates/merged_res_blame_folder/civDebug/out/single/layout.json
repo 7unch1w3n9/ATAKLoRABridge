@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\incremental\\mergeCivDebugResources\\stripped.dir\\layout\\main_layout.xml",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\main_layout.xml"
+    },
+    {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\incremental\\mergeCivDebugResources\\stripped.dir\\layout\\item_message.xml",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\item_message.xml"
+    },
+    {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\incremental\\mergeCivDebugResources\\stripped.dir\\layout\\pane_contacts.xml",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\pane_contacts.xml"
+    },
+    {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\incremental\\mergeCivDebugResources\\stripped.dir\\layout\\pane_chat.xml",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\pane_chat.xml"
+    },
+    {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\incremental\\mergeCivDebugResources\\stripped.dir\\layout\\item_contact.xml",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\item_contact.xml"
+    }
+]

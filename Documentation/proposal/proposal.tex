@@ -1,0 +1,95 @@
+%!TEX root = proposal.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[sigconf]{acmart}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+% Copyright
+\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+%Conference
+\acmConference[SEEMOO Seminars Winter 2023/24]{Seminars on Networking, Security, Mobility, and Wireless Communications Winter 2023/24}{February 2024}{Darmstadt, Germany} 
+% \acmYear{2018}
+% \copyrightyear{2018}
+% \acmArticle{4}
+% \acmPrice{15.00}
+
+\begin{document}
+\title{ATAK Plugin for Decentralized Communication via FutureSDR}
+
+% Comment out the following for you final document
+%\subtitle{One-page Summary}
+
+\author{Junchi Weng}
+\affiliation{%
+  \institution{Technische Universit\"at Darmstadt}
+}
+\email{junchi.weng@stud.tu-darmstadt.de}
+
+% The default list of authors is too long for headers.
+\renewcommand{\shortauthors}{J.Weng}
+
+\begin{comment}
+  \begin{abstract} % do not use this section in the one-page summary
+    You may want to answer the following questions with roughly one sentence each.
+
+    \begin{itemize}
+    \item What is the topic of your main seminar paper?
+    \item What problem does it solve?
+    \item Why is that topic/problem important?
+    \item What methodologies do the authors apply?
+    \item What are the main contributions of the paper?
+    \item What are the key findings/results of the paper?
+    \end{itemize}
+    
+  \textbf{Hint 1:} You do not have to answer every question above. Consider only those that are relevant to your paper. 
+
+  \end{abstract}
+  ......
+\end{comment}
+
+
+\maketitle
+
+\input{Motivation/motivation.tex}
+
+
+\input{Related_Work/related_work.tex}
+
+
+
+\section{Relevant Section}
+Main content starts here. \nocite{*} \\
+Structure it well. You can create as many sections and subsections as necessary (but do not overuse this).
+
+\section{Conclusion}
+The conclusion goes here.\\
+
+% Remove this note when submitting your report
+\textbf{Hint 2:} For the final paper, you are expected to use this template. In addition, to the research questions you answered in the one page-summary, you may want to consider the following ones in your final seminar paper.
+  \begin{itemize}
+  \item What is your research question?
+  \item Why are that question and your topic important?
+  \item How did you proceed to answer the question?
+  \item What (do you think) is the answer to your question?
+  \item Give an overall opinion on your topic.
+  \item If you have results, describe them.
+  \item What is the impact of the answers to your questions?
+  \end{itemize}
+  
+\textbf{Note 3:} Examples for the final paper are also provided in Moodle. Again, these examples are only referential and you are not expected to mimic their structure. 
+
+
+% References
+\newpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{library} 
+
+\end{document}

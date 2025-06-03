@@ -1,0 +1,14 @@
+\section{Limitations, and Risk Management}
+This project explicitly does not address issues related to message encryption and authentication, secure communication protocols, long-range transmission optimization, or power consumption control. The primary research focus is the development of a minimal working prototype that demonstrates end-to-end LoRa communication through the integration of FutureSDR and ATAK.
+
+A key technical risk lies in the system's ability to reliably generate baseband signals that conform to the LoRa standard using FutureSDR. Should this process prove unstable—either due to limitations in the FutureSDR framework or the author's technical capabilities, the system may fail to perform consistent waveform modulation or successful message transmission and reception under the available hardware conditions.
+
+To address such extreme contingencies, the project defines two fallback solutions:
+
+\vspace{0.5em}
+\noindent\textbf{A. Switching to GNU Radio as an alternative signal processing platform:}\par
+ If critical technical obstacles prevent the successful modulation of LoRa signals via FutureSDR, the project will fall back to using GNU Radio along with its existing LoRa modules to construct the necessary modulation/demodulation flowgraphs.
+
+ \vspace{0.5em}
+\noindent\textbf{B. Employing virtual channels or loopback testing:}\par
+ If radio-frequency transmission is not feasible, the system will simulate the message exchange process via internal software channels. This approach will still allow verification of key components, including the ATAK plugin, message format conversion, and the generation of CoT-compliant messages.

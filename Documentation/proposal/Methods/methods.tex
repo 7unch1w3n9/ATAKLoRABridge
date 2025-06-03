@@ -1,0 +1,23 @@
+\section{methods}
+To achieve the goal of enabling infrastructure-less communication within ATAK in post-disaster scenarios, we propose a modular implementation and evaluation strategy, combining formal software integration, signal processing design, and hardware testing. The overall workflow consists of four main phases:
+
+\vspace{0.5em}
+\noindent\textbf{Phase 0: ATAK Chat Interface Integration (Pre-validation Phase)}\par
+As a preliminary step, the project will integrate the ATAK GeoChat interface with a custom plugin. The plugin will observe, capture, and display incoming and outgoing chat messages. This is essential to verify that all required information (e.g., message text, sender, receiver ,timestamp) can be correctly extracted from CoT events. This validation step ensures that the plugin can operate independently of UI behavior and forms a solid foundation for later integration with a physical-layer communication backend.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 1: System Integration and Flowgraph Implementation (Design Phase)}\par
+Following successful message capture, we will develop a static FutureSDR flowgraph to enable point-to-point LoRa-based communication between two Android devices. The flowgraph will handle the PHY-layer modulation/demodulation of text messages, without runtime parameter configuration. This phase focuses on establishing reliable low-rate wireless transfer using an embedded SDR driver interface.The plugin will serve as a bidirectional interface between the ATAK CoT message system and the FutureSDR flowgraph. Outgoing GeoChat messages will be serialized and modulated, while demodulated messages will be reconstructed into CoT events and injected back into the ATAK message stream.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 2: Lightweight Communication Protocol Design (MAC Layer Phase)}\par
+To extend the system beyond point-to-point transmission, a simplified medium access control (MAC) layer will be introduced to enable communication among multiple devices. This layer will implement a basic addressing scheme wherein each message contains a predefined destination identifier. Upon reception, devices will apply address-based filtering to discard irrelevant messages. While the protocol remains static and topology-agnostic at this stage, this approach ensures low implementation complexity and deterministic behavior, which is crucial for resource-constrained environments. 
+
+\vspace{0.5em}
+\noindent\textbf{Phase 3: Evaluation and Testing (Validation Phase)}\par
+The final system will be tested under controlled, infrastructure-denied conditions. Evaluation will be qualitative (stability, ATAK compatibility) based on metrics such as:
+\begin{itemize}
+    \item Packet delivery success rate (PDR)
+    \item CoT message compatibility with ATAK GeoChat
+\end{itemize}
+Successful validation will be demonstrated by end-to-end message exchange between ATAK clients using FutureSDR to generate and transmit LoRa-compatible baseband signals over the air via a software-defined radio (SDR), without relying on traditional networking infrastructure such as Wi-Fi or cellular connectivity.

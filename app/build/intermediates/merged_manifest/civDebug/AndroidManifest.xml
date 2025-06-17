@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.atakmap.android.LoRaBridge.plugin"
-    android:versionCode="1747751231"
-    android:versionName="1.0 (b0c5cce6) - [4.5.1]" >
+    android:versionCode="1749024683"
+    android:versionName="1.0 (89db3ee3) - [4.5.1]" >
 
     <uses-sdk
         android:minSdkVersion="21"

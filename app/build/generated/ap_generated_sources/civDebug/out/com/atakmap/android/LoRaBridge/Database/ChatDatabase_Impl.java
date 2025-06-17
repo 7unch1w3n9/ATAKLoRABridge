@@ -30,12 +30,12 @@ public final class ChatDatabase_Impl extends ChatDatabase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `chat_messages` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `senderUid` TEXT, `senderCallsign` TEXT, `receiverUid` TEXT, `receiverCallsign` TEXT, `message` TEXT, `sentTime` INTEGER NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `chat_messages` (`messageId` TEXT NOT NULL, `senderUid` TEXT, `senderCallsign` TEXT, `receiverUid` TEXT, `receiverCallsign` TEXT, `message` TEXT, `sentTime` INTEGER NOT NULL, `messageType` TEXT, `cotRawXml` TEXT, PRIMARY KEY(`messageId`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '592756741b270165807f01a9233de442')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f114478e3d9af603ad67cd8b689db913')");
       }
 
       @Override
@@ -79,14 +79,16 @@ public final class ChatDatabase_Impl extends ChatDatabase {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsChatMessages = new HashMap<String, TableInfo.Column>(7);
-        _columnsChatMessages.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashMap<String, TableInfo.Column> _columnsChatMessages = new HashMap<String, TableInfo.Column>(9);
+        _columnsChatMessages.put("messageId", new TableInfo.Column("messageId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("senderUid", new TableInfo.Column("senderUid", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("senderCallsign", new TableInfo.Column("senderCallsign", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("receiverUid", new TableInfo.Column("receiverUid", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("receiverCallsign", new TableInfo.Column("receiverCallsign", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("message", new TableInfo.Column("message", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsChatMessages.put("sentTime", new TableInfo.Column("sentTime", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChatMessages.put("messageType", new TableInfo.Column("messageType", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChatMessages.put("cotRawXml", new TableInfo.Column("cotRawXml", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysChatMessages = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesChatMessages = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoChatMessages = new TableInfo("chat_messages", _columnsChatMessages, _foreignKeysChatMessages, _indicesChatMessages);
@@ -98,7 +100,7 @@ public final class ChatDatabase_Impl extends ChatDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "592756741b270165807f01a9233de442", "e21e44815860433d16c128da7db869d2");
+    }, "f114478e3d9af603ad67cd8b689db913", "fe7ab090c602d21c07ebef5014d02df9");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

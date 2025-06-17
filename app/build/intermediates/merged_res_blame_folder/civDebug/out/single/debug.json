@@ -28,6 +28,10 @@
         "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\drawable\\new_dark_button_bg.xml"
     },
     {
+        "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\res\\merged\\civ\\debug\\drawable_chat_bubble_background.xml.flat",
+        "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\drawable\\chat_bubble_background.xml"
+    },
+    {
         "merged": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\build\\intermediates\\res\\merged\\civ\\debug\\layout_main_layout.xml.flat",
         "source": "Z:\\SS2025\\Bachelortheis\\ATAKAPK\\atak-civ\\plugins\\LoRaBridge\\app\\src\\main\\res\\layout\\main_layout.xml"
     },

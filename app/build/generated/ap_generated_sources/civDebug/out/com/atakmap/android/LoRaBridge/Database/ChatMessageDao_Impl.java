@@ -29,12 +29,16 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
     this.__insertionAdapterOfChatMessageEntity = new EntityInsertionAdapter<ChatMessageEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `chat_messages` (`id`,`senderUid`,`senderCallsign`,`receiverUid`,`receiverCallsign`,`message`,`sentTime`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
+        return "INSERT OR IGNORE INTO `chat_messages` (`messageId`,`senderUid`,`senderCallsign`,`receiverUid`,`receiverCallsign`,`message`,`sentTime`,`messageType`,`cotRawXml`) VALUES (?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
       public void bind(SupportSQLiteStatement stmt, ChatMessageEntity value) {
-        stmt.bindLong(1, value.id);
+        if (value.messageId == null) {
+          stmt.bindNull(1);
+        } else {
+          stmt.bindString(1, value.messageId);
+        }
         if (value.senderUid == null) {
           stmt.bindNull(2);
         } else {
@@ -61,6 +65,16 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
           stmt.bindString(6, value.message);
         }
         stmt.bindLong(7, value.sentTime);
+        if (value.messageType == null) {
+          stmt.bindNull(8);
+        } else {
+          stmt.bindString(8, value.messageType);
+        }
+        if (value.cotRawXml == null) {
+          stmt.bindNull(9);
+        } else {
+          stmt.bindString(9, value.cotRawXml);
+        }
       }
     };
   }
@@ -98,16 +112,24 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
       public List<ChatMessageEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfMessageId = CursorUtil.getColumnIndexOrThrow(_cursor, "messageId");
           final int _cursorIndexOfSenderUid = CursorUtil.getColumnIndexOrThrow(_cursor, "senderUid");
           final int _cursorIndexOfSenderCallsign = CursorUtil.getColumnIndexOrThrow(_cursor, "senderCallsign");
           final int _cursorIndexOfReceiverUid = CursorUtil.getColumnIndexOrThrow(_cursor, "receiverUid");
           final int _cursorIndexOfReceiverCallsign = CursorUtil.getColumnIndexOrThrow(_cursor, "receiverCallsign");
           final int _cursorIndexOfMessage = CursorUtil.getColumnIndexOrThrow(_cursor, "message");
           final int _cursorIndexOfSentTime = CursorUtil.getColumnIndexOrThrow(_cursor, "sentTime");
+          final int _cursorIndexOfMessageType = CursorUtil.getColumnIndexOrThrow(_cursor, "messageType");
+          final int _cursorIndexOfCotRawXml = CursorUtil.getColumnIndexOrThrow(_cursor, "cotRawXml");
           final List<ChatMessageEntity> _result = new ArrayList<ChatMessageEntity>(_cursor.getCount());
           while(_cursor.moveToNext()) {
             final ChatMessageEntity _item;
+            final String _tmpMessageId;
+            if (_cursor.isNull(_cursorIndexOfMessageId)) {
+              _tmpMessageId = null;
+            } else {
+              _tmpMessageId = _cursor.getString(_cursorIndexOfMessageId);
+            }
             final String _tmpSenderUid;
             if (_cursor.isNull(_cursorIndexOfSenderUid)) {
               _tmpSenderUid = null;
@@ -140,8 +162,19 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
             }
             final long _tmpSentTime;
             _tmpSentTime = _cursor.getLong(_cursorIndexOfSentTime);
-            _item = new ChatMessageEntity(_tmpSenderUid,_tmpSenderCallsign,_tmpReceiverUid,_tmpReceiverCallsign,_tmpMessage,_tmpSentTime);
-            _item.id = _cursor.getInt(_cursorIndexOfId);
+            final String _tmpMessageType;
+            if (_cursor.isNull(_cursorIndexOfMessageType)) {
+              _tmpMessageType = null;
+            } else {
+              _tmpMessageType = _cursor.getString(_cursorIndexOfMessageType);
+            }
+            final String _tmpCotRawXml;
+            if (_cursor.isNull(_cursorIndexOfCotRawXml)) {
+              _tmpCotRawXml = null;
+            } else {
+              _tmpCotRawXml = _cursor.getString(_cursorIndexOfCotRawXml);
+            }
+            _item = new ChatMessageEntity(_tmpMessageId,_tmpSenderUid,_tmpSenderCallsign,_tmpReceiverUid,_tmpReceiverCallsign,_tmpMessage,_tmpSentTime,_tmpMessageType,_tmpCotRawXml);
             _result.add(_item);
           }
           return _result;
@@ -166,16 +199,24 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
       public List<ChatMessageEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfMessageId = CursorUtil.getColumnIndexOrThrow(_cursor, "messageId");
           final int _cursorIndexOfSenderUid = CursorUtil.getColumnIndexOrThrow(_cursor, "senderUid");
           final int _cursorIndexOfSenderCallsign = CursorUtil.getColumnIndexOrThrow(_cursor, "senderCallsign");
           final int _cursorIndexOfReceiverUid = CursorUtil.getColumnIndexOrThrow(_cursor, "receiverUid");
           final int _cursorIndexOfReceiverCallsign = CursorUtil.getColumnIndexOrThrow(_cursor, "receiverCallsign");
           final int _cursorIndexOfMessage = CursorUtil.getColumnIndexOrThrow(_cursor, "message");
           final int _cursorIndexOfSentTime = CursorUtil.getColumnIndexOrThrow(_cursor, "sentTime");
+          final int _cursorIndexOfMessageType = CursorUtil.getColumnIndexOrThrow(_cursor, "messageType");
+          final int _cursorIndexOfCotRawXml = CursorUtil.getColumnIndexOrThrow(_cursor, "cotRawXml");
           final List<ChatMessageEntity> _result = new ArrayList<ChatMessageEntity>(_cursor.getCount());
           while(_cursor.moveToNext()) {
             final ChatMessageEntity _item;
+            final String _tmpMessageId;
+            if (_cursor.isNull(_cursorIndexOfMessageId)) {
+              _tmpMessageId = null;
+            } else {
+              _tmpMessageId = _cursor.getString(_cursorIndexOfMessageId);
+            }
             final String _tmpSenderUid;
             if (_cursor.isNull(_cursorIndexOfSenderUid)) {
               _tmpSenderUid = null;
@@ -208,8 +249,19 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
             }
             final long _tmpSentTime;
             _tmpSentTime = _cursor.getLong(_cursorIndexOfSentTime);
-            _item = new ChatMessageEntity(_tmpSenderUid,_tmpSenderCallsign,_tmpReceiverUid,_tmpReceiverCallsign,_tmpMessage,_tmpSentTime);
-            _item.id = _cursor.getInt(_cursorIndexOfId);
+            final String _tmpMessageType;
+            if (_cursor.isNull(_cursorIndexOfMessageType)) {
+              _tmpMessageType = null;
+            } else {
+              _tmpMessageType = _cursor.getString(_cursorIndexOfMessageType);
+            }
+            final String _tmpCotRawXml;
+            if (_cursor.isNull(_cursorIndexOfCotRawXml)) {
+              _tmpCotRawXml = null;
+            } else {
+              _tmpCotRawXml = _cursor.getString(_cursorIndexOfCotRawXml);
+            }
+            _item = new ChatMessageEntity(_tmpMessageId,_tmpSenderUid,_tmpSenderCallsign,_tmpReceiverUid,_tmpReceiverCallsign,_tmpMessage,_tmpSentTime,_tmpMessageType,_tmpCotRawXml);
             _result.add(_item);
           }
           return _result;
@@ -223,6 +275,32 @@ public final class ChatMessageDao_Impl implements ChatMessageDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public int existsByMessageId(final String messageId) {
+    final String _sql = "SELECT COUNT(*) FROM chat_messages WHERE messageId = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (messageId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, messageId);
+    }
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _result;
+      if(_cursor.moveToFirst()) {
+        _result = _cursor.getInt(0);
+      } else {
+        _result = 0;
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
   }
 
   public static List<Class<?>> getRequiredConverters() {

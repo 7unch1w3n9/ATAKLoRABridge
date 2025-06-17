@@ -37,4 +37,12 @@ public class ChatRepository {
         return chatDao.getAllMessages();
     }
 
+    public void insertIfNotExists(ChatMessageEntity msg) {
+        executor.execute(() -> {
+            if (chatDao.existsByMessageId(msg.messageId) == 0) {
+                chatDao.insert(msg);
+            }
+        });
+    }
+
 }

@@ -18,22 +18,32 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.lifecycle.ViewTreeViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.atakmap.android.LoRaBridge.ChatMessage.ChatMessageFactory;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;
 import com.atakmap.android.LoRaBridge.plugin.R;
 import com.atakmap.android.chat.ChatDatabase;
 import com.atakmap.android.contact.Contact;
+import com.atakmap.android.cot.CotMapComponent;
 import com.atakmap.android.dropdown.DropDownReceiver;
 import com.atakmap.android.gui.EditText;
+import com.atakmap.android.ipc.AtakBroadcast;
 import com.atakmap.android.maps.MapView;
+import com.atakmap.comms.CommsMapComponent;
+import com.atakmap.comms.CotService;
+import com.atakmap.coremap.cot.event.CotDetail;
+import com.atakmap.coremap.cot.event.CotEvent;
+import com.atakmap.coremap.cot.event.CotPoint;
 import com.atakmap.coremap.log.Log;
 
 
 import com.atakmap.android.LoRaBridge.Database.ChatViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class ChatDropDown extends DropDownReceiver {
 
@@ -76,13 +86,13 @@ public class ChatDropDown extends DropDownReceiver {
             sendButton.setOnClickListener(v -> {
                 String text = messageInput.getText().toString().trim();
                 if (!text.isEmpty()) {
-                    ChatMessageEntity message = new ChatMessageEntity(
-                            MapView.getDeviceUid(), // sender
+                    ChatMessageEntity message = ChatMessageFactory.fromUserInput(
+                            MapView.getDeviceUid(),
                             MapView._mapView.getDeviceCallsign(),
-                            contact.getUID(),       // receiver
+                            contact.getUID(),
                             contact.getName(),
                             text,
-                            System.currentTimeMillis()
+                            "text"
                     );
                     viewModel.insert(message);
                     messageInput.setText("");
@@ -107,6 +117,7 @@ public class ChatDropDown extends DropDownReceiver {
         public void onReceive(Context context, Intent intent) {
 
         }
+
 }
 
 

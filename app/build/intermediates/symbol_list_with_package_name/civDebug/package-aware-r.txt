@@ -64,6 +64,7 @@ dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
 drawable btn_gray
+drawable chat_bubble_background
 drawable ic_launcher
 drawable new_dark_button_bg
 drawable new_dark_button_disabled
@@ -138,6 +139,10 @@ id italic
 id item_touch_helper_previous_elevation
 id line1
 id line3
+id message_bubble
+id message_container
+id message_date
+id message_meta
 id message_text
 id normal
 id notification_background

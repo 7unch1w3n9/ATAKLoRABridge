@@ -22,4 +22,10 @@ public interface ChatMessageDao {
 
     @Query("SELECT COUNT(*) FROM chat_messages WHERE messageId = :messageId")
     int existsByMessageId(String messageId);
+
+    @Query("SELECT * FROM chat_messages ORDER BY sentTime DESC LIMIT 1")
+    LiveData<ChatMessageEntity> getLatestMessage();
+
+    @Query("DELETE FROM chat_messages")
+    void deleteAllMessages();
 }

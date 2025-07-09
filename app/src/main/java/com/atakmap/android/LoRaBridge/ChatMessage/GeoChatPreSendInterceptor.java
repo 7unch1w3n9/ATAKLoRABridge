@@ -1,5 +1,6 @@
 package com.atakmap.android.LoRaBridge.ChatMessage;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
@@ -9,18 +10,19 @@ import com.atakmap.comms.CommsMapComponent;
 import com.atakmap.coremap.cot.event.CotEvent;
 
 
-public class MySendInterceptor implements CommsMapComponent.PreSendProcessor {
-    private static final String TAG = "MySendInterceptor";
+public class GeoChatPreSendInterceptor implements CommsMapComponent.PreSendProcessor {
+    private static final String TAG = "GeoChatPreSendInterceptor";
     private final ChatRepository chatRepository;
+    private final MessageSyncService syncService;
 
-    public MySendInterceptor() {
+    public GeoChatPreSendInterceptor(Context context) {
         this.chatRepository = new ChatRepository(MapView.getMapView().getContext());
+        this.syncService = new MessageSyncService(context);
     }
+
 
     @Override
     public void processCotEvent(CotEvent event, String[] toUIDs) {
-        if (!"b-t-f".equals(event.getType())) return;
-        ChatMessageEntity entity = ChatMessageFactory.fromCotEvent(event, toUIDs);
-        chatRepository.insertIfNotExists(entity);
+        syncService.processIncomingCotEvent(event, toUIDs);
     }
 }

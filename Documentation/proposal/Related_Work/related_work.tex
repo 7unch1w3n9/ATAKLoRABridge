@@ -1,6 +1,16 @@
-\section{Background and Related Work}
-Recently, emergency communication has been widely studied from multiple perspectives, particularly in the context of frequent communication infrastructure failures during natural disasters or large-scale crises. This section provides a systematic overview of existing research. Section 2.1 reviews three fundamental post-disaster communication strategies: Device-to-Device (D2D) communication, Unmanned Aerial Vehicle (UAV) relays, and Mobile Ad-hoc Networks (MANETs). Section 2.2 introduces the rise of LoRa in emergency scenarios. Section 2.3 discusses existing LoRa-based emergency communication solutions, with a focus on the open-source project Meshtastic. Section 2.4 focuses on the recent emergence of software-defined LoRa gateways.
+\section{Related Work and Background}
+In the specific context of disaster communication, Deepak G. and his collaborators, through their investigative research, introduced a classification methodology for scenarios based on the degree of damage sustained by communication networks. This classification encompasses congested networks, partially functional networks, and completely isolated networks\cite{Post-DisasterEmergencyCommunicationSystems}.
 
-\input{Related_Work/2_1.tex}
-\input{Related_Work/2_2.tex}
-\input{Related_Work/2_3.tex}
+A congested network describes a situation where the communication infrastructure remains operational; however, its performance significantly degrades due to a surge in communication demands. In such instances, mechanisms like enhanced Mobile Priority Services (eMPS) or network slicing can be implemented to ensure the prioritization of emergency communications. A partially functional network signifies that certain nodes within the communication infrastructure have failed, resulting in connectivity being maintained only in localized areas or for specific services. Conversely, a completely isolated network represents the most extreme scenario, characterized by the failure of all base stations and a complete loss of communication connectivity within the affected area. Under the conditions of partially functional or completely isolated networks, traditional centralized communication systems often prove ineffective, thereby necessitating autonomous and decentralized communication solutions.
+
+In recent years, the field of emergency communication has witnessed the emergence of various technologies specifically suited for scenarios involving infrastructure failure. These include:
+    \begin{itemize}
+        \item \textbf{Device-to-Device communication}.\ This enables direct communication between end devices without requiring support from base stations.
+        \item \textbf{Unmanned Aerial Vehicle relays}.\  These systems utilize UAVs equipped with communication devices to temporarily restore communication coverage in disaster-affected regions.
+        \item \textbf{Mobile Ad-hoc Networks (MANETs)}.\ These networks are formed by mobile nodes that dynamically self-organize into network topologies, providing rapid and flexible wireless communication.
+    \end{itemize}
+    
+Additionally, LoRa technology has progressively become a prevalent choice for infrastructure-independent communication solutions. This is attributable to its inherent characteristics of long-distance communication, low power consumption, and robust signal penetration capabilities.
+
+\input{Related_Work/LoRa_solutions.tex}
+\input{Related_Work/ATAK.tex}

@@ -1,14 +1,16 @@
 \section{Limitations, and Risk Management}
 This project explicitly does not address issues related to message encryption and authentication, secure communication protocols, long-range transmission optimization, or power consumption control. The primary research focus is the development of a minimal working prototype that demonstrates end-to-end LoRa communication through the integration of FutureSDR and ATAK.
 
-A key technical risk lies in the system's ability to reliably generate baseband signals that conform to the LoRa standard using FutureSDR. Should this process prove unstable—either due to limitations in the FutureSDR framework or the author's technical capabilities, the system may fail to perform consistent waveform modulation or successful message transmission and reception under the available hardware conditions.
+While the physical-layer signal processing flowgraph is provided as a static component at the project's outset, several technical risks related to integration persist.
+
+One primary concern involves the compatibility of the WebAssembly (WASM) runtime within the Android environment. This ecosystem is still maturing, and potential issues could lead to abnormal communication or degraded performance between the plugin and the embedded flowgraph. Another significant risk arises during the process of reconstructing Cursor-on-Target (CoT) messages after the plugin receives demodulated data. This reconstruction relies heavily on XML parsing and structural mapping. Any inconsistencies in format or failures during parsing could result in message loss or rejection by the GeoChat module, hindering effective communication.
 
 To address such extreme contingencies, the project defines two fallback solutions:
 
 \vspace{0.5em}
-\noindent\textbf{A. Switching to GNU Radio as an alternative signal processing platform:}\par
- If critical technical obstacles prevent the successful modulation of LoRa signals via FutureSDR, the project will fall back to using GNU Radio along with its existing LoRa modules to construct the necessary modulation/demodulation flowgraphs.
+\noindent\textbf{WASM Module Failure Fallback}\par
+Should WASM runtime compatibility issues arise within the Android environment during Phase 1—manifesting as invocation failures or memory access conflicts, for instance—the system will pivot to an alternative approach. It will then interact with a locally running non-WASM software flowgraph via inter-process communication interfaces, such as TCP or UDP. This setup will continue to simulate the modulation and demodulation processes of CoT messages. It's important to note this alternative won't activate an actual radio frequency link; its sole purpose is to validate the correct integration of the plugin with the underlying physical layer interface logic.
 
  \vspace{0.5em}
-\noindent\textbf{B. Employing virtual channels or loopback testing:}\par
- If radio-frequency transmission is not feasible, the system will simulate the message exchange process via internal software channels. This approach will still allow verification of key components, including the ATAK plugin, message format conversion, and the generation of CoT-compliant messages.
+\noindent\textbf{RF Module Failure Fallback}\par
+Should SDR hardware connectivity fail during Phase 2, or if the RF link proves unstable under specific test conditions, the system will revert to the loopback simulation path established in Phase 1. This fallback involves the plugin utilizing the embedded WASM flowgraph to simulate physical channel behavior. This ensures continued validation of core functionalities, including message format conversion, Cursor-on-Target (CoT) structure generation, and GeoChat display, even without a live RF connection.

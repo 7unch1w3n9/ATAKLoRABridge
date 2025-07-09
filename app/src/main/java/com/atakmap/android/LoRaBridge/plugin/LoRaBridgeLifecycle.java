@@ -7,8 +7,12 @@ import java.util.LinkedList;
 
 
 import com.atakmap.android.LoRaBridge.ChatMessage.ChatMessageManager;
-import com.atakmap.android.LoRaBridge.ChatMessage.MySendInterceptor;
+import com.atakmap.android.LoRaBridge.ChatMessage.ChatMessageObserver;
+import com.atakmap.android.LoRaBridge.ChatMessage.GeoChatPreSendInterceptor;
+import com.atakmap.android.LoRaBridge.ChatMessage.MessageSyncService;
+import com.atakmap.android.LoRaBridge.ChatMessage.RemoteToMeListener;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
+import com.atakmap.android.LoRaBridge.Database.ChatRepository;
 import com.atakmap.android.LoRaBridge.Database.ChatViewModel;
 import com.atakmap.android.ipc.AtakBroadcast;
 import com.atakmap.android.maps.MapComponent;
@@ -25,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.atakmap.comms.CommsMapComponent;
+import com.atakmap.comms.CotServiceRemote;
 import com.atakmap.coremap.log.Log;
 
 public class LoRaBridgeLifecycle implements Lifecycle {
@@ -35,6 +40,9 @@ public class LoRaBridgeLifecycle implements Lifecycle {
     private ChatViewModel chatViewModel;
     private Activity hostActivity;
 
+    private RemoteToMeListener remoteToMeListener;
+    private ChatMessageObserver chatMessageObserver;
+    private MessageSyncService syncService;
 
     private final static String TAG = "LoRaBridgeLifecycle";
 
@@ -81,6 +89,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
                 iter.remove();
             }
         }
+
     }
 
     @Override
@@ -105,49 +114,32 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         for (MapComponent c : this.overlays)
             c.onResume(this.pluginContext, this.mapView);
     }
-
+    /**
+     * Plugin startup entry (system callback).
+     * Initialization sequence:
+     *  1. Core map components
+     *  2. Message listeners
+     *  3. Sync services
+     *  4. GeoChat interceptor
+     */
     @Override
     public void onStart() {
         for (MapComponent c : this.overlays)
             c.onStart(this.pluginContext, this.mapView);
 
-
-        if (hostActivity != null) {
-            chatViewModel = new ViewModelProvider((ViewModelStoreOwner) hostActivity).get(ChatViewModel.class);
-            chatViewModel.getAllMessages().observe((LifecycleOwner) hostActivity, messages -> {
-                if (messages == null || messages.isEmpty()) return;
-
-                // 拿到最新一条消息（注意Room默认LiveData会回传整个列表）
-                ChatMessageEntity latest = messages.get(messages.size() - 1);
-
-                if (latest.getSenderUid().equals(MapView.getDeviceUid())) {
-                    new ChatMessageManager(this.pluginContext).sendToGeoChat(latest);
-                }
-                // 判断是不是别人发给我们的
-//                if (!latest.senderUid.equals(MapView.getDeviceUid())) {
-                    Log.i(TAG, "💬 新消息来自 [" + latest.senderCallsign + "]： " + latest.message);
-                    // TODO: 你也可以触发震动、通知栏提醒等
-//                }
-            });
+        if (remoteToMeListener == null) {
+            remoteToMeListener = new RemoteToMeListener(MapView.getMapView().getContext());
         }
 
-        /*
-        CotServiceRemote remote = new CotServiceRemote();
-        remote.setCotEventListener(new MyCotListener(pluginContext));
-        remote.connect(new CotServiceRemote.ConnectionListener() {
-            @Override
-            public void onCotServiceConnected(Bundle bundle) {
-                Log.d(TAG, "✔ CotServiceRemote connected and listener active!");
-            }
-            @Override
-            public void onCotServiceDisconnected() {
-                Log.d(TAG, "❌ CotServiceRemote disconnected!");
-            }
-        });
+        if (hostActivity != null) {
+            chatMessageObserver = new ChatMessageObserver(
+                    pluginContext,
+                    hostActivity
+            );
+        }
 
-         */
-
-        CommsMapComponent.getInstance().registerPreSendProcessor(new MySendInterceptor());
+        syncService = new MessageSyncService(pluginContext);
+        CommsMapComponent.getInstance().registerPreSendProcessor(new GeoChatPreSendInterceptor(pluginContext));
 
         /*
         AtakBroadcast.DocumentedIntentFilter filter = new AtakBroadcast.DocumentedIntentFilter("com.atakmap.android.chat.NEW_CHAT_MESSAGE");
@@ -165,11 +157,10 @@ public class LoRaBridgeLifecycle implements Lifecycle {
     public void onStop() {
         for (MapComponent c : this.overlays)
             c.onStop(this.pluginContext, this.mapView);
-        /*
-        if (cotReceiver != null) {
-            AtakBroadcast.getInstance().unregisterReceiver(cotReceiver);
-        }
 
-         */
+        if (remoteToMeListener != null) {
+            remoteToMeListener.shutdown();
+            remoteToMeListener = null;
+        }
     }
 }

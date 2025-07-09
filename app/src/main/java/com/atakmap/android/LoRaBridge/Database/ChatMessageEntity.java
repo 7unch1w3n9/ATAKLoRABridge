@@ -13,18 +13,19 @@ public class ChatMessageEntity {
     public String receiverUid;
     public String receiverCallsign;
     public String message;
-    public long sentTime;
-    public String messageType;     // 可选，方便以后扩展
-    public String cotRawXml;       // 原始CoT xml字符串
-
-    public ChatMessageEntity(String messageId,
+    public String sentTime;
+    public String messageType;
+    public String origin;
+    public String cotRawXml;
+    public ChatMessageEntity(@NonNull String messageId,
                              String senderUid,
                              String senderCallsign,
                              String receiverUid,
                              String receiverCallsign,
                              String message,
-                             long sentTime,
+                             String sentTime,
                              String messageType,
+                             String origin,
                              String cotRawXml) {
         this.messageId = messageId;
         this.senderUid = senderUid;
@@ -34,6 +35,7 @@ public class ChatMessageEntity {
         this.message = message;
         this.sentTime = sentTime;
         this.messageType = messageType;
+        this.origin = origin;
         this.cotRawXml = cotRawXml;
     }
 
@@ -85,14 +87,22 @@ public class ChatMessageEntity {
         this.message = message;
     }
 
-    public long getSentTime() {
+    public String getSentTime() {
         return sentTime;
     }
 
-    public void setSentTime(long sentTime) {
+    public void setSentTime(String sentTime) {
         this.sentTime = sentTime;
     }
 
+    public String getOrigin() {
+        return origin;
+    }
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    @NonNull
     public String toString() {
         return "ChatMessageEntity{" +
                 "messageId='" + messageId + '\'' +
@@ -101,8 +111,9 @@ public class ChatMessageEntity {
                 ", receiverUid='" + receiverUid + '\'' +
                 ", receiverName='" + receiverCallsign + '\'' +
                 ", message='" + message + '\'' +
-                ", timestamp=" + sentTime +
+                ", timestamp='" + sentTime  + '\'' +
                 ", messageType='" + messageType + '\'' +
+                ", origin='" + origin + '\'' +
                 ", cotRawXml.length=" + (cotRawXml != null ? cotRawXml.length() : 0) +
                 '}';
     }

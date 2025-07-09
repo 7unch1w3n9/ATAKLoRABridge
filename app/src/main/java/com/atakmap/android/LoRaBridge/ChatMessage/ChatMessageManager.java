@@ -13,7 +13,11 @@ import com.atakmap.coremap.maps.coords.GeoPoint;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
 
 import java.util.UUID;
-
+/**
+ * Manages message transmission and conversion.
+ * Handles: Message entity ⇄ CoT event transformations.
+ * Phase 2: Will implement LoRa encoding methods.
+ */
 public class ChatMessageManager {
     private static final String TAG = "ChatMessageManager";
     private final Context context;
@@ -23,13 +27,20 @@ public class ChatMessageManager {
     }
 
     // 外部调用：插入消息后，把它同步到GeoChat
-    public void sendToGeoChat(ChatMessageEntity msg) {
-        CotEvent event = convertChatMessageToCotEvent(msg);
+    public void sendToGeoChat(CotEvent event) {
         CotMapComponent.getInternalDispatcher().dispatch(event);
-        Log.d(TAG, "消息同步到GeoChat: " + msg.getMessage());
+        Log.d(TAG, "Message dispatched to GeoChat");
     }
-
-    private CotEvent convertChatMessageToCotEvent(ChatMessageEntity message) {
+    /**
+     * Converts message entity to CoT event (Plugin → GeoChat).
+     * Key field mappings:
+     *   senderUid → link.uid
+     *   message → remarks.innerText
+     * Special: Adds __lora.originalId to preserve source ID.
+     * @param message Message entity
+     * @return Complete CoT event
+     */
+    public  CotEvent convertChatMessageToCotEvent(ChatMessageEntity message) {
         CotEvent event = new CotEvent();
         CoordinatedTime now = new CoordinatedTime();
         GeoPoint currentLocation = MapView.getMapView().getSelfMarker().getPoint();
@@ -55,6 +66,10 @@ public class ChatMessageManager {
         chat.setAttribute("chatroom", "All Chat Rooms");
         chat.setAttribute("id", "All Chat Rooms");
         chat.setAttribute("senderCallsign", message.getSenderCallsign());
+
+        CotDetail loraDetail = new CotDetail("__lora");
+        loraDetail.setAttribute("originalId", message.getId());
+        detail.addChild(loraDetail);
 
         CotDetail chatgrp = new CotDetail("chatgrp");
         chatgrp.setAttribute("uid0", message.getSenderUid());

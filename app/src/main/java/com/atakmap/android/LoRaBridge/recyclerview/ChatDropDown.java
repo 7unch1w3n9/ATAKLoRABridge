@@ -72,6 +72,8 @@ public class ChatDropDown extends DropDownReceiver {
             this.contact = contact;
 //            Activity activity1 = (Activity)(mapView.getContext());
             viewModel = new ViewModelProvider((ViewModelStoreOwner)activity).get(ChatViewModel.class);
+            viewModel.deleteAllMessages();
+
             chatObserver = messageAdapter::setMessages;
             LiveData<List<ChatMessageEntity>> liveData = viewModel.getMessagesForContact(contact.getUID());
             liveData.observeForever(chatObserver);
@@ -94,7 +96,7 @@ public class ChatDropDown extends DropDownReceiver {
                             text,
                             "text"
                     );
-                    viewModel.insert(message);
+                    viewModel.insertIfNotExists(message);
                     messageInput.setText("");
                 } else {
                     Log.e("Chat", "Invalid message: empty content");

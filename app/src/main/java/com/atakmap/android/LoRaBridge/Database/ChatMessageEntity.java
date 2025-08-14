@@ -117,5 +117,8 @@ public class ChatMessageEntity {
                 ", cotRawXml.length=" + (cotRawXml != null ? cotRawXml.length() : 0) +
                 '}';
     }
+
+    public String getCotRawXml(){return cotRawXml;}
+    public void setCotRawXml(String RawXml){this.cotRawXml = RawXml;}
 }
 

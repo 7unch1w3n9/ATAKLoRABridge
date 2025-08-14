@@ -101,7 +101,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             timeStr = "[" + timeFormat.format(new Date(sentMillis)) + "]";
         }
 
-        boolean isSelf = msg.getSenderUid().equals(MapView.getDeviceUid());
+        String senderUid = msg.getSenderUid();
+        String deviceUid = MapView.getDeviceUid();
+        boolean isSelf = senderUid != null && senderUid.equals(deviceUid);
+
         String callsign = isSelf ? "Me" : msg.getSenderCallsign();
         String metaLine = timeStr + " " + callsign + ":";
         holder.meta.setText(metaLine);

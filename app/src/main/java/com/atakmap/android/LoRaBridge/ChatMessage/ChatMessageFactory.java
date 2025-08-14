@@ -62,24 +62,26 @@ public class ChatMessageFactory {
         if (event == null) return null;
         try {CotDetail detail = event.getDetail();
 
-        String origin = "External";
+        String origin = null;
         CotDetail chatNode = event.getDetail().getFirstChildByName(0, "__chat");
-        if (chatNode != null) {
-            origin = "GeoChat";
+
+        CotDetail loraNode  = detail.getFirstChildByName(0, "__lora");
+        if (loraNode  != null) {
+            origin = loraNode.getAttribute("origin");
+            if ("Plugin".equals(origin)) {
+                return null;
+            }
         }
+        else{origin = "GeoChat";}
+
         String senderCallsign = null;
         String senderUid = null;
         String message = null;
 
         if (chatNode != null) {
             senderCallsign = chatNode.getAttribute("senderCallsign");
-            senderUid = chatNode.getAttribute("senderUid");
+            senderUid = chatNode.getAttribute("sender")  != null ? chatNode.getAttribute("sender"):detail.getFirstChildByName(0, "link").getAttribute("uid");
             message = chatNode.getAttribute("message");
-        }
-
-        if (senderUid == null) {
-            CotDetail linkNode = detail.getFirstChildByName(0, "link");
-            if (linkNode != null) senderUid = linkNode.getAttribute("uid");
         }
 
         if (message == null) {
@@ -88,8 +90,15 @@ public class ChatMessageFactory {
         }
 
 
-        String receiverUid = (toUIDs != null && toUIDs.length > 0) ? toUIDs[0] : null;
-        String receiverCallsign = receiverUid;
+        String receiverUid;
+            if ((toUIDs != null && toUIDs.length > 0)) {
+                receiverUid = toUIDs[0];
+            } else {
+                assert chatNode != null;
+                CotDetail remarksNode= detail.getFirstChildByName(0, "remarks");
+                receiverUid = remarksNode.getAttribute("to");
+            }
+            String receiverCallsign = receiverUid;
         if (receiverUid != null) {
             com.atakmap.android.contact.Contact contact =
                     com.atakmap.android.contact.Contacts.getInstance().getContactByUuid(receiverUid);
@@ -98,10 +107,9 @@ public class ChatMessageFactory {
             }
         }
 
-            // 检查是否有原始消息ID
+
         String originalId = null;
-        CotDetail loraNode = detail.getFirstChildByName(0, "__lora");
-        if (loraNode != null) {
+        if (loraNode  != null) {
             originalId = loraNode.getAttribute("originalId");
         }
 
@@ -120,8 +128,8 @@ public class ChatMessageFactory {
                 messageId,
                 senderUid,
                 senderCallsign != null ? senderCallsign : senderUid,
-                receiverUid != null ? receiverUid : "All Chat Rooms",
-                receiverCallsign != null ? receiverCallsign : "All Chat Rooms",
+                receiverUid,
+                receiverCallsign,
                 message,
                 timestamp,
                 messageType,

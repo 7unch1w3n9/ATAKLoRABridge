@@ -34,9 +34,8 @@ public class ChatMessageManager {
     /**
      * Converts message entity to CoT event (Plugin → GeoChat).
      * Key field mappings:
-     *   senderUid → link.uid
+     *   SenderUid → link.uid
      *   message → remarks.innerText
-     * Special: Adds __lora.originalId to preserve source ID.
      * @param message Message entity
      * @return Complete CoT event
      */
@@ -44,33 +43,34 @@ public class ChatMessageManager {
         CotEvent event = new CotEvent();
         CoordinatedTime now = new CoordinatedTime();
         GeoPoint currentLocation = MapView.getMapView().getSelfMarker().getPoint();
-        CotPoint point = new CotPoint(currentLocation);
 
         // 设置基础属性
-        String uid = "GeoChat." + message.getSenderUid() + ".All Chat Rooms." + UUID.randomUUID();
+        String uid = message.getId();
         event.setUID(uid);
         event.setType("b-t-f");
-        event.setHow("m-g");
+        event.setHow("h-g-i-g-o");
         event.setTime(now);
         event.setStart(now);
-        event.setStale(now.addMinutes(2));
+        event.setStale(now.addMinutes(5));
+
+        CotPoint point = new CotPoint(currentLocation);
         event.setPoint(point);
 
         // 构造 <detail>
         CotDetail detail = new CotDetail("detail");
 
         CotDetail chat = new CotDetail("__chat");
-        chat.setAttribute("parent", "RootContactGroup");
-        chat.setAttribute("groupOwner", "false");
-        chat.setAttribute("messageId", UUID.randomUUID().toString());
-        chat.setAttribute("chatroom", "All Chat Rooms");
-        chat.setAttribute("id", "All Chat Rooms");
+        chat.setAttribute("messageId", message.getId());
+        chat.setAttribute("sender", message.getSenderUid());
+        chat.setAttribute("receiver", message.getReceiverUid());
         chat.setAttribute("senderCallsign", message.getSenderCallsign());
+
 
         CotDetail loraDetail = new CotDetail("__lora");
         loraDetail.setAttribute("originalId", message.getId());
+        loraDetail.setAttribute("origin", "Plugin");
         detail.addChild(loraDetail);
-
+/*
         CotDetail chatgrp = new CotDetail("chatgrp");
         chatgrp.setAttribute("uid0", message.getSenderUid());
         chatgrp.setAttribute("uid1", "All Chat Rooms");
@@ -78,19 +78,17 @@ public class ChatMessageManager {
         chat.addChild(chatgrp);
         detail.addChild(chat);
 
+ */
+
         CotDetail link = new CotDetail("link");
         link.setAttribute("uid", message.getSenderUid());
         link.setAttribute("type", "a-f-G-U-C");
         link.setAttribute("relation", "p-p");
         detail.addChild(link);
 
-        CotDetail serverDest = new CotDetail("__serverdestination");
-        serverDest.setAttribute("destination", "0.0.0.0:4242:tcp");
-        detail.addChild(serverDest);
-
         CotDetail remarks = new CotDetail("remarks");
-        remarks.setAttribute("source", "BAO.F.ATAK." + message.getSenderUid());
-        remarks.setAttribute("to", "All Chat Rooms");
+        remarks.setAttribute("source",  message.getSenderCallsign());
+        remarks.setAttribute("to", message.getReceiverCallsign());
         remarks.setAttribute("time", now.toString());
         remarks.setInnerText(message.getMessage());
         detail.addChild(remarks);
@@ -103,7 +101,6 @@ public class ChatMessageManager {
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Type: " + event.getType());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Sender: " + message.getSenderCallsign());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Message: " + message.getMessage());
-        com.atakmap.coremap.log.Log.d("LoRaBridge", "  Point: " + point.toString());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Detail XML: " + detail.toString());
 
         return event;

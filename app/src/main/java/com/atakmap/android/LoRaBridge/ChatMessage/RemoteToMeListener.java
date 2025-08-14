@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;
 import com.atakmap.comms.CotServiceRemote;
+import com.atakmap.coremap.cot.event.CotDetail;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.log.Log;
 
@@ -23,7 +24,7 @@ public class RemoteToMeListener implements CotServiceRemote.CotEventListener {
 
     public RemoteToMeListener(Context context) {
         this.chatRepository = new ChatRepository(context);;
-        this.syncService = new MessageSyncService(context);
+        this.syncService = MessageSyncService.getInstance(context);
         cotServiceRemote = new CotServiceRemote();
         cotServiceRemote.setCotEventListener(this);
         cotServiceRemote.connect(new CotServiceRemote.ConnectionListener() {
@@ -47,7 +48,11 @@ public class RemoteToMeListener implements CotServiceRemote.CotEventListener {
     @Override
     public void onCotEvent(CotEvent cotEvent, Bundle bundle) {
         // Delegate directly to sync service
-        syncService.processIncomingCotEvent(cotEvent, null);
+        String[] uids = new String[1];
+        uids[0] = "12324" ;
+        Log.e(TAG, "Remote ------------------------------------");
+        //cotEvent.getDetail().getFirstChildByName(0, "__chat").getAttribute("id")
+        syncService.processIncomingCotEventFromGeoChat(cotEvent,uids);
     }
 
     public void shutdown() {

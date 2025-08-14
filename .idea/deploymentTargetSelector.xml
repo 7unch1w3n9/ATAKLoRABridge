@@ -4,6 +4,14 @@
     <selectionStates>
       <SelectionState runConfigName="LoRaBridge.plugin">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-08-13T23:49:56.382559400Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=O7K7W4S8BIKB9T7L" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>

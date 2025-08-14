@@ -223,11 +223,13 @@ android {
             setProperty("archivesBaseName", "ATAK-Plugin-" + rootProject.name + "-" + PLUGIN_VERSION + "-" + getVersionName() + "-" + ATAK_VERSION)
             defaultConfig.versionCode = getVersionCode()
             defaultConfig.versionName = PLUGIN_VERSION + " (" + getVersionName() + ") - [" + ATAK_VERSION + "]"
+            jniLibs.srcDirs = ['src/main/jniLibs']
         }
 
         gov.java.srcDirs 'src/gov/java'
         gov.assets.srcDir 'src/gov/assets'
         gov.res.srcDir 'src/gov/res'
+
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
@@ -261,6 +263,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    implementation 'com.google.protobuf:protobuf-java:3.25.1'
+    implementation 'com.google.protobuf:protobuf-java-util:3.25.1'
 }
 
 

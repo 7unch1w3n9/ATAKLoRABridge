@@ -1438,7 +1438,7 @@ Computing Machinery]
    copies are not made or distributed for profit or commercial advantage
    and that copies bear this notice and the full citation on the first
    page. Copyrights for third-party components of this work must be
-   honored. For all other uses, contact the
+   honored. For all other uses, pluginContact the
    owner\hspace*{.5pt}/author(s).
   \or % usgov
    This paper is authored by an employee(s) of the United States

@@ -17,6 +17,7 @@ public class ChatRepository {
     private final ChatMessageDao chatDao;
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Map<String, LiveData<List<ChatMessageEntity>>> contactMessageCache = new HashMap<>();
+    private boolean a;
 
     public ChatRepository(Context context) {
         ChatDatabase db = ChatDatabase.getDatabase(context);
@@ -51,7 +52,7 @@ public class ChatRepository {
                 result[0] = true;
             }
         });
-        // 添加短暂等待确保插入完成
+
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {

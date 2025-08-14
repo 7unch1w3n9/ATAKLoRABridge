@@ -3,12 +3,16 @@ package com.atakmap.android.LoRaBridge.ChatMessage;
 import android.content.Context;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;
+import com.atakmap.android.LoRaBridge.JNI.FlowgraphNative;
+import com.atakmap.android.LoRaBridge.JNI.JniMessageConverter;
+import com.atakmap.android.LoRaBridge.phy.MessageConverter;
+import com.atakmap.android.LoRaBridge.phy.UdpManager;
 import com.atakmap.android.maps.MapView;
+import com.atakmap.coremap.cot.event.CotDetail;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.log.Log;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -20,26 +24,40 @@ import java.util.Set;
  */
 public class MessageSyncService {
     private static final String TAG = "MessageSyncService";
-
+    private static MessageSyncService instance;
     private final ChatRepository chatRepository;
     private final ChatMessageManager chatMessageManager;
     private final MessageTracker messageTracker = new MessageTracker();
+    private final Set<String> processedMessageIds = new HashSet<>();
+    private final MessageConverter messageConverter;
+    private final UdpManager udpManager;
 
-
-    public MessageSyncService(Context context) {
+    private MessageSyncService(Context context) {
         this.chatRepository = new ChatRepository(context);
         this.chatMessageManager = new ChatMessageManager(context);
+        this.messageConverter = new JniMessageConverter();
+        this.udpManager = new UdpManager(this, messageConverter);
     }
-
+    public static synchronized MessageSyncService getInstance(Context context) {
+        if (instance == null) {
+            instance = new MessageSyncService(context.getApplicationContext());
+        }
+        return instance;
+    }
     /**
      * Processes incoming CoT events (entry point).
      * Security: Filters invalid events and self-messages.
      * @param event Raw CoT event
      * @param toUIDs Recipient UID array
      */
-    public void processIncomingCotEvent(CotEvent event, String[] toUIDs) {
+    public void processIncomingCotEventFromGeoChat(CotEvent event, String[] toUIDs) {
         if (!isValidGeoChatEvent(event)) return;
 
+        CotDetail lora = event.getDetail().getFirstChildByName(0, "__lora");
+        if (lora != null ) {
+            Log.d(TAG, "Skipping plugin processed message to avoid loop");
+            return;
+        }
         ChatMessageEntity entity = ChatMessageFactory.fromCotEvent(event, toUIDs);
         if (entity == null) {
             Log.w(TAG, "Failed to create entity from CoT event");
@@ -58,33 +76,62 @@ public class MessageSyncService {
         }
     }
 
-    // 处理用户发送的消息（从UI发出）convertChatMessageToCotEvent
     /**
      * Processes locally generated messages (DB → GeoChat).
      * Note: Only handles "Plugin" origin messages.
      * @param message Message entity to send
      */
     public void processOutgoingMessage(ChatMessageEntity message) {
-        if (message == null) return;
-
-
-        // 只处理Plugin来源的消息
         if ("Plugin".equals(message.getOrigin())) {
-            // 检查是否已处理过
             if (messageTracker.isProcessed(message.getId())) {
                 Log.d(TAG, "Message already processed: " + message.getId());
                 return;
             }
             messageTracker.markProcessed(message.getId());
-            chatRepository.insert(message);
             CotEvent cotEvent = chatMessageManager.convertChatMessageToCotEvent(message);
             if (cotEvent != null) {
-                chatMessageManager.sendToGeoChat(cotEvent);
+                CotDetail detail = cotEvent.getDetail();
+                CotDetail pluginDetail = detail.getFirstChildByName(0, "__plugin");
+                //pluginDetail.setAttribute("messageId", cotEvent.getUID());
+                //detail.addChild(pluginDetail);
+                if(pluginDetail != null) chatMessageManager.sendToGeoChat(cotEvent);
+            }
+
+            if (shouldSendToLoRa(message)) {
+                sendToFlowgraph(message);
             }
         }
     }
+    private void sendToFlowgraph(ChatMessageEntity message) {
+        try {
+            byte[] payload = messageConverter.encodeMessage(message);
+            udpManager.sendAsync(payload);
 
-    // 添加消息跟踪，防止重复处理
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to send to Flowgraph", e);
+        }
+    }
+
+    public void handleFlowgraphMessage(byte[] payload) {
+        try {
+            Log.d(TAG, "Received Flowgraph payload (" + payload.length + " bytes)");
+
+            // 使用转换器解码消息
+            ChatMessageEntity message = messageConverter.decodeMessage(payload);
+
+            if (message == null) {
+                Log.w(TAG, "Failed to decode Flowgraph payload");
+                return;
+            }
+            processIncomingPhyMessage(message);
+        } catch (Exception e) {
+            Log.e(TAG, "Error handling Flowgraph message", e);
+        }
+    }
+
+    public boolean isMessageProcessed(String messageId) {
+        return messageTracker.isProcessed(messageId);
+    }
     private boolean isValidGeoChatEvent(CotEvent event) {
         return event != null && event.isValid() &&
                 "b-t-f".equals(event.getType()) &&
@@ -108,7 +155,6 @@ public class MessageSyncService {
     // Message tracker to prevent duplicate processing
     private static class MessageTracker {
         private final Set<String> processedIds = new HashSet<>();
-        private final long MAX_AGE = 5 * 60 * 1000; // 5mins
 
         /**
          * Checks if message was processed within 5-minute window.
@@ -124,5 +170,67 @@ public class MessageSyncService {
             }
             processedIds.add(id);
         }
+    }
+
+    private boolean shouldSendToLoRa(ChatMessageEntity message) {
+        //return !"All Chat Rooms".equals(message.getReceiverUid());
+        Log.d(TAG, "Sending" + message.getId() + "To Flowgraph");
+        return true;
+    }
+
+
+    /**
+     * 处理从物理层接收的消息
+     */
+    public void processIncomingPhyMessage(ChatMessageEntity message) {
+        if (message == null) return;
+        Log.d(TAG, "Recevice " + message.getId() + "from Flowgraph");
+        if (processedMessageIds.contains(message.getId())) {
+            Log.d(TAG, "Duplicate Flowgraph  message ignored: " + message.getId());
+            return;
+        }
+        processedMessageIds.add(message.getId());
+        if (processedMessageIds.size() > 500) {
+            processedMessageIds.clear(); // 防止内存占用过大
+        }
+        message.setOrigin("PHY");
+
+        // 重建原始CoT
+        rebuildRawCot(message);
+
+        // 保存到数据库
+        boolean inserted = chatRepository.insertIfNotExists(message);
+
+        if (inserted) {
+            Log.d(TAG, "New PHY message saved: " + message.getMessage());
+
+            // 转换为CoT事件并发送到GeoChat
+            Log.d(TAG, "TESSSSSSSSSSSSSSSSSSSSSSST2 ");
+            CotEvent event = chatMessageManager.convertChatMessageToCotEvent(message);
+            if (event != null) {
+                chatMessageManager.sendToGeoChat(event);
+            }
+        } else {
+            Log.d(TAG, "Duplicate PHY message ignored");
+        }
+    }
+
+
+    private void rebuildRawCot(ChatMessageEntity message) {
+        if (message.getCotRawXml()!= null && !message.getCotRawXml().isEmpty()) {
+            return;
+        }
+        message.setCotRawXml(message.toString());
+
+    }
+
+    public void shutdown() {
+        if (udpManager != null) {
+            udpManager.stop();
+            Log.d(TAG, "UDP管理器已停止");
+        }
+
+        processedMessageIds.clear();
+        Log.d(TAG, "消息同步服务清理完成");
     }
 }

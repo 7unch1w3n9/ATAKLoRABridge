@@ -15,6 +15,7 @@ import com.atakmap.android.LoRaBridge.ChatMessage.RemoteToMeListener;
 import com.atakmap.android.LoRaBridge.Database.ChatViewModel;
 import com.atakmap.android.LoRaBridge.JNI.FlowgraphNative;
 import com.atakmap.android.LoRaBridge.phy.UdpManager;
+
 import com.atakmap.android.maps.MapComponent;
 import com.atakmap.android.maps.MapView;
 import com.atakmap.android.LoRaBridge.LoRaBridgeMapComponent;
@@ -154,7 +155,6 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         CommsMapComponent.getInstance().registerPreSendProcessor(
                 new GeoChatPreSendInterceptor(pluginContext)
         );
-
         startFlowgraphThread();
         Log.d(TAG, "Not gonna SEE mee");
     }

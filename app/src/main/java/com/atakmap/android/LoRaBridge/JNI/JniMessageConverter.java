@@ -9,11 +9,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
 
 public class JniMessageConverter implements MessageConverter {
     private static final String TAG = "JniMessageConverter";
@@ -112,6 +110,7 @@ public class JniMessageConverter implements MessageConverter {
     }
 
     private String[] splitPreservingEscapes(String input, String delimiter, String escape) {
+
         List<String> parts = new ArrayList<>();
         StringBuilder current = new StringBuilder();
         char delimChar = delimiter.charAt(0);

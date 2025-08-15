@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage[a4paper,margin=2cm]{geometry}
+
+\begin{document}
+
+    \begin{landscape}
+    \begin{center}
+        {\LARGE \textbf{Gantt Chart (Weekly Plan)}}
+    \end{center}
+
+        \begin{ganttchart}[
+            hgrid,
+            vgrid,
+            x unit=0.7cm,
+            y unit chart=1cm,
+            bar height=0.7,
+            bar/.append style={fill=blue!50},
+            bar label font=\normalsize\rmfamily,
+            %title/.style={draw=none, fill=gray!10},
+            title height=1,
+            title label font=\bfseries,
+            title top shift=0,
+            milestone/.append style={fill=red}
+        ]{1}{26}
+
+
+        
+        \gantttitle{2025 Bachelor Thesis Timeline (26 Weeks)}{26} \\
+        \gantttitle{July}{4}
+        \gantttitle{August}{4}
+        \gantttitle{September}{4}
+        \gantttitle{October}{5}
+        \gantttitle{November}{5} 
+        \gantttitle{December}{4} \\
+        \gantttitlelist{1,...,26}{1} \\
+
+        \ganttbar{Phase 0: ATAK Plugin (Chat I/O)}{1}{4} \\
+        %\ganttmilestone{Milestone: ATAK I/O Ready}{4} \\
+        
+       \ganttbar{Phase 1: WASM Runtime Integration}{5}{9} \\
+        %\ganttmilestone{Milestone: LoRa Signal Chain Ready}{10} \\
+
+        \ganttbar{Phase 2: RF + CoT Integration}{10}{15} \\
+        %\ganttmilestone{Milestone: First RF Message Sent}{13} \\
+
+        \ganttbar{Phase 3: Dummy MAC (Multi-device)}{16}{18} \\
+        %\ganttmilestone{Milestone: Multi-device Ready}{16} \\
+
+        \ganttbar{Phase 4: Evaluation + Fallback Testing}{19}{20} \\
+        %\ganttmilestone{Milestone: Evaluation Done}{19} \\
+
+        \ganttbar{Phase 5: Thesis Writing \& Polishing}{21}{26} \\
+        %\ganttmilestone{Milestone: Thesis Submitted}{25} \\
+
+        \end{ganttchart}
+    \end{landscape}
+
+\end{document}

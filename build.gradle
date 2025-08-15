@@ -1,0 +1,212 @@
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+/*
+ext {
+    rustDir = file("${projectDir}/../rust")
+    rustTarget = "aarch64-linux-android"
+    rustLibName = "libflowgraph_native.so"
+    jniLibsDir = file("${projectDir}/app/src/main/jniLibs")
+}
+
+
+task buildRust(type: Exec) {
+    workingDir rustDir
+    commandLine 'cargo', 'build', '--target', rustTarget, '--release'
+
+
+    doFirst {
+        println "Building Rust library for Android..."
+        println "Working directory: ${rustDir}"
+        println "Command: cargo build --target ${rustTarget} --release"
+    }
+}
+
+
+task cleanRust(type: Exec) {
+    workingDir rustDir
+    commandLine 'cargo', 'clean'
+}
+
+
+task copyRustLibraries(type: Copy) {
+    dependsOn buildRust
+
+    from "${rustDir}/target/${rustTarget}/release"
+    into "${jniLibsDir}/${rustTarget}"
+
+    include rustLibName
+
+
+    doFirst {
+        println "Copying Rust libraries from: ${from}"
+        println "Copying Rust libraries to: ${into}"
+    }
+
+    doLast {
+        println "Copied ${rustLibName} to Android project"
+    }
+}
+
+
+task cleanCopiedLibraries(type: Delete) {
+    delete jniLibsDir
+}
+
+
+clean.dependsOn cleanRust
+clean.dependsOn cleanCopiedLibraries
+
+
+project.afterEvaluate {
+    def appBuildTask = tasks.findByPath(':app:build')
+    if (appBuildTask) {
+        appBuildTask.dependsOn copyRustLibraries
+    }
+
+
+    tasks.whenTaskAdded { task ->
+        if (task.name.startsWith('assemble')) {
+            task.dependsOn copyRustLibraries
+        }
+    }
+}
+
+// ========================================
+
+project(':app') {
+    android {
+        externalNativeBuild {
+            cmake {
+                path "CMakeLists.txt"
+            }
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ["src/main/jniLibs"]
+            }
+        }
+    }
+
+    // 创建 CMakeLists.txt 文件（如果不存在）
+    task createCMakeListsFile {
+        def cmakeFile = file("CMakeLists.txt")
+        if (!cmakeFile.exists()) {
+            cmakeFile.text = """
+                cmake_minimum_required(VERSION 3.4.1)
+                
+                
+                set(RUST_LIB_DIR \${CMAKE_SOURCE_DIR}/src/main/jniLibs/aarch64-linux-android)
+                
+                
+                add_library(flowgraph_native SHARED IMPORTED)
+                set_target_properties(flowgraph_native PROPERTIES
+                    IMPORTED_LOCATION \${RUST_LIB_DIR}/libflowgraph_native.so)
+                
+                
+                add_library(native-lib SHARED
+                            src/main/cpp/native-lib.cpp)
+                
+                
+                target_link_libraries(native-lib
+                                      flowgraph_native
+                                      log)
+            """.stripIndent()
+            println "Created CMakeLists.txt"
+        }
+    }
+
+
+    preBuild.dependsOn createCMakeListsFile
+}
+
+// ========================================
+
+def getNdkPath() {
+    if (System.getenv("ANDROID_NDK_HOME") != null) {
+        return System.getenv("ANDROID_NDK_HOME")
+    } else if (System.getenv("ANDROID_NDK_ROOT") != null) {
+        return System.getenv("ANDROID_NDK_ROOT")
+    } else {
+        // 默认路径，根据你的安装修改
+        return "/home/user/Android/Sdk/ndk/25.2.9519653"
+    }
+}
+
+
+task setupRustToolchain {
+    def cargoConfigDir = file("${rustDir}/.cargo")
+    def cargoConfigFile = file("${cargoConfigDir}/config.toml")
+
+    doLast {
+        if (!cargoConfigDir.exists()) {
+            cargoConfigDir.mkdirs()
+        }
+
+        def ndkPath = getNdkPath()
+        def toolchainPath = "${ndkPath}/toolchains/llvm/prebuilt/linux-x86_64"
+
+        cargoConfigFile.text = """
+            [target.${rustTarget}]
+            ar = "${toolchainPath}/bin/aarch64-linux-android-ar"
+            linker = "${toolchainPath}/bin/aarch64-linux-android30-clang"
+        """.stripIndent()
+
+        println "Configured Rust toolchain for Android"
+        println "AR: ${toolchainPath}/bin/aarch64-linux-android-ar"
+        println "Linker: ${toolchainPath}/bin/aarch64-linux-android30-clang"
+    }
+}
+
+
+buildRust.dependsOn setupRustToolchain
+
+// =====================================
+task verifyRustSetup {
+    dependsOn setupRustToolchain
+
+    doLast {
+
+        def rustupCheck = new ByteArrayOutputStream()
+        exec {
+            commandLine 'rustup', 'target', 'list', '--installed'
+            standardOutput = rustupCheck
+        }
+
+        if (!rustupCheck.toString().contains(rustTarget)) {
+            throw new GradleException("Rust target ${rustTarget} is not installed. Please run: rustup target add ${rustTarget}")
+        }
+
+
+        def ndkPath = getNdkPath()
+        if (!file(ndkPath).exists()) {
+            throw new GradleException("Android NDK not found at ${ndkPath}. Please set ANDROID_NDK_HOME environment variable.")
+        }
+
+        println "Rust setup verified successfully"
+    }
+}
+
+buildRust.dependsOn verifyRustSetup
+*/

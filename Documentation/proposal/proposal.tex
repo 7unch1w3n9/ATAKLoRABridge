@@ -1,0 +1,76 @@
+%!TEX root = proposal.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[sigconf]{acmart}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\usepackage{enumitem}
+
+
+% Copyright
+\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+%Conference
+\acmConference[Proposal for Bachelorthesis ]{SEEMOO }{Juni 2025}{Darmstadt, Germany} 
+% \acmYear{2018}
+% \copyrightyear{2018}
+% \acmArticle{4}
+% \acmPrice{15.00}
+
+\begin{document}
+\title{ATAK Plugin for Decentralized Communication via FutureSDR}
+
+% Comment out the following for you final document
+%\subtitle{One-page Summary}
+
+\author{Junchi Weng}
+\affiliation{%
+  \institution{Technische Universit\"at Darmstadt}
+}
+\email{junchi.weng@stud.tu-darmstadt.de}
+
+% The default list of authors is too long for headers.
+\renewcommand{\shortauthors}{J.Weng}
+
+\begin{comment}
+  \begin{abstract} % do not use this section in the one-page summary
+    You may want to answer the following questions with roughly one sentence each.
+
+    \begin{itemize}
+    \item What is the topic of your main seminar paper?
+    \item What problem does it solve?
+    \item Why is that topic/problem important?
+    \item What methodologies do the authors apply?
+    \item What are the main contributions of the paper?
+    \item What are the key findings/results of the paper?
+    \end{itemize}
+    
+  \textbf{Hint 1:} You do not have to answer every question above. Consider only those that are relevant to your paper. 
+
+  \end{abstract}
+  ......
+\end{comment}
+
+
+\maketitle
+
+\input{Motivation/motivation.tex}
+
+\input{Related_Work/related_work.tex}
+
+\input{Methods/methods.tex}
+
+\input{RiskAndLimit/riskAndLimit.tex}
+
+% References
+\newpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{proposal/bibliography}
+
+\end{document}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">LoRaBridge</string>
+    <!-- description -->
+    <string name="app_desc">ATAK Plugin for sending and receiving CoT messages over LoRa</string>
+    <string name="welcome_to_the_lora_chat_plugin">Welcome to the LoRa Chat plugin</string>
+    <string name="contact_list">Contact list</string>
+    <string name="list_of_contacts">List of pluginContacts</string>
+    <string name="contact_s_name">Contact´s name</string>
+
+
+</resources>

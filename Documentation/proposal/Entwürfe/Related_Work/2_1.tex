@@ -1,0 +1,35 @@
+\subsection{Classification of Disaster Communication Scenarios and Response Strategies}
+    In a survey study, Deepak G. and his team proposed a classification of disaster communication scenarios based on the extent of network damage: congested networks, partially functional networks, and completely isolated networks.
+    \begin{description}
+        \item[Congested networks] refer to cases where the communication infrastructure is still operational, but performance significantly deteriorates due to overwhelming traffic—such as a large number of people simultaneously attempting to pluginContact others during the event.
+        \sloppy\item[Partially functional networks] indicate that some components of the infrastructure are no longer operational, leaving only certain areas or services functional.
+        \sloppy\item[Completely isolated networks] represent the most severe case, where all base stations (BS) are down and the affected area is entirely cut off from communication.
+    \end{description}
+    Different response strategies are typically employed depending on the problem. In congested networks, mechanisms such as enhanced Mobile Priority Services (eMPS) can be used to ensure higher priority for emergency traffic. Additionally, network slicing can allocate dedicated resources to specific services. However, when the network is partially available or completely isolated, traditional centralized communication systems become ineffective. In such cases, more autonomous and decentralized communication solutions are required. To address scenarios with degraded or completely failed infrastructure, three key decentralized communication methods have been extensively studied and applied:
+
+        \vspace{0.8em}
+        \noindent\textbf{2.1.1 Device-to-Device (D2D) Communication}\par
+        \vspace{0.3em}
+            \sloppy D2D communication facilitates the direct exchange of data between proximate devices, thereby circumventing the reliance on conventional base stations or access points. This approach allows devices to maintain connectivity even in the absence of centralized infrastructure. Cano et al. proposed several D2D forwarding strategies for disaster environments, aiming to optimize the use of limited resources:
+            \begin{itemize}
+                \item \textbf{greedy strategy} selects neighboring nodes with the highest remaining energy for message forwarding, in order to prolong network lifetime.
+                \item \textbf{distance-aware strategy} considers both energy levels and the distance to the final destination, aiming to balance energy efficiency and transmission effectiveness.
+                \item \textbf{probabilistic strategy} chooses relay nodes based on a probability distribution influenced by energy availability, providing greater robustness under resource constraints.
+            \end{itemize}
+            \vspace{0.4em}
+            Simulation results from the aforementioned study show that these strategies outperform traditional flooding methods in terms of energy efficiency, with savings ranging from 20\% to 60\%. Notably, the probabilistic strategy demonstrates considerable robustness in energy-constrained conditions, while the distance-aware strategy offers the most stable performance and the highest message delivery rate. Nevertheless, a major limitation of D2D communication is its short transmission range, which restricts long-distance communication.
+
+        \vspace{1em}
+        \noindent\textbf{2.1.2 Mobile Ad-hoc Networks(MANETs)}\par
+        \vspace{0.2em}
+            MANETs build upon the D2D concept by enabling multi-hop communication between mobile nodes in a self-organizing network. Jang et al. were pioneers in applying MANETs to disaster response scenarios. They developed a temporary mesh network using WiFi-enabled laptops, which operated without any centralized server. The integration of this system with the P2Pnet platform and the Rescue Information System for Earthquake Disasters (RISED) conferred upon it robust task orientation and modularity.
+
+            While MANETs have demonstrably shown feasibility in post-disaster communications, several limitations remain. These include a relatively short transmission range, reliance on manual operation, and lack of automated routing mechanisms, all of which hinder large-scale or fully autonomous deployment.
+
+        \vspace{1em}
+        \noindent\textbf{2.1.3 Unmanned Aerial Vehicle (UAV) Relay}\par
+        \vspace{0.2em}
+            UAV relays utilize drones as temporary airborne base stations or relay nodes, offering a distinct advantage over ground-based systems. Erdelj et al. conducted a comprehensive review of UAV-based disaster communication systems, outlining both their strengths and limitations. UAVs are considered ideal for emergency communication due to their rapid deployment, high mobility, and ability to provide aerial coverage.
+
+            However, the deployment of UAV relays is not without its challenges. Flight durations are typically circumscribed, necessitating frequent battery replacement or recharging. The stability of communication links can be adversely affected by atmospheric turbulence and physical obstructions. Furthermore, the implementation of efficient energy management strategies is critical to maximize operational time and ensure sustained functionality.
+

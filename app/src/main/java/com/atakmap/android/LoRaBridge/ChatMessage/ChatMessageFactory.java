@@ -71,8 +71,7 @@ public class ChatMessageFactory {
             if ("Plugin".equals(origin)) {
                 return null;
             }
-        }
-        else{origin = "GeoChat";}
+        } else{origin = "GeoChat";}
 
         String senderCallsign = null;
         String senderUid = null;

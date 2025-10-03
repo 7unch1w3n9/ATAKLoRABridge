@@ -8,10 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.atakmap.android.LoRaBridge.Database.ChatViewModel;
-import com.atakmap.android.maps.MapView;
 import com.atakmap.coremap.log.Log;
 
-public class ChatMessageObserver {
+public class MessageDatenbankObserver {
     private final String TAG = "Observer";
     private final Context context;
     private final ChatViewModel chatViewModel;
@@ -19,7 +18,7 @@ public class ChatMessageObserver {
     private final MessageSyncService syncService;
     private boolean isFirst = true;
 
-    public ChatMessageObserver(Context context, Activity hostActivity) {
+    public MessageDatenbankObserver(Context context, Activity hostActivity) {
 
         this.context = context;
         this.chatViewModel = new ViewModelProvider((ViewModelStoreOwner) hostActivity).get(ChatViewModel.class);

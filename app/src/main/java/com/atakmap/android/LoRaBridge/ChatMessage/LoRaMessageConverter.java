@@ -6,10 +6,14 @@
     import com.atakmap.coremap.log.Log;
 
     import java.nio.charset.StandardCharsets;
+    import java.text.ParseException;
     import java.text.SimpleDateFormat;
+    import java.util.ArrayList;
     import java.util.Date;
+    import java.util.List;
     import java.util.Locale;
     import java.util.StringTokenizer;
+    import java.util.TimeZone;
     import java.util.UUID;
 
     public class LoRaMessageConverter implements MessageConverter {
@@ -69,8 +73,8 @@
                         unescapeField(parts[5]),  // Receiver Callsign
                         unescapeField(parts[6]),  // Message
                         String.valueOf(timestamp), // Timestamp
-                        unescapeField(parts[7]),  // Message Type
-                        unescapeField(parts[8]),  // Origin
+                        unescapeField(parts[8]),  // Message Type
+                        unescapeField(parts[9]),  // Origin
                         null  // Raw CoT (将在接收后重建)
                 );
             } catch (Exception e) {
@@ -116,46 +120,49 @@
         }
 
         private long parseTimestamp(String timestampStr) {
-            try {
-                return Long.parseLong(timestampStr);
-            } catch (NumberFormatException e) {
-                // 尝试解析ISO8601格式
+            // 先尝试直接解析为毫秒数
+            if (timestampStr.matches("\\d+")) {
                 try {
-                    SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMP_FORMAT, Locale.US);
-                    Date date = sdf.parse(timestampStr);
-                    return date != null ? date.getTime() : System.currentTimeMillis();
-                } catch (Exception ex) {
-                    Log.w(TAG, "Failed to parse timestamp: " + timestampStr, ex);
-                    return System.currentTimeMillis();
-                }
+                    return Long.parseLong(timestampStr);
+                } catch (NumberFormatException ignore) {}
+            }
+
+            // 尝试ISO 8601格式
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMP_FORMAT, Locale.US);
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(timestampStr).getTime();
+            } catch (ParseException e) {
+                Log.w(TAG, "Using current time for invalid timestamp: " + timestampStr);
+                return System.currentTimeMillis();
             }
         }
 
         private String[] splitPreservingEscapes(String input, String delimiter, String escape) {
-            StringTokenizer tokenizer = new StringTokenizer(input, delimiter, true);
+
+            List<String> parts = new ArrayList<>();
             StringBuilder current = new StringBuilder();
-            java.util.ArrayList<String> parts = new java.util.ArrayList<>();
-            boolean lastWasDelimiter = false;
-            boolean escaping = false;
+            char delimChar = delimiter.charAt(0);
+            char escapeChar = escape.charAt(0);
+            boolean nextEscaped = false;
 
-            while (tokenizer.hasMoreTokens()) {
-                String token = tokenizer.nextToken();
+            for (int i = 0; i < input.length(); i++) {
+                char c = input.charAt(i);
 
-                if (escaping) {
-                    current.append(token);
-                    escaping = false;
-                } else if (escape.equals(token)) {
-                    escaping = true;
-                } else if (delimiter.equals(token)) {
-                    if (lastWasDelimiter) {
-                        // 连续的分隔符表示空字段
-                        parts.add(current.toString());
-                        current.setLength(0);
-                    }
-                    lastWasDelimiter = true;
+                if (nextEscaped) {
+                    // 转义模式下追加任何字符
+                    current.append(c);
+                    nextEscaped = false;
+                } else if (c == escapeChar) {
+                    // 标记下一个字符需要转义
+                    nextEscaped = true;
+                } else if (c == delimChar) {
+                    // 遇到未转义的分隔符
+                    parts.add(current.toString());
+                    current.setLength(0);
                 } else {
-                    current.append(token);
-                    lastWasDelimiter = false;
+                    // 普通字符
+                    current.append(c);
                 }
             }
 

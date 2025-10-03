@@ -1,5 +1,6 @@
 package com.atakmap.android.LoRaBridge.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -56,12 +57,14 @@ public class ChatDropDown extends DropDownReceiver {
             this.contact = contact;
 //            Activity activity1 = (Activity)(mapView.getContext());
             viewModel = new ViewModelProvider((ViewModelStoreOwner)activity).get(ChatViewModel.class);
-            viewModel.deleteAllMessages();
+                       viewModel.deleteAllMessages();
 
             chatObserver = messageAdapter::setMessages;
             LiveData<List<ChatMessageEntity>> liveData = viewModel.getMessagesForContact(contact.getId());
             liveData.observeForever(chatObserver);
+
             List<ChatMessageEntity> initialMessages = liveData.getValue();
+            Log.d("Heltec und Plugin ", "HERRREEE BEGEIINNNNNNNNNNNN");
             if (initialMessages != null) {
                 messageAdapter.setMessages(initialMessages);
             }
@@ -103,7 +106,6 @@ public class ChatDropDown extends DropDownReceiver {
         public void onReceive(Context context, Intent intent) {
 
         }
-
 }
 
 

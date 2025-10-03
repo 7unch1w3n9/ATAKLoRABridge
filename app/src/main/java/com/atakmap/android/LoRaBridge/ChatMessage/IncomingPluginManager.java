@@ -12,17 +12,16 @@ import com.atakmap.coremap.cot.event.CotPoint;
 import com.atakmap.coremap.maps.coords.GeoPoint;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
 
-import java.util.UUID;
 /**
  * Manages message transmission and conversion.
  * Handles: Message entity ⇄ CoT event transformations.
  * Phase 2: Will implement LoRa encoding methods.
  */
-public class ChatMessageManager {
-    private static final String TAG = "ChatMessageManager";
+public class IncomingPluginManager {
+    private static final String TAG = "IncomingPluginManager";
     private final Context context;
 
-    public ChatMessageManager(Context context) {
+    public IncomingPluginManager(Context context) {
         this.context = context;
     }
 

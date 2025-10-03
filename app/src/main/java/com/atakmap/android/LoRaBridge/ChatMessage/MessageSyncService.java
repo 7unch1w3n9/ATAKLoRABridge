@@ -3,8 +3,6 @@ package com.atakmap.android.LoRaBridge.ChatMessage;
 import android.content.Context;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;
-import com.atakmap.android.LoRaBridge.JNI.FlowgraphNative;
-import com.atakmap.android.LoRaBridge.JNI.JniMessageConverter;
 import com.atakmap.android.LoRaBridge.phy.MessageConverter;
 import com.atakmap.android.LoRaBridge.phy.UdpManager;
 import com.atakmap.android.maps.MapView;
@@ -26,7 +24,7 @@ public class MessageSyncService {
     private static final String TAG = "MessageSyncService";
     private static MessageSyncService instance;
     private final ChatRepository chatRepository;
-    private final ChatMessageManager chatMessageManager;
+    private final IncomingPluginManager incomingPluginManager;
     private final MessageTracker messageTracker = new MessageTracker();
     private final Set<String> processedMessageIds = new HashSet<>();
     private final MessageConverter messageConverter;
@@ -34,8 +32,8 @@ public class MessageSyncService {
 
     private MessageSyncService(Context context) {
         this.chatRepository = new ChatRepository(context);
-        this.chatMessageManager = new ChatMessageManager(context);
-        this.messageConverter = new JniMessageConverter();
+        this.incomingPluginManager = new IncomingPluginManager(context);
+        this.messageConverter = new LoRaMessageConverter();
         this.udpManager = new UdpManager(this, messageConverter);
     }
     public static synchronized MessageSyncService getInstance(Context context) {
@@ -88,13 +86,13 @@ public class MessageSyncService {
                 return;
             }
             messageTracker.markProcessed(message.getId());
-            CotEvent cotEvent = chatMessageManager.convertChatMessageToCotEvent(message);
+            CotEvent cotEvent = incomingPluginManager.convertChatMessageToCotEvent(message);
             if (cotEvent != null) {
-                CotDetail detail = cotEvent.getDetail();
-                CotDetail pluginDetail = detail.getFirstChildByName(0, "__plugin");
+                //CotDetail detail = cotEvent.getDetail();
+                //CotDetail pluginDetail = detail.getFirstChildByName(0, "__Plugin");
                 //pluginDetail.setAttribute("messageId", cotEvent.getUID());
                 //detail.addChild(pluginDetail);
-                if(pluginDetail != null) chatMessageManager.sendToGeoChat(cotEvent);
+                if(cotEvent.getDetail() != null) incomingPluginManager.sendToGeoChat(cotEvent);
             }
 
             if (shouldSendToLoRa(message)) {
@@ -206,9 +204,9 @@ public class MessageSyncService {
 
             // 转换为CoT事件并发送到GeoChat
             Log.d(TAG, "TESSSSSSSSSSSSSSSSSSSSSSST2 ");
-            CotEvent event = chatMessageManager.convertChatMessageToCotEvent(message);
+            CotEvent event = incomingPluginManager.convertChatMessageToCotEvent(message);
             if (event != null) {
-                chatMessageManager.sendToGeoChat(event);
+                incomingPluginManager.sendToGeoChat(event);
             }
         } else {
             Log.d(TAG, "Duplicate PHY message ignored");

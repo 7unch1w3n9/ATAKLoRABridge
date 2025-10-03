@@ -78,7 +78,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     public boolean syncContactsFromATAK() {
         List<Contact> atakContacts = Contacts.getInstance().getAllContacts();
-        List<PluginContact> storedContacts = ContactStore.getAllContacts(context);
+        List<PluginContact> storedContacts = ContactStore.getAllContacts();
 
         Set<String> storedIds = new HashSet<>();
         for (PluginContact contact : storedContacts) {
@@ -95,9 +95,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 Log.d("ContactSync", "have or not:" + storedIds.contains(uid));
 
                 if (!storedIds.contains(uid)) {
-                    PluginContact loraContact = convertToLoRaContact((IndividualContact) c);
-                    ContactStore.saveContact(context, loraContact);
-                    Log.d("ContactSync", "Added ATAK contact: " + loraContact.getCallsign());
+                    PluginContact pluginContact = convertToLoRaContact((IndividualContact) c);
+                    ContactStore.saveContact(pluginContact);
+                    Log.d("ContactSync", "Added ATAK contact: " + pluginContact.getCallsign());
                     hasChanges = true;
                 }
             }
@@ -107,7 +107,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     }
 
     public void addContact(PluginContact contact) {
-        ContactStore.saveContact(context, contact);
+        ContactStore.saveContact(contact);
         contactList.add(contact);
         notifyItemInserted(contactList.size() - 1);
     }
@@ -115,7 +115,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     public void refreshContacts() {
         try {
             contactList.clear();
-            contactList.addAll(ContactStore.getAllContacts(context));
+            contactList.addAll(ContactStore.getAllContacts());
 
             Set<String> atakUids = getATAKContactUids();
             for (PluginContact contact : contactList) {

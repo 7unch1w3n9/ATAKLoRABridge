@@ -20,10 +20,8 @@ import com.atakmap.coremap.maps.time.CoordinatedTime;
  */
 public class IncomingPluginManager {
     private static final String TAG = "IncomingPluginManager";
-    private final Context context;
 
-    public IncomingPluginManager(Context context) {
-        this.context = context;
+    public IncomingPluginManager() {
     }
 
     // 外部调用：插入消息后，把它同步到GeoChat
@@ -42,7 +40,7 @@ public class IncomingPluginManager {
     public  CotEvent convertChatMessageToCotEvent(ChatMessageEntity message) {
         CotEvent event = new CotEvent();
         CoordinatedTime now = new CoordinatedTime();
-        GeoPoint currentLocation = MapView.getMapView().getSelfMarker().getPoint();
+        //GeoPoint currentLocation = MapView.getMapView().getSelfMarker().getPoint();
 
 
         event.setUID("PluginMsg." + message.getSenderCallsign()
@@ -108,7 +106,7 @@ public class IncomingPluginManager {
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Type: " + event.getType());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Sender: " + event.getDetail().getFirstChildByName(0,"__chat").getAttribute("sender"));
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Message: " + message.getMessage());
-        com.atakmap.coremap.log.Log.d("LoRaBridge", "  Detail XML: " + detail.toString());
+        com.atakmap.coremap.log.Log.d("LoRaBridge", "  Detail XML: " + detail);
 
         return event;
     }

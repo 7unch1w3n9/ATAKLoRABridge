@@ -1,5 +1,6 @@
 package com.atakmap.android.LoRaBridge.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -150,6 +151,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return messages.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setMessages(List<ChatMessageEntity> newMessages) {
         messages.clear();
         messages.addAll(newMessages);

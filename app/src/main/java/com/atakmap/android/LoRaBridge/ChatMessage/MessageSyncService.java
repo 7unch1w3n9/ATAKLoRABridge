@@ -32,7 +32,7 @@ public class MessageSyncService {
 
     private MessageSyncService(Context context) {
         this.chatRepository = new ChatRepository(context);
-        this.incomingPluginManager = new IncomingPluginManager(context);
+        this.incomingPluginManager = new IncomingPluginManager();
         this.messageConverter = new LoRaMessageConverter();
         this.udpManager = new UdpManager(this, messageConverter);
     }

@@ -62,23 +62,32 @@
                     throw new IllegalArgumentException("Invalid LoRa format. Parts: " + parts.length);
                 }
 
-                // 解析时间戳
-                long timestamp = parseTimestamp(parts[6]);
+                String id               = unescapeField(parts[1]);
+                String senderUid        = unescapeField(parts[2]);
+                String senderCallsign   = unescapeField(parts[3]);
+                String receiverUid      = unescapeField(parts[4]);
+                String receiverCallsign = unescapeField(parts[5]);
+                String messageBody      = unescapeField(parts[6]);
+                String tsStr            = unescapeField(parts[7]);
+                String msgType          = unescapeField(parts[8]);
+                String origin           = unescapeField(parts[9]);
+
+                String tsIso = parseTimestamp(tsStr);
 
                 return new ChatMessageEntity(
-                        unescapeField(parts[1]),  // ID
-                        unescapeField(parts[2]),  // Sender UID
-                        unescapeField(parts[3]),  // Sender Callsign
-                        unescapeField(parts[4]),  // Receiver UID
-                        unescapeField(parts[5]),  // Receiver Callsign
-                        unescapeField(parts[6]),  // Message
-                        String.valueOf(timestamp), // Timestamp
-                        unescapeField(parts[8]),  // Message Type
-                        unescapeField(parts[9]),  // Origin
-                        null  // Raw CoT (将在接收后重建)
+                        id,
+                        senderUid,
+                        senderCallsign,
+                        receiverUid,
+                        receiverCallsign,
+                        messageBody,
+                        tsIso,
+                        msgType,
+                        origin,
+                        null
                 );
             } catch (Exception e) {
-                Log.e(TAG, "Decoding failed for payload: " + new String(payload), e);
+                Log.e(TAG, "Decoding failed for payload: " + new String(payload, StandardCharsets.UTF_8), e);
                 return null;
             }
         }
@@ -119,22 +128,38 @@
             return timestamp;
         }
 
-        private long parseTimestamp(String timestampStr) {
-            // 先尝试直接解析为毫秒数
-            if (timestampStr.matches("\\d+")) {
-                try {
-                    return Long.parseLong(timestampStr);
-                } catch (NumberFormatException ignore) {}
-            }
-
-            // 尝试ISO 8601格式
+        private String parseTimestamp(String timestampStr) {
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMP_FORMAT, Locale.US);
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(timestampStr).getTime();
-            } catch (ParseException e) {
-                Log.w(TAG, "Using current time for invalid timestamp: " + timestampStr);
-                return System.currentTimeMillis();
+                // 输出格式：UTC ISO 带 'Z'
+                SimpleDateFormat out = new SimpleDateFormat(TIMESTAMP_FORMAT, Locale.US);
+                out.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                if (timestampStr == null || timestampStr.isEmpty()) {
+                    return out.format(new Date(System.currentTimeMillis()));
+                }
+
+                // 1) 纯数字：按毫秒解析 -> 输出 ISO
+                if (timestampStr.matches("\\d+")) {
+                    long ms = Long.parseLong(timestampStr);
+                    return out.format(new Date(ms));
+                }
+
+                // 2) 归一化 ISO8601：支持末尾 Z 或 +hh:mm
+                String s = timestampStr;
+                if (s.endsWith("Z")) {
+                    s = s.replace("Z", "+0000");                  // ...SSS+0000
+                } else {
+                    s = s.replaceAll(":(?=[0-9]{2}$)", "");       // +01:00 -> +0100
+                }
+                SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+                in.setTimeZone(TimeZone.getTimeZone("UTC"));
+                Date d = in.parse(s);
+                return d != null ? out.format(d) : out.format(new Date(System.currentTimeMillis()));
+            } catch (Exception e) {
+                Log.w(TAG, "parseTimestamp fallback, input=" + timestampStr);
+                SimpleDateFormat out = new SimpleDateFormat(TIMESTAMP_FORMAT, Locale.US);
+                out.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return out.format(new Date(System.currentTimeMillis()));
             }
         }
 

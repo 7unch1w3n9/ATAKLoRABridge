@@ -9,6 +9,7 @@ import com.atakmap.android.maps.MapView;
 import com.atakmap.coremap.cot.event.CotDetail;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.cot.event.CotPoint;
+import com.atakmap.coremap.maps.conversion.EGM96;
 import com.atakmap.coremap.maps.coords.GeoPoint;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
 
@@ -43,41 +44,48 @@ public class IncomingPluginManager {
         CoordinatedTime now = new CoordinatedTime();
         GeoPoint currentLocation = MapView.getMapView().getSelfMarker().getPoint();
 
-        // 设置基础属性
-        String uid = message.getId();
-        event.setUID(uid);
+
+        event.setUID("PluginMsg." + message.getSenderCallsign()
+                + "." + message.getReceiverUid()
+                + "." + message.getId());
         event.setType("b-t-f");
         event.setHow("h-g-i-g-o");
         event.setTime(now);
         event.setStart(now);
         event.setStale(now.addMinutes(5));
 
-        CotPoint point = new CotPoint(currentLocation);
+        // Point:
+        GeoPoint gp = MapView.getMapView().getSelfMarker().getPoint();
+        double hae = gp.isAltitudeValid() ? EGM96.getHAE(gp) : 0.0;
+        double ce = (Double.isNaN(gp.getCE()) || gp.getCE() == CotPoint.UNKNOWN) ? 10.0 : gp.getCE();
+        double le = (Double.isNaN(gp.getLE()) || gp.getLE() == CotPoint.UNKNOWN) ? 10.0 : gp.getLE();
+        CotPoint point = new CotPoint(gp.getLatitude(), gp.getLongitude(), hae, ce, le);
         event.setPoint(point);
 
         // 构造 <detail>
         CotDetail detail = new CotDetail("detail");
 
         CotDetail chat = new CotDetail("__chat");
+        chat.setAttribute("parent", "RootContactGroup");
+        chat.setAttribute("groupOwner", "false");
         chat.setAttribute("messageId", message.getId());
-        chat.setAttribute("sender", message.getSenderUid());
-        chat.setAttribute("receiver", message.getReceiverUid());
+        chat.setAttribute("chatroom", message.getReceiverCallsign());
+        chat.setAttribute("id",       message.getReceiverUid());
         chat.setAttribute("senderCallsign", message.getSenderCallsign());
+        detail.addChild(chat);
+
+        CotDetail chatgrp = new CotDetail("chatgrp");
+        chatgrp.setAttribute("uid0", message.getSenderUid());   // 发送者 UID（你自己）
+        chatgrp.setAttribute("uid1", message.getReceiverUid()); // 目标 UID（对方）
+        chatgrp.setAttribute("id",   message.getReceiverUid()); // 与 __chat@id 保持一致
+        chat.addChild(chatgrp);
 
 
         CotDetail loraDetail = new CotDetail("__lora");
         loraDetail.setAttribute("originalId", message.getId());
         loraDetail.setAttribute("origin", "Plugin");
         detail.addChild(loraDetail);
-/*
-        CotDetail chatgrp = new CotDetail("chatgrp");
-        chatgrp.setAttribute("uid0", message.getSenderUid());
-        chatgrp.setAttribute("uid1", "All Chat Rooms");
-        chatgrp.setAttribute("id", "All Chat Rooms");
-        chat.addChild(chatgrp);
-        detail.addChild(chat);
 
- */
 
         CotDetail link = new CotDetail("link");
         link.setAttribute("uid", message.getSenderUid());
@@ -86,8 +94,8 @@ public class IncomingPluginManager {
         detail.addChild(link);
 
         CotDetail remarks = new CotDetail("remarks");
-        remarks.setAttribute("source",  message.getSenderCallsign());
-        remarks.setAttribute("to", message.getReceiverCallsign());
+        remarks.setAttribute("source", "BAO.F.ATAK." + message.getSenderUid());
+        remarks.setAttribute("to", message.getReceiverUid());
         remarks.setAttribute("time", now.toString());
         remarks.setInnerText(message.getMessage());
         detail.addChild(remarks);
@@ -98,7 +106,7 @@ public class IncomingPluginManager {
         com.atakmap.coremap.log.Log.d("LoRaBridge", "📤 Convert message to CoT Event:");
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  UID: " + event.getUID());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Type: " + event.getType());
-        com.atakmap.coremap.log.Log.d("LoRaBridge", "  Sender: " + message.getSenderCallsign());
+        com.atakmap.coremap.log.Log.d("LoRaBridge", "  Sender: " + event.getDetail().getFirstChildByName(0,"__chat").getAttribute("sender"));
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Message: " + message.getMessage());
         com.atakmap.coremap.log.Log.d("LoRaBridge", "  Detail XML: " + detail.toString());
 

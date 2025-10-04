@@ -36,7 +36,7 @@ public class ChatMessageFactory {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         String timestamp = sdf.format(new Date());
-        String id = "PluginMsg." + UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString();
         return new ChatMessageEntity(
                 id,
                 senderUid,

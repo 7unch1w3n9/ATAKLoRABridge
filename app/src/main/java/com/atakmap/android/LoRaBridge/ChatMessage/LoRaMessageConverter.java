@@ -6,15 +6,12 @@
     import com.atakmap.coremap.log.Log;
 
     import java.nio.charset.StandardCharsets;
-    import java.text.ParseException;
     import java.text.SimpleDateFormat;
     import java.util.ArrayList;
     import java.util.Date;
     import java.util.List;
     import java.util.Locale;
-    import java.util.StringTokenizer;
     import java.util.TimeZone;
-    import java.util.UUID;
 
     public class LoRaMessageConverter implements MessageConverter {
         private static final String TAG = "LoRaMessageConverter";
@@ -56,7 +53,7 @@
         public ChatMessageEntity decodeMessage(byte[] payload) {
             try {
                 String raw = new String(payload, StandardCharsets.UTF_8);
-                String[] parts = splitPreservingEscapes(raw, FIELD_DELIMITER, FIELD_ESCAPE);
+                String[] parts = splitPreservingEscapes(raw);
 
                 if (parts.length < 9 || !"LORA".equals(parts[0])) {
                     throw new IllegalArgumentException("Invalid LoRa format. Parts: " + parts.length);
@@ -163,12 +160,12 @@
             }
         }
 
-        private String[] splitPreservingEscapes(String input, String delimiter, String escape) {
+        private String[] splitPreservingEscapes(String input) {
 
             List<String> parts = new ArrayList<>();
             StringBuilder current = new StringBuilder();
-            char delimChar = delimiter.charAt(0);
-            char escapeChar = escape.charAt(0);
+            char delimChar = LoRaMessageConverter.FIELD_DELIMITER.charAt(0);
+            char escapeChar = LoRaMessageConverter.FIELD_ESCAPE.charAt(0);
             boolean nextEscaped = false;
 
             for (int i = 0; i < input.length(); i++) {

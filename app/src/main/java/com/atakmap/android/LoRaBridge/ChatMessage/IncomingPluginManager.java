@@ -1,6 +1,5 @@
 package com.atakmap.android.LoRaBridge.ChatMessage;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;

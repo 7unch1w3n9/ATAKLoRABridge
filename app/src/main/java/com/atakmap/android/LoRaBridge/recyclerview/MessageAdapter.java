@@ -21,24 +21,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.text.ParseException;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     private final List<ChatMessageEntity> messages;
 
-    public MessageAdapter() {
-        this.messages = new ArrayList<>();
-    }
-
     public MessageAdapter(List<ChatMessageEntity> initialMessages) {
         this.messages = new ArrayList<>(initialMessages);
     }
 
-    public void addMessage(ChatMessageEntity msg) {
-        messages.add(msg);
-        notifyItemInserted(messages.size() - 1);
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView meta;
@@ -59,6 +50,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -116,7 +108,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.bubble.setBackgroundResource(R.drawable.chat_bubble_background);
 
         boolean showDate = false;
-        long prevMillis = -1;
+        long prevMillis;
         if (position == 0) {
             showDate = true;
         } else {

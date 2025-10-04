@@ -39,17 +39,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
     private MessageDatenbankObserver messageDatenbankObserver;
     private MessageSyncService syncService;
     private final static String TAG = "LoRaBridgeLifecycle";
-
-    private Future<?> flowgraphFuture;
-
-    private UdpManager udpManager;
-
-    private boolean createdOnce = false;
-    private Context usbReceiverCtx;
-    private final Object flowgraphLock = new Object();
     private android.hardware.usb.UsbDeviceConnection hackrfConn;
-    private static final String ACTION_USB_PERMISSION = "com.atakmap.android.LoRaBridge.USB_PERMISSION";
-    private static volatile boolean sEnvInited = false;
 
     private UsbHackrfManager usbMgr;
     public LoRaBridgeLifecycle(Context ctx) {
@@ -101,7 +91,6 @@ public class LoRaBridgeLifecycle implements Lifecycle {
 
         PluginNativeLoader.init(initCtx);
         ContactStore.init(mapView);
-        createdOnce = true;
     }
 
     @Override
@@ -146,7 +135,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
             usbMgr = new UsbHackrfManager(app, "com.atakmap.android.LoRaBridge.USB_PERMISSION");
             usbMgr.setListener(new UsbHackrfManager.Listener() {
                 @Override public void onHackrfReady(UsbDeviceConnection conn) {
-                    FlowgraphEngine.get().startWithConnection(app, conn);
+                    FlowgraphEngine.get().startWithConnection(conn);
                 }
                 @Override public void onHackrfDetached() {
                     FlowgraphEngine.get().stop();

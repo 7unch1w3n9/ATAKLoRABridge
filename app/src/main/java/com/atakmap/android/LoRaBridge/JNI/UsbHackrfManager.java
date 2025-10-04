@@ -3,8 +3,7 @@ package com.atakmap.android.LoRaBridge.JNI;
 import android.app.PendingIntent;
 import android.content.*;
 import android.hardware.usb.*;
-import android.os.Build;
-import android.util.Log;
+
 
 public final class UsbHackrfManager {
     public interface Listener {
@@ -50,7 +49,7 @@ public final class UsbHackrfManager {
                     UsbDevice d = i.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     if (d != null) android.util.Log.w("UsbHackrfManager", "DETACHED: " + devStr(d));
                     // 仅当是当前这台 HackRF 才触发 stop
-                    if (d != null && isHackrf(d) && devNameEqActive(d)) {
+                    if (isHackrf(d) && devNameEqActive(d)) {
                         if (listener != null) listener.onHackrfDetached();
                         activeHackrfName = null;
                     } else {

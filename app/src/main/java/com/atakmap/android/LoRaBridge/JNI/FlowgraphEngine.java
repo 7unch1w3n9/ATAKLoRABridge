@@ -1,15 +1,9 @@
 package com.atakmap.android.LoRaBridge.JNI;
 
-import android.content.Context;
 import com.atakmap.coremap.log.Log;
 
 import android.hardware.usb.UsbDeviceConnection;
 import android.os.ParcelFileDescriptor;
-import android.system.ErrnoException;
-import android.system.Os;
-import android.util.Printer;
-
-import java.io.FileDescriptor;
 import java.util.concurrent.*;
 
 public final class FlowgraphEngine {
@@ -27,16 +21,16 @@ public final class FlowgraphEngine {
     private State state = State.STOPPED;
 
     private android.hardware.usb.UsbDeviceConnection heldConn; // Engine 持有并关闭
-    private int rxPort, txPort;
+    //private int rxPort, txPort;
 
     public boolean isRunning() { synchronized (lock) { return state == State.RUNNING; } }
 
 
-    public boolean startWithConnection(Context ctx, UsbDeviceConnection conn) {
+    public void startWithConnection(UsbDeviceConnection conn) {
         synchronized (lock) {
             if (state == State.RUNNING || state == State.STARTING) {
                 Log.w("FlowgraphEngine", "start ignored: state=" + state);
-                return false;
+                return;
             }
             this.heldConn = conn;
 
@@ -69,7 +63,6 @@ public final class FlowgraphEngine {
                     Log.e("FlowgraphEngine", "flowgraph thread crashed", t);
                 }
             });
-            return true;
         }
     }
 

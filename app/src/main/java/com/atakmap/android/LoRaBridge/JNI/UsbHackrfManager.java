@@ -80,7 +80,6 @@ public final class UsbHackrfManager {
     public void probeNow() {
         android.util.Log.i("UsbHackrfManager", "probeNow()");
 
-        // Engine 已在运行就不再枚举/打开，避免重复 open / FD 泄露
         if (com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine.get().isRunning()) {
             android.util.Log.i("UsbHackrfManager", "Engine running; skip probe");
             return;
@@ -93,7 +92,7 @@ public final class UsbHackrfManager {
             android.util.Log.i("UsbHackrfManager", "  isHackrf=" + true + " hasPermission=" + usb.hasPermission(d));
             if (usb.hasPermission(d)) openAndNotify(d);
             else usb.requestPermission(d, permissionPI);
-            break; // 只处理第一台
+            break;
         }
     }
 

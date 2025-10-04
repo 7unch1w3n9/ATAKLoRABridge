@@ -53,8 +53,6 @@ public class LoRaBridgeLifecycle implements Lifecycle {
 
     private UsbHackrfManager usbMgr;
     public LoRaBridgeLifecycle(Context ctx) {
-        Log.d(TAG, "c" + System.identityHashCode(this)
-                + " ctx=" + (ctx==null?"null":ctx.getPackageName()));
         this.pluginContext = ctx;
         this.overlays = new LinkedList<>();
         this.mapView = null;
@@ -108,21 +106,6 @@ public class LoRaBridgeLifecycle implements Lifecycle {
 
     @Override
     public void onDestroy() {
-        /*
-        shutdownFlowgraph();
-        if (flowgraphExecutor != null) {
-            try {
-                flowgraphExecutor.shutdown();
-                if (!flowgraphExecutor.awaitTermination(1, java.util.concurrent.TimeUnit.SECONDS)) {
-                    flowgraphExecutor.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                flowgraphExecutor.shutdownNow();
-                Thread.currentThread().interrupt();
-            }
-            flowgraphExecutor = null;
-        }
-         */
         try {
             FlowgraphEngine.get().stop();
         } catch (Throwable ignore) {}
@@ -202,10 +185,6 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         for (MapComponent c : this.overlays)
             c.onStop(this.pluginContext, this.mapView);
 
-        if (hostActivity == null || !hostActivity.isChangingConfigurations()) {
-            FlowgraphEngine.get().stop();
-            if (usbMgr != null) usbMgr.stop();
-        }
 
         if (hackrfConn != null) { try { hackrfConn.close(); } catch (Throwable ignore) {} hackrfConn = null; }
 

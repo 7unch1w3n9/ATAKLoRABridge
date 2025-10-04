@@ -45,7 +45,6 @@ public final class FlowgraphEngine {
 
             state = State.STARTING;
             task = exec.submit(() -> {
-                // ⚠️ 提前标记为 RUNNING，避免外部再来重复 start
                 synchronized (lock) { state = State.RUNNING; }
                 int rawFd = safeFd(heldConn);
                 int fdForNative = rawFd;
@@ -68,9 +67,6 @@ public final class FlowgraphEngine {
                     Log.i("FlowgraphEngine", "run_flowgraph_with_fd exit rc=" + rc);
                 } catch (Throwable t) {
                     Log.e("FlowgraphEngine", "flowgraph thread crashed", t);
-                } finally {
-                    // ⚠️ 不要在这里关闭 heldConn，也不要在这里把 state 置为 STOPPED
-                    //    真正的收尾统一交给 stop()
                 }
             });
             return true;

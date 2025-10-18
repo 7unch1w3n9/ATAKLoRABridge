@@ -10,6 +10,7 @@ import com.atakmap.android.LoRaBridge.ChatMessage.IncomingGeoChatListener;
 import com.atakmap.android.LoRaBridge.ChatMessage.OutgoingGeoChatInterceptor;
 import com.atakmap.android.LoRaBridge.ChatMessage.MessageSyncService;
 import com.atakmap.android.LoRaBridge.Contacts.ContactStore;
+import com.atakmap.android.LoRaBridge.FlowgraphSetting.ParamsStore;
 import com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManager;
 import com.atakmap.android.LoRaBridge.phy.UdpManager;
@@ -91,6 +92,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
 
         PluginNativeLoader.init(initCtx);
         ContactStore.init(mapView);
+        ParamsStore.init(mapView);
     }
 
     @Override

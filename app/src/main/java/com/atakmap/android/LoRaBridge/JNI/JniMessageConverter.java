@@ -1,5 +1,4 @@
-package com.atakmap.android.LoRaBridge.JNI;
-
+/*
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.phy.MessageConverter;
 import com.atakmap.coremap.log.Log;
@@ -169,3 +168,4 @@ public class JniMessageConverter implements MessageConverter {
     }
 
 }
+ */

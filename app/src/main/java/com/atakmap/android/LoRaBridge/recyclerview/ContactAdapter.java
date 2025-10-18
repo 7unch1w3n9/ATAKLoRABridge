@@ -1,4 +1,4 @@
-package com.atakmap.android.LoRaBridge.recyclerview;// 1. 自定义联系人列表的 Adapter
+package com.atakmap.android.LoRaBridge.recyclerview;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

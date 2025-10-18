@@ -30,67 +30,60 @@ import java.util.Objects;
 public class RecyclerViewDropDown extends DropDownReceiver implements
         MapEventDispatcher.MapEventDispatchListener,
         View.OnClickListener, TimeListener {
-
-    private final MapView _mapView;
-    private final Context _plugin;
-    private final TimeViewUpdater _timeUpdater;
-    private final View _view;
-    private final RecyclerView _rView;
-    private final Map<String, ChatDropDown> activeChats = new HashMap<>();
-    private final ContactAdapter adapter;
-
+    private static final String TAG = "ContactsDropDown";
+    private final MapView mapView;
+    private final Context pluginContext;
+    private final Activity hostActivity;
+    private final TimeViewUpdater timeUpdater;
+    private final View rootView;
+    private final RecyclerView contactsRecycler;
+    private final Map<String, ChatDropDown> chatWindows = new HashMap<>();
+    private final ContactAdapter contactsAdapter;
+    private SettingDropDown settingDropDown;
     public RecyclerViewDropDown(MapView mapView, Context plugin, Activity activity) {
         super(mapView);
-        _mapView = mapView;
-        _plugin = plugin;
+        this.mapView = mapView;
+        this.pluginContext = plugin;
+        this.hostActivity = activity;
 
-        _view = LayoutInflater.from(_plugin).inflate(R.layout.pane_contacts,
-                mapView, false);
-        _rView = _view.findViewById(R.id.rView);
-        _rView.setLayoutManager(new LinearLayoutManager(_plugin,
-                LinearLayoutManager.VERTICAL, false));
+        rootView = LayoutInflater.from(pluginContext).inflate(R.layout.pane_contacts, mapView, false);
+        contactsRecycler = rootView.findViewById(R.id.rView);
+        contactsRecycler.setLayoutManager(
+                new LinearLayoutManager(pluginContext, LinearLayoutManager.VERTICAL, false)
+        );
 
-        adapter = new ContactAdapter(_plugin, new ContactAdapter.OnContactClickListener() {
-            @Override
-            public void onContactClick(PluginContact contact) {
-                handleContactClick(contact, activity);
-            }
-        });
-        _rView.setAdapter(adapter);
+        contactsAdapter = new ContactAdapter(pluginContext, this::openChat);
+        contactsRecycler.setAdapter(contactsAdapter);
 
-        _view.findViewById(R.id.btnAddContact).setOnClickListener(v -> {
-            addNewContact();
-        });
+        rootView.findViewById(R.id.btnAddContact).setOnClickListener(v -> addNewContact());
+        rootView.findViewById(R.id.btnRefresh).setOnClickListener(v -> refreshContacts());
+        View btnSetting = rootView.findViewById(R.id.btnSetting);
+        if (btnSetting != null) {
+            btnSetting.setOnClickListener(v -> openSettings());
+        } else {
+            Log.w(TAG, "btnSetting not found in pane_contacts layout");
+        }
 
-        _view.findViewById(R.id.btnRefresh).setOnClickListener(v -> {
-            refreshContacts();
-        });
-
-        // Add map listeners
-        _mapView.getMapEventDispatcher().addMapEventListener(
-                MapEvent.ITEM_ADDED, this);
-        _mapView.getMapEventDispatcher().addMapEventListener(
-                MapEvent.ITEM_REMOVED, this);
+        mapView.getMapEventDispatcher().addMapEventListener(MapEvent.ITEM_ADDED, this);
+        mapView.getMapEventDispatcher().addMapEventListener(MapEvent.ITEM_REMOVED, this);
 
         // Update the time ago for all the users each second
-        _timeUpdater = new TimeViewUpdater(_mapView, 1000);
-        _timeUpdater.register(this);
+        timeUpdater = new TimeViewUpdater(mapView, 1000);
+        timeUpdater.register(this);
     }
-    private void handleContactClick(PluginContact contact, Activity activity) {
+    private void openChat(PluginContact contact) {
         String uid = contact.getId();
-        if (activeChats.containsKey(uid)) {
-            Objects.requireNonNull(activeChats.get(uid)).show();
-        } else {
-            ChatDropDown chatDropDown = new ChatDropDown(_mapView, _plugin, contact, activity);
-            activeChats.put(uid, chatDropDown);
-            chatDropDown.show();
+        ChatDropDown win = chatWindows.get(uid);
+        if (win == null) {
+            win = new ChatDropDown(mapView, pluginContext, contact, hostActivity);
+            chatWindows.put(uid, win);
         }
+        Objects.requireNonNull(win).show();
     }
     private void refreshContacts() {
-        adapter.refreshContacts();
+        contactsAdapter.refreshContacts();
         Log.d("ContactRefresh", "Contacts refreshed");
     }
-
     private void addNewContact() {
         PluginContact newContact = new PluginContact(
                 null,
@@ -98,21 +91,26 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
                 "DEV-" + System.currentTimeMillis()
         );
         newContact.setLocal(true);
-        adapter.addContact(newContact);
-        adapter.refreshContacts();
+        contactsAdapter.addContact(newContact);
+        contactsAdapter.refreshContacts();
         Log.d("ContactAdd", "Added new contact: " + newContact.getCallsign());
     }
-
+    private void openSettings() {
+        if (settingDropDown == null) {
+            settingDropDown = new SettingDropDown(mapView, pluginContext, hostActivity);
+        }
+        settingDropDown.show();
+    }
 
 
     @Override
     public void disposeImpl() {
         // Remove map listeners
-        _mapView.getMapEventDispatcher().removeMapEventListener(
+        mapView.getMapEventDispatcher().removeMapEventListener(
                 MapEvent.ITEM_ADDED, this);
-        _mapView.getMapEventDispatcher().removeMapEventListener(
+        mapView.getMapEventDispatcher().removeMapEventListener(
                 MapEvent.ITEM_REMOVED, this);
-        _timeUpdater.unregister(this);
+        timeUpdater.unregister(this);
     }
 
     @Override
@@ -133,8 +131,7 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
     }
 
     public void show() {
-        adapter.fullSyncAndRefresh();
-        showDropDown(_view, THREE_EIGHTHS_WIDTH, FULL_HEIGHT, FULL_WIDTH,
-                THIRD_HEIGHT);
+        contactsAdapter.fullSyncAndRefresh();
+        showDropDown(rootView, THREE_EIGHTHS_WIDTH, FULL_HEIGHT, FULL_WIDTH, THIRD_HEIGHT);
     }
 }

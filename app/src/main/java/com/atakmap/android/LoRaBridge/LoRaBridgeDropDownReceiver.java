@@ -25,7 +25,7 @@ public class LoRaBridgeDropDownReceiver extends DropDownReceiver implements
 
     public static final String SHOW_PLUGIN = "com.atakmap.android.plugintemplate.SHOW_PLUGIN";
     private final MainLayoutBinding mainLayoutBinding;
-    private final Context pluginContext;
+    private  Context pluginContext;
     private final RecyclerViewDropDown recyclerView;
 
     /**************************** CONSTRUCTOR *****************************/
@@ -39,7 +39,7 @@ public class LoRaBridgeDropDownReceiver extends DropDownReceiver implements
         // In this case, using it is not necessary - but I am putting it here to remind
         // developers to look at this Inflator
         mainLayoutBinding = MainLayoutBinding.inflate(LayoutInflater.from(context));
-        recyclerView = new RecyclerViewDropDown(getMapView(), pluginContext, activity);
+        recyclerView = new RecyclerViewDropDown(getMapView(), context, activity);
         mainLayoutBinding.btnOpenContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

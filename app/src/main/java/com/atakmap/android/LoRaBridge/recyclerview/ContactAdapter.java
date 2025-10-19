@@ -1,9 +1,13 @@
 package com.atakmap.android.LoRaBridge.recyclerview;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,12 +34,20 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         void onContactClick(PluginContact contact);
     }
 
+    public interface OnContactDeleteListener {
+        void onDeleteContact(PluginContact contact);
+    }
+
     private final List<PluginContact> contactList = new ArrayList<>();
     private final OnContactClickListener clickListener;
+    private final OnContactDeleteListener deleteListener;
+    private final Activity activity;
 
-    public ContactAdapter(Context context, OnContactClickListener listener) {
+    public ContactAdapter(Context context, OnContactClickListener listener, OnContactDeleteListener deleteListener, Activity activity) {
         this.context = context;
         this.clickListener = listener;
+        this.deleteListener = deleteListener;
+        this.activity = activity;
         refreshContacts();
     }
 
@@ -65,7 +77,48 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         PluginContact contact = contactList.get(position);
         holder.getTextView().setText(contact.getCallsign());
         holder.itemView.setOnClickListener(v -> clickListener.onContactClick(contact));
+
+        holder.itemView.setOnLongClickListener(v -> {
+            PopupMenu menu = new PopupMenu(context, v);
+            if (contact.isLocal()) {
+                menu.getMenu().add("Delete Contact");
+            } else {
+                menu.getMenu().add("(ATAK contact — cannot delete)");
+            }
+
+            menu.setOnMenuItemClickListener(mi -> {
+                String title = mi.getTitle().toString();
+                if ("Delete Contact".equals(title)) {
+                    Log.w("How", context.toString());
+                    new AlertDialog.Builder(activity)
+                            .setTitle("Confirm Deletion")
+                            .setMessage("Delete contact \"" + safe(contact.getCallsign()) + "\"? This only affects local plugin contacts.")
+                            .setPositiveButton("Delete", (d, w) -> {
+                                int pos  = holder.getAdapterPosition();
+                                if (pos != RecyclerView.NO_POSITION) {
+                                    contactList.remove(pos);
+                                    notifyItemRemoved(pos);
+                                } else {
+                                    refreshContacts();
+                                }
+                                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                                if (deleteListener != null) {
+                                    deleteListener.onDeleteContact(contact);
+                                }
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .show();
+                } else {
+                    Toast.makeText(context, "ATAK contacts cannot be deleted in the plugin.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            });
+            menu.show();
+            return true;
+        });
     }
+
+    private static String safe(String s) { return s == null ? "" : s; }
 
     @Override
     public int getItemCount() {

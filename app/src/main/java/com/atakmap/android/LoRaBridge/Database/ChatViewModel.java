@@ -49,4 +49,8 @@ public class ChatViewModel extends AndroidViewModel {
     public void insertIfNotExists(ChatMessageEntity msg) {
         repository.insertIfNotExists(msg);
     }
+
+    public void deleteMessagesForContact(String contactId) {
+        repository.deleteMessagesByContact(contactId);
+    }
 }

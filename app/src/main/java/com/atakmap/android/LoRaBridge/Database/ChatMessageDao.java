@@ -28,4 +28,7 @@ public interface ChatMessageDao {
 
     @Query("DELETE FROM chat_messages")
     void deleteAllMessages();
+
+    @Query("DELETE FROM chat_messages WHERE senderUid = :contactUid OR receiverUid = :contactUid")
+    void deleteMessagesByContact(String contactUid);
 }

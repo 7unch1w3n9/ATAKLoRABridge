@@ -7,10 +7,16 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.atakmap.android.LoRaBridge.Contacts.ContactStore;
 import com.atakmap.android.LoRaBridge.Contacts.PluginContact;
+import com.atakmap.android.LoRaBridge.Database.ChatRepository;
+import com.atakmap.android.LoRaBridge.Database.ChatViewModel;
 import com.atakmap.android.dropdown.DropDownReceiver;
 import com.atakmap.android.LoRaBridge.plugin.R;
 import com.atakmap.android.maps.MapEvent;
@@ -23,6 +29,8 @@ import com.atakmap.coremap.maps.time.CoordinatedTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A drop-down menu that demonstrates use of a RecyclerView to show a list of content
@@ -40,19 +48,35 @@ public class RecyclerViewDropDown extends DropDownReceiver implements
     private final Map<String, ChatDropDown> chatWindows = new HashMap<>();
     private final ContactAdapter contactsAdapter;
     private SettingDropDown settingDropDown;
-    public RecyclerViewDropDown(MapView mapView, Context plugin, Activity activity) {
+    private ChatViewModel viewModel;
+    private final ExecutorService io = Executors.newSingleThreadExecutor();
+    public RecyclerViewDropDown(MapView mapView, Context context, Activity activity) {
         super(mapView);
         this.mapView = mapView;
-        this.pluginContext = plugin;
+        this.pluginContext = context;
         this.hostActivity = activity;
-
+        viewModel = new ViewModelProvider((ViewModelStoreOwner)activity).get(ChatViewModel.class);
         rootView = LayoutInflater.from(pluginContext).inflate(R.layout.pane_contacts, mapView, false);
         contactsRecycler = rootView.findViewById(R.id.rView);
         contactsRecycler.setLayoutManager(
                 new LinearLayoutManager(pluginContext, LinearLayoutManager.VERTICAL, false)
         );
 
-        contactsAdapter = new ContactAdapter(pluginContext, this::openChat);
+        contactsAdapter = new ContactAdapter(
+                pluginContext,
+                this::openChat,
+                contact -> {
+                    viewModel.deleteMessagesForContact(contact.getId());
+                        ContactStore.deleteContact(contact.getId());
+
+                    Toast.makeText(
+                            pluginContext,
+                            "Deleted：" + contact.getCallsign(),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                },
+                activity
+        );
         contactsRecycler.setAdapter(contactsAdapter);
 
         rootView.findViewById(R.id.btnAddContact).setOnClickListener(v -> addNewContact());

@@ -57,7 +57,7 @@ public class ChatDropDown extends DropDownReceiver {
             this.contact = contact;
 //            Activity activity1 = (Activity)(mapView.getContext());
             viewModel = new ViewModelProvider((ViewModelStoreOwner)activity).get(ChatViewModel.class);
-                       viewModel.deleteAllMessages();
+//            viewModel.deleteAllMessages();
 
             chatObserver = messageAdapter::setMessages;
             LiveData<List<ChatMessageEntity>> liveData = viewModel.getMessagesForContact(contact.getId());

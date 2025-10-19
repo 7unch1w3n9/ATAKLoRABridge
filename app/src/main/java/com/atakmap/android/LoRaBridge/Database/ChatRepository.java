@@ -69,4 +69,8 @@ public class ChatRepository {
         executor.execute(chatDao::deleteAllMessages);
     }
 
+    public void deleteMessagesByContact(String contactUid) {
+        executor.execute(() -> chatDao.deleteMessagesByContact(contactUid));
+    }
+
 }

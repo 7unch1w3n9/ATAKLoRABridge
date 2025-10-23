@@ -20,7 +20,7 @@ public final class UsbHackrfManager {
     private Listener listener;
 
     // 记录当前 Engine 正在使用的 HackRF 设备名（/dev/bus/usb/xxx/yyy）
-    private volatile String activeHackrfName;  // <- 新增
+    private volatile String activeHackrfName;
 
     public UsbHackrfManager(Context appCtx, String actionUsbPermission) {
         this.appCtx = appCtx.getApplicationContext();
@@ -44,11 +44,10 @@ public final class UsbHackrfManager {
                 if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(a)) {
                     UsbDevice d = i.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     if (d != null) android.util.Log.i("UsbHackrfManager", "ATTACHED: " + devStr(d));
-                    probeNow(); // 仅在未运行时会动作
+                    probeNow();
                 } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(a)) {
                     UsbDevice d = i.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     if (d != null) android.util.Log.w("UsbHackrfManager", "DETACHED: " + devStr(d));
-                    // 仅当是当前这台 HackRF 才触发 stop
                     if (isHackrf(d) && devNameEqActive(d)) {
                         if (listener != null) listener.onHackrfDetached();
                         activeHackrfName = null;
@@ -104,7 +103,6 @@ public final class UsbHackrfManager {
     }
 
     private void openAndNotify(UsbDevice d) {
-        // 再次防抖：Engine 正在运行就不要再 open（否则会泄露 FD）
         if (com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine.get().isRunning()) {
             android.util.Log.w("UsbHackrfManager", "Engine already RUNNING; skip open for " + d.getDeviceName());
             return;

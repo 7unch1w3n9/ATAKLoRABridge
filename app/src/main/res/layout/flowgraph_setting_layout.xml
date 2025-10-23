@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- udp_bind -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,86 +20,189 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="parameter 1" />
+                android:text="udp_bind (host:port)" />
+
             <EditText
-                android:id="@+id/parameter_1"
+                android:id="@+id/etUdpBind"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="number"
-                android:hint="default Value"/>
+                android:inputType="textUri"
+                android:hint="default: 127.0.0.1:1382"/>
         </LinearLayout>
 
+        <!-- udp_send_to -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="8dp">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="parameter 2"/>
+                android:text="udp_send_to (host:port)"/>
+
             <EditText
-                android:id="@+id/parameter_2"
+                android:id="@+id/etUdpSendTo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="number"/>
+                android:inputType="textUri"
+                android:hint="default: 127.0.0.1:1383"/>
         </LinearLayout>
 
+        <!-- code_rate {1,2,3,4} -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="8dp">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="parameter 3"/>
-            <EditText
-                android:id="@+id/parameter_3"
+                android:text="code_rate"/>
+
+            <Spinner
+                android:id="@+id/spCodeRate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="numberDecimal"/>
+                android:spinnerMode="dropdown"
+                android:entries="@array/code_rate_values"/>
         </LinearLayout>
 
+        <!-- spreading_factor [5..12] -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="8dp">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="parameter 4"/>
-            <EditText
-                android:id="@+id/parameter_4"
+                android:text="spreading_factor"/>
+
+            <Spinner
+                android:id="@+id/spSpreadingFactor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="numberDecimal"/>
+                android:spinnerMode="dropdown"
+                android:entries="@array/spreading_factor_values"/>
+        </LinearLayout>
+
+        <!-- oversampling {16, (32)} -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="oversampling"/>
+
+            <Spinner
+                android:id="@+id/spOversampling"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"
+                android:entries="@array/oversampling_values"/>
+        </LinearLayout>
+
+        <!-- sync_word {18,52} -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="sync_word"/>
+
+            <Spinner
+                android:id="@+id/spSyncWord"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"
+                android:entries="@array/sync_word_values"/>
+        </LinearLayout>
+
+        <!-- soft_decoding [bool] -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="soft_decoding"/>
+
+            <Switch
+                android:id="@+id/swSoftDecoding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="false"
+                android:textOn="true"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:paddingTop="12dp">
+            android:id="@+id/extraParamsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp" />
+
+        <Button
+            android:id="@+id/btnAddParam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add parameter"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Cancel / Save 一行两列，使用权重 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp">
 
             <Button
                 android:id="@+id/btnCancel"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Cancel"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"/>
 
             <Space
-                android:layout_width="12dp" android:layout_height="1dp"/>
+                android:layout_width="12dp"
+                android:layout_height="1dp"/>
 
             <Button
                 android:id="@+id/btnSave"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Save"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"/>
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

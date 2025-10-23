@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- code_rate  -->
+    <string-array name="code_rate_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- spreading_factor ：5..12 -->
+    <string-array name="spreading_factor_values">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <!-- oversampling：16 / 32 -->
+    <string-array name="oversampling_values">
+        <item>16</item>
+        <item>32</item>
+    </string-array>
+
+    <!-- sync_word：18 / 52 -->
+    <string-array name="sync_word_values">
+        <item>18</item>
+        <item>52</item>
+    </string-array>
+</resources>

@@ -18,12 +18,11 @@ public final class FlowgraphEngine {
     });
     private Future<?> task;
     private enum State { STOPPED, STARTING, RUNNING, STOPPING }
-    private State state = State.STOPPED;
-
-    private android.hardware.usb.UsbDeviceConnection heldConn; // Engine 持有并关闭
-    //private int rxPort, txPort;
+    private volatile State state = State.STOPPED;
+    private android.hardware.usb.UsbDeviceConnection heldConn;
 
     public boolean isRunning() { synchronized (lock) { return state == State.RUNNING; } }
+
 
 
     public void startWithConnection(UsbDeviceConnection conn) {
@@ -46,26 +45,27 @@ public final class FlowgraphEngine {
                 try {
                     // 复制出一份新的 fd
                     ParcelFileDescriptor pfd = ParcelFileDescriptor.fromFd(rawFd);
-                    fdForNative = pfd.detachFd();   // 拿到“新 fd”的 int，且不再由 pfd 托管
+                    fdForNative = pfd.detachFd();
                     Log.i("FlowgraphEngine", "dup via PFD: " + rawFd + " -> " + fdForNative);
                 } catch (Throwable e) {
                     Log.w("FlowgraphEngine", "dup via ParcelFileDescriptor failed, fallback to original fd", e);
                 }
 
                 try {
-                    // 如需把端口传到底层，这里调用 init
-                    // FlowgraphNative.initFlowgraph("127.0.0.1:"+rxPort, "127.0.0.1:"+txPort);
 
                     Log.i("FlowgraphEngine", "run_flowgraph_with_fd(" + fdForNative + ") begin");
                     int rc = FlowgraphNative.run_flowgraph_with_fd(fdForNative);
                     Log.i("FlowgraphEngine", "run_flowgraph_with_fd exit rc=" + rc);
                 } catch (Throwable t) {
                     Log.e("FlowgraphEngine", "flowgraph thread crashed", t);
+                } finally {
+                synchronized (lock) {
+                        state = State.STOPPED;
                 }
+            }
             });
         }
     }
-
     public void stop() {
         Log.i("FlowgraphEngine", "stop() called, state=" + state);
         synchronized (lock) {
@@ -74,10 +74,10 @@ public final class FlowgraphEngine {
         }
         try {
             Log.i("FlowgraphEngine", "call FlowgraphNative.shutdown()");
-            FlowgraphNative.shutdown(); // 幂等
+            FlowgraphNative.shutdown();
             Future<?> f; synchronized (lock) { f = task; }
             if (f != null) {
-                try { f.get(1500, TimeUnit.MILLISECONDS); Log.i("FlowgraphEngine","stop wait done"); }
+                try { f.get(15000, TimeUnit.MILLISECONDS); Log.i("FlowgraphEngine","stop wait done"); }
                 catch (TimeoutException te) { Log.w("FlowgraphEngine", "stop wait timeout, cancel"); f.cancel(true); }
                 catch (Throwable ignored) { Log.w("FlowgraphEngine", "stop wait threw", ignored); f.cancel(true); }
             }

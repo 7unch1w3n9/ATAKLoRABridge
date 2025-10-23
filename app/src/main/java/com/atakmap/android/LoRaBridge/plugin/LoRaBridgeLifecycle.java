@@ -13,6 +13,7 @@ import com.atakmap.android.LoRaBridge.Contacts.ContactStore;
 import com.atakmap.android.LoRaBridge.FlowgraphSetting.ParamsStore;
 import com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManager;
+import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManagerHolder;
 import com.atakmap.android.LoRaBridge.phy.UdpManager;
 import com.atakmap.android.LoRaBridge.JNI.PluginNativeLoader;
 
@@ -85,12 +86,8 @@ public class LoRaBridgeLifecycle implements Lifecycle {
                 iter.remove();
             }
         }
-        final Context initCtx =
-                (pluginContext != null) ? this.pluginContext:
-                        (hostActivity != null) ? hostActivity.getApplicationContext() :
-                                this.mapView.getContext().getApplicationContext();
 
-        PluginNativeLoader.init(initCtx);
+
         ContactStore.init(mapView);
         ParamsStore.init(mapView);
     }
@@ -133,8 +130,16 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         final Context app = (hostActivity != null)
                 ? hostActivity.getApplicationContext()
                 : pluginContext;
+
+        final Context initCtx =
+                (pluginContext != null) ? this.pluginContext:
+                        (hostActivity != null) ? hostActivity.getApplicationContext() :
+                                this.mapView.getContext().getApplicationContext();
+        PluginNativeLoader.init(initCtx);
+
         if (usbMgr == null) {
             usbMgr = new UsbHackrfManager(app, "com.atakmap.android.LoRaBridge.USB_PERMISSION");
+            UsbHackrfManagerHolder.set(usbMgr);
             usbMgr.setListener(new UsbHackrfManager.Listener() {
                 @Override public void onHackrfReady(UsbDeviceConnection conn) {
                     FlowgraphEngine.get().startWithConnection(conn);

@@ -20,7 +20,7 @@
         private static final String TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
         @Override
-        public byte[] encodeMessage(ChatMessageEntity message) {
+        public byte[] encode(ChatMessageEntity message) {
             try {
                 // 创建精简版本的消息（清除不必要字段）
                 ChatMessageEntity lite = createLiteMessage(message);
@@ -30,7 +30,6 @@
 
                 // 构建消息字符串
                 String formatted = String.join(FIELD_DELIMITER,
-                        "LORA",
                         lite.getId(),
                         lite.getSenderUid(),
                         escapeField(lite.getSenderCallsign()),
@@ -50,24 +49,24 @@
         }
 
         @Override
-        public ChatMessageEntity decodeMessage(byte[] payload) {
+        public ChatMessageEntity decode(byte[] payload) {
             try {
                 String raw = new String(payload, StandardCharsets.UTF_8);
                 String[] parts = splitPreservingEscapes(raw);
 
-                if (parts.length < 9 || !"LORA".equals(parts[0])) {
+                if (parts.length < 9 ) {
                     throw new IllegalArgumentException("Invalid LoRa format. Parts: " + parts.length);
                 }
 
-                String id               = unescapeField(parts[1]);
-                String senderUid        = unescapeField(parts[2]);
-                String senderCallsign   = unescapeField(parts[3]);
-                String receiverUid      = unescapeField(parts[4]);
-                String receiverCallsign = unescapeField(parts[5]);
-                String messageBody      = unescapeField(parts[6]);
-                String tsStr            = unescapeField(parts[7]);
-                String msgType          = unescapeField(parts[8]);
-                String origin           = unescapeField(parts[9]);
+                String id               = unescapeField(parts[0]);
+                String senderUid        = unescapeField(parts[1]);
+                String senderCallsign   = unescapeField(parts[2]);
+                String receiverUid      = unescapeField(parts[3]);
+                String receiverCallsign = unescapeField(parts[4]);
+                String messageBody      = unescapeField(parts[5]);
+                String tsStr            = unescapeField(parts[6]);
+                String msgType          = unescapeField(parts[7]);
+                String origin           = unescapeField(parts[8]);
 
                 String tsIso = parseTimestamp(tsStr);
 

@@ -3,14 +3,14 @@ package com.atakmap.android.LoRaBridge.plugin;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.concurrent.Future;
 
 import com.atakmap.android.LoRaBridge.ChatMessage.MessageDatenbankObserver;
 import com.atakmap.android.LoRaBridge.ChatMessage.IncomingGeoChatListener;
-import com.atakmap.android.LoRaBridge.ChatMessage.OutgoingGeoChatInterceptor;
+import com.atakmap.android.LoRaBridge.ChatMessage.OutgoingCoTEventInterceptor;
 import com.atakmap.android.LoRaBridge.ChatMessage.MessageSyncService;
 import com.atakmap.android.LoRaBridge.Contacts.ContactStore;
 import com.atakmap.android.LoRaBridge.FlowgraphSetting.ParamsStore;
+import com.atakmap.android.LoRaBridge.GenericMessage.CotSyncService;
 import com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManager;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManagerHolder;
@@ -97,6 +97,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         try {
             FlowgraphEngine.get().stop();
         } catch (Throwable ignore) {}
+        UdpManager.getInstance().stop();
         try {
             if (usbMgr != null) usbMgr.stop();
         } catch (Throwable ignore) {}
@@ -166,11 +167,12 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         }
 
         syncService = MessageSyncService.getInstance(pluginContext);
-        syncService.udpManager.start();
+        UdpManager.getInstance().start();
+        CotSyncService.getInstance(pluginContext);
         Log.d(TAG, "Flowgraph同步服务初始化完成");
 
         CommsMapComponent.getInstance().registerPreSendProcessor(
-                new OutgoingGeoChatInterceptor(pluginContext)
+                new OutgoingCoTEventInterceptor(pluginContext)
         );
 
         Log.d(TAG, "onStart done");
@@ -187,7 +189,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         if (incomingGeoChatListener != null) { incomingGeoChatListener.shutdown(); incomingGeoChatListener = null; }
 
         if (syncService != null) { syncService.shutdown(); syncService = null; Log.d(TAG, "Flowgraph同步服务已关闭"); }
-
+        if (hackrfConn != null) { try { hackrfConn.close(); } catch (Throwable ignore) {} hackrfConn = null; }
     }
 /*
     private void startFlowgraphWithFd(int fd) {

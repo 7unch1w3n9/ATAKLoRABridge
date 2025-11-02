@@ -1,5 +1,7 @@
 package com.atakmap.android.LoRaBridge.ChatMessage;
 
+import static com.atakmap.comms.CotServiceRemote.Proto.udp;
+
 import android.content.Context;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;
@@ -28,13 +30,13 @@ public class MessageSyncService {
     private final MessageTracker messageTracker = new MessageTracker();
     private final Set<String> processedMessageIds = new HashSet<>();
     private final MessageConverter messageConverter;
-    public final UdpManager udpManager;
+    private final UdpManager udp = UdpManager.getInstance();
 
     private MessageSyncService(Context context) {
         this.chatRepository = new ChatRepository(context);
         this.incomingPluginManager = new IncomingPluginManager();
         this.messageConverter = new LoRaMessageConverter();
-        this.udpManager = new UdpManager(this, messageConverter);
+        udp.setChatHandler(this::handleFlowgraphMessage);
     }
     public static synchronized MessageSyncService getInstance(Context context) {
         if (instance == null) {
@@ -102,9 +104,8 @@ public class MessageSyncService {
     }
     private void sendToFlowgraph(ChatMessageEntity message) {
         try {
-            byte[] payload = messageConverter.encodeMessage(message);
-            udpManager.sendAsync(payload);
-
+            byte[] body = messageConverter.encodeMessage(message);
+            udp.sendChat(body);
         } catch (Exception e) {
             Log.e(TAG, "Failed to send to Flowgraph", e);
         }
@@ -223,11 +224,6 @@ public class MessageSyncService {
     }
 
     public void shutdown() {
-        if (udpManager != null) {
-            udpManager.stop();
-            Log.d(TAG, "UDP管理器已停止");
-        }
-
         processedMessageIds.clear();
         Log.d(TAG, "消息同步服务清理完成");
     }

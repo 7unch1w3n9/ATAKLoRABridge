@@ -29,6 +29,8 @@ import android.hardware.usb.UsbDeviceConnection;
 
 import com.atakmap.comms.CommsMapComponent;
 import com.atakmap.coremap.log.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 public class LoRaBridgeLifecycle implements Lifecycle {
 
@@ -42,7 +44,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
     private MessageSyncService syncService;
     private final static String TAG = "LoRaBridgeLifecycle";
     private android.hardware.usb.UsbDeviceConnection hackrfConn;
-
+    private final Handler main = new Handler(Looper.getMainLooper());
     private UsbHackrfManager usbMgr;
     public LoRaBridgeLifecycle(Context ctx) {
         this.pluginContext = ctx;
@@ -121,7 +123,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
     public void onResume() {
         for (MapComponent c : this.overlays)
             c.onResume(this.pluginContext, this.mapView);
-        if (usbMgr != null && !FlowgraphEngine.get().isRunning()) usbMgr.probeNow();
+        if (usbMgr != null && !FlowgraphEngine.get().isBusy()) usbMgr.probeNow();
     }
     @Override
     public void onStart() {
@@ -146,6 +148,7 @@ public class LoRaBridgeLifecycle implements Lifecycle {
                     FlowgraphEngine.get().startWithConnection(conn);
                 }
                 @Override public void onHackrfDetached() {
+                    UdpManager.getInstance().stop();
                     FlowgraphEngine.get().stop();
                 }
                 @Override public void onPermissionDenied() {
@@ -183,13 +186,10 @@ public class LoRaBridgeLifecycle implements Lifecycle {
         for (MapComponent c : this.overlays)
             c.onStop(this.pluginContext, this.mapView);
 
-
-        if (hackrfConn != null) { try { hackrfConn.close(); } catch (Throwable ignore) {} hackrfConn = null; }
-
         if (incomingGeoChatListener != null) { incomingGeoChatListener.shutdown(); incomingGeoChatListener = null; }
+        if (syncService != null) { syncService.shutdown(); syncService = null; }
+        UdpManager.getInstance().stop();
 
-        if (syncService != null) { syncService.shutdown(); syncService = null; Log.d(TAG, "Flowgraph同步服务已关闭"); }
-        if (hackrfConn != null) { try { hackrfConn.close(); } catch (Throwable ignore) {} hackrfConn = null; }
     }
 /*
     private void startFlowgraphWithFd(int fd) {
@@ -375,7 +375,7 @@ private void requestHackRfPermission() {
             int fd = hackrfConn.getFileDescriptor();
             Log.i(TAG, "HackRF FD = " + fd);
 
-            // ✅ 用 executor 启动（不会阻塞广播线程）
+            //  用 executor 启动（不会阻塞广播线程）
             startFlowgraphWithFd(fd);
         }
     };

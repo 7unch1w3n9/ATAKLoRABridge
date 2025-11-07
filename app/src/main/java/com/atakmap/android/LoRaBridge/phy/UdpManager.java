@@ -47,11 +47,9 @@ public class UdpManager {
     private Thread receiveThread;
     private volatile boolean running = false;
 
-    // handlers（可选）
     private volatile ByteHandler chatHandler;
     private volatile ByteHandler cotHandler;
 
-    // 旁路镜像（抓包用，可设为 null 关闭）
     private volatile String mirrorHost = "192.168.0.213";
 
     private final ExecutorService exec = new ThreadPoolExecutor(
@@ -62,11 +60,9 @@ public class UdpManager {
 
     private UdpManager() {}
 
-    // ---------- 注册回调 ----------
     public void setChatHandler(ByteHandler handler) { this.chatHandler = handler; }
     public void setCotHandler(ByteHandler handler)  { this.cotHandler = handler; }
 
-    // ---------- 生命周期 ----------
     public synchronized void start() {
         if (running) return;
         try {
@@ -92,7 +88,6 @@ public class UdpManager {
         Log.d(TAG, "UDP stopped");
     }
 
-    // ---------- 发送 API（自动加头） ----------
     public void sendChat(byte[] body) {
         if (body == null) return;
         byte[] payload = withHeader(HDR_CHAT, body);
@@ -156,17 +151,9 @@ public class UdpManager {
         if (payload == null || payload.length == 0) return;
         ensureTxSocket();
         try {
-            // 1) 本机 flowgraph
             InetAddress localhost = InetAddress.getByName("127.0.0.1");
             socket.send(new DatagramPacket(payload, payload.length, localhost, TX_PORT));
             Log.d(TAG, "➡ local " + payload.length);
-
-            // 2) 抓包镜像
-            if (mirrorHost != null && !mirrorHost.isEmpty()) {
-                InetAddress pc = InetAddress.getByName(mirrorHost);
-                socket.send(new DatagramPacket(payload, payload.length, pc, TX_PORT));
-                Log.d(TAG, "➡ mirror " + pc.getHostAddress() + ":" + TX_PORT);
-            }
         } catch (Exception e) {
             Log.e(TAG, "UDP send failed", e);
         }

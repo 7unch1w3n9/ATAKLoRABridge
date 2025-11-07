@@ -21,84 +21,115 @@ public final class FlowgraphEngine {
     private volatile State state = State.STOPPED;
     private android.hardware.usb.UsbDeviceConnection heldConn;
 
-    public boolean isRunning() { synchronized (lock) { return state == State.RUNNING; } }
-
+    public boolean isBusy() {
+        synchronized (lock) {
+            return state == State.STARTING || state == State.RUNNING || state == State.STOPPING;
+        }
+    }
+    private volatile CountDownLatch runningGate = new CountDownLatch(0);
+    private volatile CountDownLatch terminated = new CountDownLatch(0);
 
 
     public void startWithConnection(UsbDeviceConnection conn) {
         synchronized (lock) {
-            if (state == State.RUNNING || state == State.STARTING) {
+            if (isBusy()) {
                 Log.w("FlowgraphEngine", "start ignored: state=" + state);
                 return;
             }
-            this.heldConn = conn;
-
-
-            Log.i("FlowgraphEngine", "start enter fd=" + safeFd(conn) + Thread.currentThread().getName());
-
+            heldConn = conn;
             state = State.STARTING;
+
+            final int rawFd = safeFd(conn);
+            Log.i("FlowgraphEngine", "start enter fd=" + rawFd + " " + Thread.currentThread().getName());
+
+
+            runningGate = new CountDownLatch(1);
+
             task = exec.submit(() -> {
                 synchronized (lock) { state = State.RUNNING; }
-                int rawFd = safeFd(heldConn);
+
                 int fdForNative = rawFd;
 
                 try {
-                    // 复制出一份新的 fd
                     ParcelFileDescriptor pfd = ParcelFileDescriptor.fromFd(rawFd);
                     fdForNative = pfd.detachFd();
                     Log.i("FlowgraphEngine", "dup via PFD: " + rawFd + " -> " + fdForNative);
                 } catch (Throwable e) {
-                    Log.w("FlowgraphEngine", "dup via ParcelFileDescriptor failed, fallback to original fd", e);
+                    Log.w("FlowgraphEngine", "dup via PFD failed, fallback to original fd", e);
                 }
 
-                try {
 
+
+                try {
                     Log.i("FlowgraphEngine", "run_flowgraph_with_fd(" + fdForNative + ") begin");
                     int rc = FlowgraphNative.run_flowgraph_with_fd(fdForNative);
                     Log.i("FlowgraphEngine", "run_flowgraph_with_fd exit rc=" + rc);
+
+                    try {
+                        runningGate.await();
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
                 } catch (Throwable t) {
                     Log.e("FlowgraphEngine", "flowgraph thread crashed", t);
-                } finally {
-                synchronized (lock) {
-                        state = State.STOPPED;
+                } if (conn != null) {
+                    conn.close();
+                    Log.i("FlowgraphEngine", "closed UsbDeviceConnection immediately after dup FD");
                 }
-            }
+                heldConn = null;
             });
         }
     }
     public void stop() {
         Log.i("FlowgraphEngine", "stop() called, state=" + state);
+
         synchronized (lock) {
-            if (state == State.STOPPED) { Log.i("FlowgraphEngine", "stop() ignored: already STOPPED"); return; }
+            if (state == State.STOPPED) {
+                Log.i("FlowgraphEngine", "stop() ignored: already STOPPED");
+                return;
+            }
             state = State.STOPPING;
         }
+
         try {
-            Log.i("FlowgraphEngine", "call FlowgraphNative.shutdown()");
-            FlowgraphNative.shutdown();
-            Future<?> f; synchronized (lock) { f = task; }
+            Log.i("FlowgraphEngine", "stop(): calling FlowgraphNative.shutdown()");
+            try { FlowgraphNative.shutdown(); } catch (Exception e) {}
+            CountDownLatch gate = runningGate;
+            if (gate != null) gate.countDown();
+
+            Future<?> f;
+            synchronized (lock) { f = task; }
             if (f != null) {
-                try { f.get(15000, TimeUnit.MILLISECONDS); Log.i("FlowgraphEngine","stop wait done"); }
-                catch (TimeoutException te) { Log.w("FlowgraphEngine", "stop wait timeout, cancel"); f.cancel(true); }
-                catch (Throwable ignored) { Log.w("FlowgraphEngine", "stop wait threw", ignored); f.cancel(true); }
+                Log.w("FlowgraphEngine", "stop wait timeout; cancel task");
+                f.cancel(true);
             }
         } finally {
-            closeConnQuietly();
-            synchronized (lock) { state = State.STOPPED; task = null; }
+            closeConnQuietly(2500);
+
+            synchronized (lock) {
+                state = State.STOPPED;
+                task  = null;
+            }
             Log.i("FlowgraphEngine", "stop() complete, state=STOPPED");
         }
     }
 
-    private void closeConnQuietly() {
-        try {
-            if (heldConn != null) {
-                Log.i("FlowgraphEngine", "close UsbDeviceConnection fd=" + safeFd(heldConn));
-                heldConn.close();
-            }
-        } catch (Throwable ignore) {}
+
+    private void closeConnQuietly(long ms) {
+        final UsbDeviceConnection c = heldConn;
         heldConn = null;
+        if (c == null) return;
+        exec.submit(() -> {
+            int fdSnapshot = -1;
+            try { fdSnapshot = c.getFileDescriptor(); } catch (Throwable ignore) {}
+            try {
+                Log.i("FlowgraphEngine", "close UsbDeviceConnection (delayed) fd=" + fdSnapshot);
+                c.close();
+            } catch (Throwable ignore) {}
+        });
     }
 
-    private static int safeFd(android.hardware.usb.UsbDeviceConnection c) {
+    private static int safeFd(UsbDeviceConnection c) {
         if (c == null) return -1;
         try { return c.getFileDescriptor(); } catch (Throwable t) { return -2; }
     }

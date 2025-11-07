@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.content.*;
 import android.hardware.usb.*;
 
+import com.atakmap.coremap.log.Log;
+
 
 public final class UsbHackrfManager {
     public interface Listener {
@@ -76,18 +78,18 @@ public final class UsbHackrfManager {
     }
 
     public void probeNow() {
-        android.util.Log.i("UsbHackrfManager", "probeNow()");
+        Log.i("UsbHackrfManager", "probeNow()");
 
-        if (com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine.get().isRunning()) {
-            android.util.Log.i("UsbHackrfManager", "Engine running; skip probe");
+        if (FlowgraphEngine.get().isBusy()) {
+            Log.i("UsbHackrfManager", "Engine busy; skip probe");
             return;
         }
 
         for (UsbDevice d : usb.getDeviceList().values()) {
-            android.util.Log.i("UsbHackrfManager", "  check " + devDump(d));
+            Log.i("UsbHackrfManager", "  check " + devDump(d));
             if (!isHackrf(d)) continue;
 
-            android.util.Log.i("UsbHackrfManager", "  isHackrf=" + true + " hasPermission=" + usb.hasPermission(d));
+            Log.i("UsbHackrfManager", "  isHackrf=" + true + " hasPermission=" + usb.hasPermission(d));
             if (usb.hasPermission(d)) openAndNotify(d);
             else usb.requestPermission(d, permissionPI);
             break;
@@ -103,20 +105,15 @@ public final class UsbHackrfManager {
     }
 
     private void openAndNotify(UsbDevice d) {
-        if (com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine.get().isRunning()) {
-            android.util.Log.w("UsbHackrfManager", "Engine already RUNNING; skip open for " + d.getDeviceName());
+        if (FlowgraphEngine.get().isBusy()) {
+            android.util.Log.w("UsbHackrfManager", "Engine busy; skip open " + d.getDeviceName());
             return;
         }
-
         android.util.Log.i("UsbHackrfManager", "openAndNotify OPEN " + devStr(d));
         UsbDeviceConnection c = usb.openDevice(d);
-        if (c == null) {
-            android.util.Log.w("UsbHackrfManager", "openDevice returned null");
-            return;
-        }
-        android.util.Log.i("UsbHackrfManager", "openDevice OK, fd=" + c.getFileDescriptor() + " conn=" + c);
+        if (c == null) { android.util.Log.w("UsbHackrfManager", "openDevice returned null"); return; }
 
-        // 记住当前在用的 HackRF（用于精准 DETACHED）
+        android.util.Log.i("UsbHackrfManager", "openDevice OK, fd=" + c.getFileDescriptor() + " conn=" + c);
         activeHackrfName = d.getDeviceName();
 
         if (listener != null) listener.onHackrfReady(c);

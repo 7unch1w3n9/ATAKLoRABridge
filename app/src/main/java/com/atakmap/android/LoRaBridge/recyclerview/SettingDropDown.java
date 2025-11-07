@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ArrayAdapter;
 
 import com.atakmap.android.LoRaBridge.FlowgraphSetting.ParamsStore;
+import com.atakmap.android.LoRaBridge.JNI.FlowgraphEngine;
 import com.atakmap.android.LoRaBridge.JNI.FlowgraphNative;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManager;
 import com.atakmap.android.LoRaBridge.JNI.UsbHackrfManagerHolder;
@@ -137,7 +138,7 @@ public class SettingDropDown extends DropDownReceiver {
             ParamsStore.put(ParamsStore.K_SYNC_WORD,     sSw);
             ParamsStore.put(ParamsStore.K_SOFT_DECODING, String.valueOf(bSoft));
 
-            // 保存动态参数（含校验）
+
             try {
                 saveDynamicParamsOrFail();
             } catch (IllegalArgumentException ex) {
@@ -147,14 +148,11 @@ public class SettingDropDown extends DropDownReceiver {
 
             toast("Saved");
             hideDropDown();
-            UsbHackrfManager mgr = UsbHackrfManagerHolder.get();
-            if (mgr != null) {
-                mgr.probeNow();
-            } else {
-                android.util.Log.w("SettingDropDown", "UsbHackrfManager is null; cannot re-probe");
-                toast("USB manager not ready");
-            }
-
+            new Thread(() -> {
+                FlowgraphEngine.get().stop();
+                UsbHackrfManager mgr = UsbHackrfManagerHolder.get();
+                if (mgr != null) mgr.probeNow();
+            }, "Flowgraph-Restart").start();
         });
     }
     private void addExtraRow(String keyPrefill, String valPrefill) {

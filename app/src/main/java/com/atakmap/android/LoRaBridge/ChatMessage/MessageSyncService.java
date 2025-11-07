@@ -1,7 +1,5 @@
 package com.atakmap.android.LoRaBridge.ChatMessage;
 
-import static com.atakmap.comms.CotServiceRemote.Proto.udp;
-
 import android.content.Context;
 import com.atakmap.android.LoRaBridge.Database.ChatMessageEntity;
 import com.atakmap.android.LoRaBridge.Database.ChatRepository;

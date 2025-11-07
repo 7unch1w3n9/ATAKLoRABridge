@@ -45,3 +45,4 @@ Thumbs.db
 # Ignore node_modules for hybrid projects
 node_modules/
 local.properties 
+*.hprof

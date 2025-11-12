@@ -1,0 +1,475 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:228 (message)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      The target system is: Android - 1 - armv7-a
+      The host system is: Linux - 6.6.87.2-microsoft-standard-WSL2 - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-march=armv7-a;-mthumb;-Wformat;-Werror=format-security
+      Id flags: -c;--target=armv7-none-linux-androideabi21 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is Clang, found in:
+        /mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-march=armv7-a;-mthumb;-Wformat;-Werror=format-security
+      Id flags: -c;--target=armv7-none-linux-androideabi21 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        /mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C"
+      binary: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C"
+    cmakeVariables:
+      ANDROID_ABI: "armeabi-v7a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-21"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_C_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_C_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat "
+      CMAKE_C_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d2247/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d2247.dir/build.make CMakeFiles/cmTC_d2247.dir/build
+        gmake[1]: Entering directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C'
+        Building C object CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        Android (13691557, +pgo, +bolt, +lto, +mlgo, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: armv7-none-linux-android21
+        Thread model: posix
+        InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple thumbv7-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C -resource-dir /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        Linking C executable cmTC_d2247
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2247.dir/link.txt --verbose=1
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -o cmTC_d2247 
+        Android (13691557, +pgo, +bolt, +lto, +mlgo, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: armv7-none-linux-android21
+        Thread model: posix
+        InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=both --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_d2247 /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o
+        gmake[1]: Leaving directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld\\.lld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d2247/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_d2247.dir/build.make CMakeFiles/cmTC_d2247.dir/build]
+        ignore line: [gmake[1]: Entering directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C']
+        ignore line: [Building C object CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [Android (13691557  +pgo  +bolt  +lto  +mlgo  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: armv7-none-linux-android21]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple thumbv7-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-V7nl7C -resource-dir /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_d2247]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2247.dir/link.txt --verbose=1]
+        ignore line: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -Wl --build-id=sha1 -Wl --no-rosegment -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o -o cmTC_d2247 ]
+        ignore line: [Android (13691557  +pgo  +bolt  +lto  +mlgo  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: armv7-none-linux-android21]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=both --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_d2247 /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [-X] ==> ignore
+          arg [--hash-style=both] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [armelf_linux_eabi] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_d2247] ==> ignore
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o] ==> obj [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_d2247.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o] ==> obj [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+        remove lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+        remove lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+        implicit dirs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC"
+      binary: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC"
+    cmakeVariables:
+      ANDROID_ABI: "armeabi-v7a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-21"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_CXX_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat  "
+      CMAKE_CXX_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_C_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_00192/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_00192.dir/build.make CMakeFiles/cmTC_00192.dir/build
+        gmake[1]: Entering directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC'
+        Building CXX object CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        Android (13691557, +pgo, +bolt, +lto, +mlgo, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: armv7-none-linux-android21
+        Thread model: posix
+        InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple thumbv7-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC -resource-dir /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi
+         /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        Linking CXX executable cmTC_00192
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_00192.dir/link.txt --verbose=1
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_00192 
+        Android (13691557, +pgo, +bolt, +lto, +mlgo, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: armv7-none-linux-android21
+        Thread model: posix
+        InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=both --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_00192 /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lm /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o
+        gmake[1]: Leaving directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+          add: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        collapse include dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld\\.lld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_00192/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_00192.dir/build.make CMakeFiles/cmTC_00192.dir/build]
+        ignore line: [gmake[1]: Entering directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC']
+        ignore line: [Building CXX object CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Android (13691557  +pgo  +bolt  +lto  +mlgo  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: armv7-none-linux-android21]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple thumbv7-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-hHQjfC -resource-dir /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        ignore line: [ /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_00192]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_00192.dir/link.txt --verbose=1]
+        ignore line: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -Wl --build-id=sha1 -Wl --no-rosegment -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_00192 ]
+        ignore line: [Android (13691557  +pgo  +bolt  +lto  +mlgo  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: armv7-none-linux-android21]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=both --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_00192 /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lm /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [-X] ==> ignore
+          arg [--hash-style=both] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [armelf_linux_eabi] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_00192] ==> ignore
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o] ==> obj [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib]
+          arg [-L/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_00192.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lc++] ==> lib [c++]
+          arg [-lm] ==> lib [m]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o] ==> obj [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+        remove lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+        remove lib [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-arm-android.a]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        collapse library dir [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_dynamic.o;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_android.o]
+        implicit dirs: [/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/arm;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi;/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLanguage.cmake:139 (message)"
+      - "swig/csharp/CMakeLists.txt:11 (check_language)"
+    checks:
+      - "Looking for a CSharp compiler"
+    message: |
+      Looking for a CSharp compiler failed with the following output:
+      -- ANDROID_PLATFORM not set. Defaulting to minimum supported version
+      21.
+      CMake Error at /usr/share/cmake-3.28/Modules/CMakeDetermineCSharpCompiler.cmake:5 (message):
+        C# is currently only supported for Microsoft Visual Studio 12 2013 and
+        later.
+      Call Stack (most recent call first):
+        CMakeLists.txt:2 (project)
+      
+      
+      CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage
+      -- Configuring incomplete, errors occurred!
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "swig/python/CMakeLists.txt:39 (CHECK_CXX_SOURCE_COMPILES)"
+    checks:
+      - "Performing Test SIZE_T_IS_UNSIGNED_INT"
+    directories:
+      source: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS"
+      binary: "/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS"
+    cmakeVariables:
+      ANDROID_ABI: "armeabi-v7a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-21"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_CXX_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  "
+      CMAKE_C_COMPILER_TARGET: "armv7-none-linux-androideabi21"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_MODULE_PATH: "/mnt/d/SS2025/SoapySDR-master/swig/python/cmake;/mnt/d/SS2025/SoapySDR-master/cmake/Modules"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "SIZE_T_IS_UNSIGNED_INT"
+      cached: true
+      stdout: |
+        Change Dir: '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f9ba0/fast
+        gmake: Warning: File 'Makefile' has modification time 0.077 s in the future
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f9ba0.dir/build.make CMakeFiles/cmTC_f9ba0.dir/build
+        gmake[1]: Entering directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS'
+        gmake[1]: Warning: File 'CMakeFiles/cmTC_f9ba0.dir/flags.make' has modification time 0.047 s in the future
+        Building CXX object CMakeFiles/cmTC_f9ba0.dir/src.cxx.o
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DSIZE_T_IS_UNSIGNED_INT  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security    -fPIE -MD -MT CMakeFiles/cmTC_f9ba0.dir/src.cxx.o -MF CMakeFiles/cmTC_f9ba0.dir/src.cxx.o.d -o CMakeFiles/cmTC_f9ba0.dir/src.cxx.o -c /mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS/src.cxx
+        Linking CXX executable cmTC_f9ba0
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9ba0.dir/link.txt --verbose=1
+        /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security    -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_f9ba0.dir/src.cxx.o -o cmTC_f9ba0  -latomic -lm 
+        gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
+        gmake[1]: Leaving directory '/mnt/d/SS2025/SoapySDR-master/build-android-armv7/CMakeFiles/CMakeScratch/TryCompile-rPxajS'
+        gmake: warning:  Clock skew detected.  Your build may be incomplete.
+        
+      exitCode: 0
+...

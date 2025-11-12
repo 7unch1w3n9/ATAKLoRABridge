@@ -1,0 +1,31 @@
+lib/CMakeFiles/SoapySDR.dir/FormatsC.cpp.o: \
+  /mnt/d/SS2025/SoapySDR-master/lib/FormatsC.cpp \
+  /mnt/d/SS2025/SoapySDR-master/include/SoapySDR/Formats.h \
+  /mnt/d/SS2025/SoapySDR-master/include/SoapySDR/Config.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/iso646.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/features.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/cdefs.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/versioning.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/api-level.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/get_device_api_level_inlines.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/ndk-version.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stdbool.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stddef.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stddef.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_ptrdiff_t.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_size_t.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_wchar_t.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_null.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_nullptr_t.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_max_align_t.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_offsetof.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cctype \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__assert \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__verbose_abort \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__availability \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/ctype.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/ctype.h \
+  /mnt/d/SS2025/Bachelorarbeit/AndroidNDK/android-ndk-r27d-linux/android-ndk-r27d/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/xlocale.h

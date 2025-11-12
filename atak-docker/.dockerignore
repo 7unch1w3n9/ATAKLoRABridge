@@ -1,0 +1,16 @@
+
+/proc
+/sys
+/dev
+/tmp
+/run
+
+.gradle/
+build/
+*/build/
+out/
+*.iml
+
+
+.idea/
+.vscode/

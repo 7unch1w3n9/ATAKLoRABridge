@@ -1,0 +1,31 @@
+variables:
+  MAINPDF: "Thesis.pdf"
+
+build:
+  image: texlive/texlive
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - $MAINPDF
+    expire_in: 1 week
+  interruptible: true
+
+test:pdfa:
+  image: openjdk:18-buster
+  stage: test
+  variables:
+    VERAPDF_DIR: /verapdf  # same dir as set in .support/verapdf-auto-install.xml
+    VERAPDF_URL: "http://downloads.verapdf.org/rel/verapdf-installer.zip"
+  before_script:
+    # Install VeraPDF (https://verapdf.org)
+    - apt-get install wget
+    - wget $VERAPDF_URL 
+    - unzip verapdf-installer.zip
+    - INSTALLER=$(find . -type f -name "verapdf-izpack-installer-*.jar")
+    - java -jar $INSTALLER -console -auto .support/verapdf-auto-install.xml
+  script:
+    # Test conformance to PDF/A-2b (as required by TUbama)
+    - $VERAPDF_DIR/verapdf -f 2b $MAINPDF
+  interruptible: true

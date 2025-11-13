@@ -1,0 +1,24 @@
+% !TeX root = ../Thesis.tex
+
+%********************************************************************
+% Bibliography
+%*******************************************************
+% work-around to have small caps also here in the headline
+% https://tex.stackexchange.com/questions/188126/wrong-header-in-bibliography-classicthesis
+% Thanks to Enrico Gregorio
+% \defbibheading{bibintoc}[\bibname]{%
+%   \phantomsection
+%   \manualmark
+%   \markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}%
+%   \addtocontents{toc}{\protect\vspace{\beforebibskip}}%
+%   \addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{#1}}{#1}}%
+%   \chapter*{#1}%
+% }
+\chapterExtra{Bibliography}
+
+% Declaration on the use of AI tools, as demanded by FB20. 
+% https://www.informatik.tu-darmstadt.de/media/informatik/fb20_studium/infos_dozenten/20240126_KI_Hilfsmittel.de.pdf
+\emph{This thesis was written independently and was linguistically revised with the help of <name the AI-tool you used for polishing the text>.}
+
+% Bibliography
+\printbibliography[heading=none]

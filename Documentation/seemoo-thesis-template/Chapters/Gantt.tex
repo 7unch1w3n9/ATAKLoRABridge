@@ -1,0 +1,38 @@
+\begin{figure}[htbp]
+    \centering
+    \rotatebox{90}{%
+        \begin{tabular}{c}
+            \LARGE \textbf{Gantt Chart (Weekly Plan)} \\[1cm]
+            \begin{ganttchart}[%
+                hgrid,
+                vgrid,
+                x unit=0.7cm,
+                y unit chart=1cm,
+                bar height=0.7,
+                bar/.append style={fill=blue!50},
+                bar label font=\normalsize\rmfamily,
+                title height=1,
+                title label font=\bfseries,
+                title top shift=0,
+                milestone/.append style={fill=red}
+            ]{1}{26}
+            \gantttitle{2025 Bachelor Thesis Timeline (26 Weeks)}{26} \\
+            \gantttitle{July}{4}
+            \gantttitle{August}{4}
+            \gantttitle{September}{4}
+            \gantttitle{October}{5}
+            \gantttitle{November}{5}
+            \gantttitle{December}{4} \\
+            \gantttitlelist{1,...,26}{1} \\
+            \ganttbar{Phase 0: ATAK Plugin (Chat I/O)}{1}{4} \\
+            \ganttbar{Phase 1: WASM Runtime Integration}{5}{9} \\
+            \ganttbar{Phase 2: RF + CoT Integration}{10}{15} \\
+            \ganttbar{Phase 3: Dummy MAC (Multi-device)}{16}{18} \\
+            \ganttbar{Phase 4: Evaluation + Fallback Testing}{19}{20} \\
+            \ganttbar{Phase 5: Thesis Writing \& Polishing}{21}{26} \\
+            \end{ganttchart}
+        \end{tabular}
+    }
+    \caption{Bachelor Thesis Weekly Plan}
+    \label{fig:gantt}
+\end{figure}

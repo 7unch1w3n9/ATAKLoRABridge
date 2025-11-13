@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+	node distance = 7mm and 18mm,
+	  start chain = going right,
+	   box/.style = {draw, thick,
+	                 minimum height=9mm, minimum width =18mm,
+	                 on chain},
+	every edge/.style = {draw, -Straight Barb, semithick},
+	every node/.style = {align=center},
+]
+
+	% Draw boxes for Encoder, Channel and Decoder
+	\coordinate[on chain] (in);
+	\node (n1) [box]    {Encoder};
+	\node (n2) [box]    {Channel};
+	\node (n3) [box]    {Decoder};
+	\coordinate[on chain] (out);
+
+	% Draw labeled arrow between the boxes
+	\draw[->] (in) -- node[above] {Message \\ $\mathcal{K}$} (n1);
+	\draw[->] (n1) -- node[above] {Codeword\\ $X_{\mathcal{K}}$} (n2);
+	\draw[->] (n2) -- node[above] {Output  \\ $Y$} (n3);
+	\draw[->] (n3) -- node[above] {Estimate\\ $\widehat{\mathcal{K}}$} (out);
+\end{tikzpicture}

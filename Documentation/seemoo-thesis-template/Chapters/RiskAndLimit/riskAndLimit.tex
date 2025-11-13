@@ -1,0 +1,18 @@
+\section{Limitations, and Risk Management}
+This project explicitly does not address issues related to message encryption and authentication, secure communication protocols, long-range transmission optimization, or power consumption control. The primary research focus is the development of a extensible working prototype that demonstrates end-to-end LoRa communication through the integration of FutureSDR and ATAK.
+
+While the physical-layer signal processing flowgraph is provided as a static component at the project's outset, several technical risks related to integration persist.
+
+One primary concern involves the compatibility of the WebAssembly (WASM) runtime within the Android environment. This ecosystem is still maturing, and potential issues could lead to abnormal communication or degraded performance between the plugin and the embedded flowgraph.
+%Another significant risk arises during the process of reconstructing Cursor-on-Target (CoT) messages after the plugin receives demodulated data. This reconstruction relies heavily on XML parsing and structural mapping. Any inconsistencies in format or failures during parsing could result in message loss or rejection by the GeoChat module, hindering effective communication.
+
+To mitigate these risks, the project defines two fallback solutions:
+
+\newpage
+%\vspace{0.5em}
+\noindent\textbf{WASM Module Failure Fallback}\par
+Should WASM runtime compatibility issues arise within the Android environment during Phase 1—manifesting as invocation failures or memory access conflicts, for instance—the system will pivot to an alternative approach. It will then interact with a locally running non-WASM software flowgraph via inter-process communication interfaces, such as TCP or UDP. This setup will continue to simulate the modulation and demodulation processes of CoT messages. It's important to note this alternative won't activate an actual radio frequency link; its sole purpose is to validate the correct integration of the plugin with the underlying physical layer interface logic.
+
+ \vspace{0.5em}
+\noindent\textbf{RF Module Failure Fallback}\par
+Should SDR hardware connectivity fail during Phase 2, or if the RF link proves unstable under specific test conditions, the system will revert to the loopback simulation path established in Phase 1. This fallback involves the plugin utilizing the embedded WASM flowgraph to simulate physical channel behavior. This ensures continued validation of core functionalities, including message format conversion, Cursor-on-Target (CoT) structure generation, and GeoChat display, even without a live RF connection.

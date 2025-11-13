@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"file_exclude_patterns": ["*.glo", "*.gls", "*.glg", "*.acn", "*.acr", "*.alg", "*.aux", "*.bbl", "*.blg", "*-blx.bib", "*.fdb_latexmk", "*.fls", "*.ist", "*.lof", "*.lol", "*.lot", "*.synctex.gz", "*.toc", "*.out", "*.log", "*.xmpi", "*.xmpdata", "*.run.xml"],
+		},
+	]
+}

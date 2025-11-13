@@ -1,0 +1,31 @@
+% !TeX root = ./Thesis.tex
+
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
+
+% for use in unnumbered chapters in the front and back matter that should appear in ToC
+\newcommand{\chapterExtra}[1]{%
+	\phantomsection%
+	\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}%
+	\addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{#1}}{#1}}%
+	\chapter*{#1}%
+}
+
+% When using \part{}, the generated PDF bookmark has a leading whitespace for unknown reasons.
+% Using hyperref's \texorpdfstring within \part{} does not fix the problem.
+% The following command provides a workaround:
+% First, manually add a PDF bookmark (without a leading whitespace).
+% Then, disable the generation of PDF bookmarks temporarily to prevent
+% the creation of a PDF bookmark with a leading whitespace.
+% Then, start the new part and restore the automatic generation of PDF bookmarks.
+\newcommand{\partExtra}[1]{%
+	\phantomsection%
+	\pdfbookmark[-1]{#1}{#1}%
+	\hypersetup{bookmarksdepth=-2}%
+	\part{#1}%
+	\hypersetup{bookmarksdepth}%
+}
+
+\newcommand{\shorturl}[2]{\href{#1}{\nolinkurl{#2}}} % useful for typesetting DOIs and URNs

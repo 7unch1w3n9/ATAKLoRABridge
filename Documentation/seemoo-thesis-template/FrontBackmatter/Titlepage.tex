@@ -1,0 +1,48 @@
+% !TeX root = ../Thesis.tex
+
+%*******************************************************
+% Titlepage
+%*******************************************************
+\pdfbookmark[0]{Cover}{cover}
+\begin{titlepage}
+    % -- TemplateKnob
+    % if you want the titlepage to be centered, uncomment and
+    % fine-tune the line below (KOMA classes environment)
+    %\pdfbookmark[1]{\myTitle{}}{titlepage}
+
+    \begin{addmargin}[-1cm]{\iftoggle{adrianstyle}{-2cm}{-3cm}}
+    \begin{center}
+        \large
+
+        \includegraphics[width=6cm]{logos/tud-logo-rgb}
+        
+        \vfill
+
+        \begingroup
+            \color{CTtitle}\spacedallcaps{\myTitle{}} \\ \bigskip
+        \endgroup
+
+        \vspace{2ex}
+
+        \spacedlowsmallcaps{\myName{}}
+
+        \vfill
+
+        \myDegree{}
+
+        \vspace{2ex}
+
+        \myTime{}
+
+        \vfill
+
+        \myDepartment{} \\
+        \myFaculty{} \\
+        \myUni{}
+
+        \vfill
+
+        \includegraphics[width=5cm]{logos/seemoo-logo-rgb}
+    \end{center}
+    \end{addmargin}
+\end{titlepage}

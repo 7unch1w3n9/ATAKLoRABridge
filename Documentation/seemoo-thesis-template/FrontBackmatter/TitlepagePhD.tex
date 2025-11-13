@@ -1,0 +1,73 @@
+% !TeX root = ../Thesis.tex
+
+% Vorgaben zum Titelblatt einer Dissertation: https://www.intern.tu-darmstadt.de/media/dezernat_ii/promotionen_dokumente/Dissertation-Titelblatt.de.pdf
+
+%*******************************************************
+% Titlepage
+%*******************************************************
+\pdfbookmark[0]{Cover}{cover}
+\begin{titlepage}
+    % -- TemplateKnob
+    % if you want the titlepage to be centered, uncomment and
+    % fine-tune the line below (KOMA classes environment)
+    %\pdfbookmark[1]{\myTitle{}}{titlepage}
+
+    \begin{addmargin}[-1cm]{\iftoggle{adrianstyle}{-2cm}{-3cm}}
+    \begin{center}
+    \begin{otherlanguage}{ngerman}
+        \large
+
+        \includegraphics[width=6cm]{logos/tud-logo-rgb}
+        
+        \vfill
+
+        \begingroup
+            \color{CTtitle}\spacedallcaps{\myTitle{}} \\ \bigskip
+        \endgroup
+
+        \vfill
+
+        Am \myFacultyDE{} \\ 
+        der Technischen Universität Darmstadt \\
+        eingereichte
+
+        % -- TemplateKnob
+        %% Use this for the final version:
+        % Vom \myFacultyDE{} \\ 
+        % der Technischen Universität Darmstadt \\
+        % genehmigte
+
+        \vspace{2ex}
+
+        \spacedlowsmallcaps{Dissertation}
+
+        \vspace{2ex}
+
+        zur Erlangung des akademischen Grades \\
+        \myDegreePhD{} \\
+        von
+
+        \vspace{2ex}
+
+        \spacedlowsmallcaps{\myName{}}
+
+        \vfill
+
+        \begin{tabular}{r@{~}l}
+        Erstreferent: & \myProf{} \\
+        Korreferent: & \myOtherProf{} \\
+        \end{tabular}
+
+        \vfill
+        
+        \myLocation{} \myYearPresent{} \\
+        Hochschulkennziffer \myUniKennziffer{}
+
+        \vfill
+
+        \includegraphics[width=5cm]{logos/seemoo-logo-rgb} \\
+
+    \end{otherlanguage}
+    \end{center}
+    \end{addmargin}
+\end{titlepage}

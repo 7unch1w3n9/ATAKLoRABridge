@@ -1,0 +1,234 @@
+% **************************************************************************************************************
+% A Classic Thesis Style
+% An Homage to The Elements of Typographic Style
+%
+% Copyright (C) 2018 André Miede and Ivo Pletikosić
+%
+% If you like the style then I would appreciate a postcard. My address
+% can be found in the file ClassicThesis.pdf. A collection of the
+% postcards I received so far is available online at
+% http://postcards.miede.de
+%
+% License:
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program; see the file COPYING.  If not, write to
+% the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+% Boston, MA 02111-1307, USA.
+%
+% PLEASE SEE ALSO THE AUTHORS' NOTE REGARDING THIS LICENSE
+% IN THE DOCUMENTATION (ClassicThesis.pdf --> Chapter 1 / Chapter01.tex)
+% **************************************************************************************************************
+
+\input{PersonalInfo}
+
+% Metadata to comply with PDF/A
+\begin{filecontents*}{\jobname.xmpdata}
+	\Title{\myTitle}
+	\Author{\myName}
+	\Copyright{Copyright \copyright\ \myYearPublication "\myName"}
+	\Subject{\myAbstract} % Make sure to update your abstract in PersonalInfo.tex!
+\end{filecontents*}
+
+
+\RequirePackage{silence} % :-\
+	\WarningFilter{scrreprt}{Usage of package `titlesec'}
+	\WarningFilter{titlesec}{Non standard sectioning command detected}
+
+
+\documentclass[
+	twoside,
+	openright,
+	titlepage,
+	numbers=noenddot,
+	headinclude,
+	footinclude,
+	cleardoublepage=empty,
+	abstract=on,
+	BCOR=5mm,
+	paper=a4,
+	fontsize=11pt
+]{scrreprt}
+
+
+% ------------------------------------------------------------------
+% Toggles to enable large-scale configuration of the template
+% ------------------------------------------------------------------
+\usepackage{etoolbox}
+
+% Toggle true if you want to have a style with smaller margins
+\newtoggle{adrianstyle}
+
+% Toggle true to use parts (as in a book; for long theses only!)
+\newtoggle{parts}
+
+% Toggle true to write a full-blown PhD thesis (with parts, author references, etc.)
+\newtoggle{phd}
+
+
+% -- TemplateKnob
+%\toggletrue{phd}
+%\toggletrue{parts}
+%\toggletrue{adrianstyle}
+\PassOptionsToPackage{adrianstyle=\iftoggle{adrianstyle}{true}{false}}{classicthesis}
+\iftoggle{phd}{\toggletrue{parts}}{}
+
+% ------------------------------------------------------------------
+% PDF/A for TUbama
+% ------------------------------------------------------------------
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\usepackage{colorprofiles}
+\usepackage[a-2b, mathxmp]{pdfx}
+
+
+% ------------------------------------------------------------------
+% Include configs and other packages
+% ------------------------------------------------------------------
+\input{ClassicThesisConfig}
+\input{AdditionalPackages}
+
+
+% ------------------------------------------------------------------
+% Bibliographies
+% ------------------------------------------------------------------
+\addbibresource{Bibliography.bib}
+\addbibresource[label=own]{AuthorPublications.bib}
+
+% ------- uncomment the following files to enable URL newline/breaks in Bibliography
+% \usepackage{url}
+% \usepackage{xurl}
+% \usepackage{hyperref}
+% -- its importat that they are after \addbibresource
+
+% ------------------------------------------------------------------
+% Hyphenation
+% ------------------------------------------------------------------
+\input{Hyphenation}
+
+
+% ------------------------------------------------------------------
+% Acronyms
+% ------------------------------------------------------------------
+\input{Acronyms}
+
+
+% ------------------------------------------------------------------
+% Macros
+% ------------------------------------------------------------------
+\input{Macros}
+
+
+% ------------------------------------------------------------------
+% GO!GO!GO! MOVE IT!
+% ------------------------------------------------------------------
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{american} % american ngerman
+\pagenumbering{roman}
+\pagestyle{plain}
+
+
+% ------------------------------------------------------------------
+% Frontmatter
+% ------------------------------------------------------------------
+\iftoggle{parts}{
+	\include{Parts/FrontMatter}
+}{}
+\iftoggle{phd}{
+	\include{FrontBackmatter/TitlepagePhD}
+	\include{FrontBackmatter/TitlebackPhD}
+	\cleardoublepage\include{FrontBackmatter/Dedication}
+}{
+	\include{FrontBackmatter/Titlepage}
+	\include{FrontBackmatter/Titleback}
+}
+
+\cleardoublepage\include{FrontBackmatter/Abstract}
+\cleardoublepage\include{FrontBackmatter/Acknowledgments}
+\cleardoublepage\include{FrontBackmatter/Contents}
+\iftoggle{phd}{
+	\begin{refsection}[own] % use numbering of list of publications
+	\cleardoublepage\include{FrontBackmatter/Publications}
+	\cleardoublepage\include{FrontBackmatter/Collaborations}
+	\end{refsection}
+}{}
+
+
+% ------------------------------------------------------------------
+% Mainmatter
+% ------------------------------------------------------------------
+\addtocounter{table}{-1} % otherwise starts counting from 2
+\cleardoublepage
+\pagestyle{scrheadings}
+\pagenumbering{arabic}
+
+% use \cleardoublepage here to avoid problems with pdfbookmark
+\cleardoublepage
+\iftoggle{parts}{
+	\ctparttext{The first chapter of this part gives an introduction and a motivation to this thesis, followed by a presentation of related work found in the area of physical layer security. In the third chapter, we present some definitions and background information to make it easier for the reader to quickly understand the subsequent parts of this thesis.}
+	\partExtra{Introduction}
+}{}
+\include{Chapters/Introduction}
+\include{Chapters/RelatedWork}
+\iftoggle{parts}{
+	\cleardoublepage
+	\ctparttext{The contribution starts with a design chapter, where we mathematically describe the design of the physical layer security system, as well as the adaptive filter of the attacker. After the design follows the implementation on WARP nodes. Here we give an insight into the challenges of implementing the designed MIMO communication system. The last chapter concentrates on evaluating the performance of our proposed attack in simulation and practice.}
+	\partExtra{Contribution}
+}{}
+\include{Chapters/Design}
+\include{Chapters/Implementation}
+\include{Chapters/Evaluation}
+\iftoggle{parts}{
+	\cleardoublepage
+	\ctparttext{After the evaluation, we further discuss the results and give an outlook. In addition, we finish this work with conclusions.}
+	\partExtra{Discussion and Conclusions}
+}{}
+\include{Chapters/Discussion}
+\include{Chapters/Conclusions}
+
+
+% ------------------------------------------------------------------
+% Backmatter
+% ------------------------------------------------------------------
+\iftoggle{parts}{}{
+	\addtocontents{toc}{\protect\vspace{\beforebibskip}} % add space between main chapters and appendix if we do not use parts
+}
+\appendix
+\cleardoublepage
+\iftoggle{parts}{
+	\partExtra{Appendix}
+}{}
+\include{Appendices/SomeProof}
+
+
+% ------------------------------------------------------------------
+% Other Stuff in the Back
+% ------------------------------------------------------------------
+\iftoggle{parts}{
+	\include{Parts/BackMatter}
+}{}
+\cleardoublepage\include{FrontBackmatter/Bibliography}
+\include{FrontBackmatter/AIDeclaration}
+\iftoggle{phd}{
+	% -- TemplateKnob
+	%\cleardoublepage\include{FrontBackmatter/CurriculumVitae} % not required in final submission
+	\cleardoublepage\include{FrontBackmatter/StatementThesisPhD}
+}{
+	\cleardoublepage\include{FrontBackmatter/StatementThesis}
+}
+
+
+% ------------------------------------------------------------------
+% Game Over: Restore, Restart, or Quit?
+% ------------------------------------------------------------------
+\end{document}

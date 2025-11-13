@@ -1,0 +1,29 @@
+\section{methods}
+To achieve the goal of enabling infrastructure-less communication within ATAK in post-disaster scenarios, we propose a modular implementation and evaluation strategy, combining formal software integration, signal processing design, and hardware testing. The overall workflow consists of four main phases:
+
+\vspace{0.5em}
+\noindent\textbf{Phase 0: ATAK Chat Interface Integration}\par
+As a preliminary step, the project will integrate the ATAK GeoChat interface with a custom plugin. The plugin will observe, capture, and display incoming and outgoing chat messages. This is essential to verify that all required information (e.g., message text, sender, receiver ,timestamp) can be correctly extracted from CoT events. This validation step ensures that the plugin can operate independently of UI behavior and forms a solid foundation for later integration with a physical-layer communication backend.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 1: WASM Runtime Integration}\par
+To facilitate the internal execution of physical-layer logic within ATAK, a static FutureSDR flowgraph will be compiled into WebAssembly (WASM) and subsequently embedded directly into the plugin. The interaction between the plugin and this flowgraph will be managed through memory-sharing mechanisms and exported function calls. This particular design allows for the complete encoding and decoding of Cursor-on-Target (CoT) messages into baseband In-phase/Quadrat-ure (IQ) data entirely within the Android runtime environment. This initial phase primarily focuses on enabling signal processing capabilities without external dependencies, serving as a robust foundation for loopback testing, debugging, and fallback operational modes.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 2: RF + CoT Integration}\par
+In scenarios requiring real-world over-the-air communication, the system will interface with external software-defined radio (SDR) hardware. Since WASM cannot directly access low-level device drivers or I/O APIs, the flowgraph will be executed as a native binary outside the plugin environment. ATAK will communicate with this flowgraph over UDP, TCP, or the local filesystem. Outgoing CoT messages will be serialized, forwarded to the external runtime, and transmitted via LoRa. Conversely, decoded messages received over the air will be injected back into ATAK as valid CoT events. This phase bridges ATAK with the physical RF layer in a modular and platform-agnostic way.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 3: Dummy MAC (Multi-device)}\par
+To support multiple ATAK devices sharing the same LoRa channel, a simplified static MAC layer will be implemented. To enable basic filtering, each message will prepend a lightweight protocol header containing sender and receiver UIDs. This allows the receiving side to discard irrelevant traffic early in the processing pipeline without parsing the full CoT payload. Although this MAC scheme is non-adaptive and stateless, it provides lightweight addressability and serves as a baseline for future protocol upgrades.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 4: Evaluation + Fallback Testing}\par
+The final system will be evaluated under infrastructure-denied conditions. Testing will include:
+\begin{itemize}
+    \item End-to-End Message Exchange Between ATAK on Different Devices
+    \item Compliance of injected CoT events with native ATAK GeoChat behavior
+    \item Plugin behavior in fallback mode (using WASM flowgraph in loopback)
+\end{itemize}
+Fallback testing temporarily removes the dependency on physical SDR hardware by substituting the RF transmission path with an in-app WASM-based flowgraph. This simulation enables early-stage validation of protocol logic and plugin integration behavior without requiring a full physical test setup. The final system, however, is designed to operate with actual RF hardware in deployment scenarios.
+

@@ -1,0 +1,92 @@
+% !TeX root = ./Thesis.tex
+
+\graphicspath{{./Graphics/}}
+
+% need to pass languages explicitly
+\PassOptionsToPackage{capitalize, noabbrev, ngerman, english}{cleveref}
+\usepackage{cleveref}
+\usepackage{datetime} % for formatting submission date
+\usepackage{lipsum}   % for template text
+
+% include Git commit hash when drafting
+\makeatletter
+\ifthenelse{\boolean{ct@drafting}}{
+  \usepackage{gitinfo2}
+  \renewcommand{\PrelimText}{\footnotesize[\,\today\ at \thistime\ -- version \myVersion{} -- git \gitAbbrevHash\,]}
+}{}
+\makeatother
+
+% nice cv style for PhD theses
+\iftoggle{phd}{
+  \usepackage[LabelsAligned]{currvita}
+}{}
+
+% to enable wide text/floats taking the space of margin notes (435pt instead of 336pt)
+% note that this changes the \linewidth (not \textwidth), so follow this example
+% to include a wide figure:
+%  \begin{figure}
+%  \begin{wide}
+%    \includegraphics[width=\linewidth]{logos/tud-logo}
+%    \caption{Athene logo of TU Darmstadt.}
+%  \end{wide}
+%  \end{figure}
+\usepackage[strict]{changepage}
+\newlength{\fullwidthlen}
+\setlength{\fullwidthlen}{\marginparwidth}
+\addtolength{\fullwidthlen}{\marginparsep}
+\newenvironment{wide}{%
+  \begin{adjustwidth*}{}{-\fullwidthlen}\hsize=\linewidth%
+}{%
+  \end{adjustwidth*}%
+}
+
+% TikZ/PGFPlots
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{
+  chains,
+  positioning,
+  quotes,
+}
+
+% Check if compiling on Overleaf
+\newif\ifoverleaf
+\begingroup
+\edef\x{\jobname}
+\edef\y{output}
+\ifx\x\y
+  \global\overleaftrue
+\else
+  \global\overleaffalse
+\fi
+\endgroup
+
+% To cache tikz pictures you have to run pdflatex with -shell-escape or --enable-write18
+\newif\ifshellescape
+\makeatletter
+\@ifundefined{pdfshellescape}{
+  \shellescapefalse
+}{
+  \ifnum\pdfshellescape=1
+    \shellescapetrue
+  \else
+    \shellescapefalse
+  \fi
+}
+\makeatother
+
+% TikZ externalization 逻辑
+\ifshellescape
+  \usepgfplotslibrary{external}
+  \ifoverleaf
+    \tikzexternaldisable
+  \else
+    \tikzexternalize[prefix=GraphicsCache/]
+  \fi
+\fi
+
+
+% Lengths for matlab2tikz
+\newlength\figureheight
+\newlength\figurewidth

@@ -1,0 +1,63 @@
+% !TeX root = ../Thesis.tex
+
+%*******************************************************
+% Table of Contents
+%*******************************************************
+\pagestyle{scrheadings}
+
+\pdfbookmark[0]{\contentsname}{tableofcontents}
+\setcounter{tocdepth}{2} % <-- 2 includes up to subsections in the ToC
+\setcounter{secnumdepth}{3} % <-- 3 numbers up to subsubsections
+\manualmark
+\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+\tableofcontents
+\automark[section]{chapter}
+\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{\thesection}\enspace\spacedlowsmallcaps{#1}}}
+%*******************************************************
+% List of Figures and of the Tables
+%*******************************************************
+\clearpage
+% -- TemplateKnob
+% Uncomment this line if your lists should not have any
+% headlines with section name and page number
+% \pagestyle{empty}
+\begingroup
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    %*******************************************************
+    % List of Figures
+    %*******************************************************
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{\listfigurename}}{\listfigurename}}
+    \listoffigures
+
+    \vspace{8ex}
+
+    %*******************************************************
+    % List of Tables
+    %*******************************************************
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{\listtablename}}{\listtablename}}
+    \listoftables
+
+    \vspace{8ex}
+    % \newpage
+
+    %*******************************************************
+    % List of Listings
+    %*******************************************************
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{\lstlistlistingname}}{\lstlistlistingname}}
+    \lstlistoflistings
+
+    \vspace{8ex}
+
+    %*******************************************************
+    % Acronyms
+    %*******************************************************
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\tocEntry{Acronyms}}{Acronyms}}
+    \printglossary[type=\acronymtype]
+
+\endgroup

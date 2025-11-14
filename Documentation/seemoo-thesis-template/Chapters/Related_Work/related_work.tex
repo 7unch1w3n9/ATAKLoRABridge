@@ -1,4 +1,5 @@
-\section{Chapters/Related Work and Background}
+\section{Related Work}
+
 In the specific context of disaster communication, Deepak G. and his collaborators, through their investigative research, introduced a classification methodology for scenarios based on the degree of damage sustained by communication networks. This classification encompasses congested networks, partially functional networks, and completely isolated networks\cite{Post-DisasterEmergencyCommunicationSystems}.
 
 A congested network describes a situation where the communication infrastructure remains operational; however, its performance significantly degrades due to a surge in communication demands. In such instances, mechanisms like enhanced Mobile Priority Services (eMPS) or network slicing can be implemented to ensure the prioritization of emergency communications. A partially functional network signifies that certain nodes within the communication infrastructure have failed, resulting in connectivity being maintained only in localized areas or for specific services. Conversely, a completely isolated network represents the most extreme scenario, characterized by the failure of all base stations and a complete loss of communication connectivity within the affected area. Under the conditions of partially functional or completely isolated networks, traditional centralized communication systems often prove ineffective, thereby necessitating autonomous and decentralized communication solutions.
@@ -10,7 +11,8 @@ In recent years, the field of emergency communication has witnessed the emergenc
         \item \textbf{Mobile Ad-hoc Networks (MANETs)}. These networks are formed by mobile nodes that dynamically self-organize into network topologies, providing rapid and flexible wireless communication.
     \end{itemize}
     
-Additionally, LoRa technology has progressively become a prevalent choice for infrastructure-independent communication solutions. This is attributable to its inherent characteristics of long-distance communication, low power consumption, and robust signal penetration capabilities.
+Although D2D\footnote{Device-to-Device},  UAVs\footnote{Unmanned Aerial Vehicles}, and MANETs\footnote{Mobile Ad-hoc Networks } provide different forms of decentralized communication capabilities for post-disaster areas, they remain subject to significant limitations in terms of communication range, operational duration, and scalability in high-density environments. D2D typically covers only tens to hundreds of meters \cite{TODO}. MANET relies on Wi-Fi/short-range links, which are characterized by high energy consumption and bulky device form factors \cite{TODO}. UAVs are constrained by battery capacity and flight time\cite{TODO}. None of these three approaches can sustainably provide low-power connectivity across large-scale areas that are completely isolated with destroyed infrastructure. Consequently, an increasing body of research has recently focused on LPWAN\footnote{Low-Power Wide-Area Network} technologies characterized by ultra-low power consumption and long-range communication, particularly LoRa as candidate physical layer solutions for emergency communications.
 
 \input{Chapters/Related_Work/LoRa_solutions.tex}
+\input{Chapters/Related_Work/FutureSDR_and_JNI.tex}
 \input{Chapters/Related_Work/ATAK.tex}

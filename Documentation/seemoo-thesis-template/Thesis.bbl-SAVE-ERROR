@@ -1,0 +1,389 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{Tonga}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=94ba92b31016ab2252f62334e9df8a34}{%
+           family={Speidel},
+           familyi={S\bibinitperiod},
+           given={Ulrich},
+           giveni={U\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hiroshima, Japan}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{fullhash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{fullhashraw}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{bibnamehash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{authorbibnamehash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{authornamehash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{authorfullhash}{94ba92b31016ab2252f62334e9df8a34}
+      \strng{authorfullhashraw}{94ba92b31016ab2252f62334e9df8a34}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 17th Asian Internet Engineering Conference (AINTEC '22)}
+      \field{isbn}{9781450399814}
+      \field{title}{The Hunga Tonga Hunga Ha'apai Eruption - A Postmortem: What Happened to Tonga's Internet in January 2022, and What Lessons Are There to Be Learned?}
+      \field{year}{2022}
+      \keyw{subsea cables,satellites,disaster networking,Tonga}
+    \endentry
+    \entry{Post-DisasterEmergencyCommunicationSystems}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=af3e88966cc95d7bb021e24eb90758f5}{%
+           family={G.C.},
+           familyi={G\bibinitperiod},
+           given={Deepak},
+           giveni={D\bibinitperiod}}}%
+        {{hash=38491ca74b16005fd4016f0b6fd5d583}{%
+           family={Ladas},
+           familyi={L\bibinitperiod},
+           given={Alexandros},
+           giveni={A\bibinitperiod}}}%
+        {{hash=17050473b15d812716a5b072ae0b3520}{%
+           family={Sambo},
+           familyi={S\bibinitperiod},
+           given={Yusuf\bibnamedelima Abdulrahman},
+           giveni={Y\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=35756c0e4082b65e0e266e457795aa1d}{%
+           family={Pervaiz},
+           familyi={P\bibinitperiod},
+           given={Haris},
+           giveni={H\bibinitperiod}}}%
+        {{hash=36c8858fe065ac4feba304406a35d99f}{%
+           family={Politis},
+           familyi={P\bibinitperiod},
+           given={Christos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f2769d972335f7e4b819e5f58619b9c5}{%
+           family={Imran},
+           familyi={I\bibinitperiod},
+           given={Muhammad\bibnamedelima Ali},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{2c49f08c7a0ca5bfb00a36a1f5d45f02}
+      \strng{fullhash}{3a94ef67083a5b140e3dad8a2613f492}
+      \strng{fullhashraw}{3a94ef67083a5b140e3dad8a2613f492}
+      \strng{bibnamehash}{3a94ef67083a5b140e3dad8a2613f492}
+      \strng{authorbibnamehash}{3a94ef67083a5b140e3dad8a2613f492}
+      \strng{authornamehash}{2c49f08c7a0ca5bfb00a36a1f5d45f02}
+      \strng{authorfullhash}{3a94ef67083a5b140e3dad8a2613f492}
+      \strng{authorfullhashraw}{3a94ef67083a5b140e3dad8a2613f492}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Wireless Communications}
+      \field{number}{6}
+      \field{title}{An Overview of Post-Disaster Emergency Communication Systems in the Future Networks}
+      \field{volume}{26}
+      \field{year}{2019}
+      \field{pages}{132\bibrangedash 139}
+      \range{pages}{8}
+    \endentry
+    \entry{TODO}{misc}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{note}{Placeholder citation}
+    \endentry
+    \entry{LoRAgent}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=86f1aabcb2824740b1a6ca2699e1e6f8}{%
+           family={Baumgärtner},
+           familyi={B\bibinitperiod},
+           given={Lars},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e0812b7ee6c343339b5c9bb759bb3347}{%
+           family={Lieser},
+           familyi={L\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=24268d24583ee3fd3e3841be2f2fd63c}{%
+           family={Zobel},
+           familyi={Z\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b64d05fb773c3b60b0177311af05114d}{%
+           family={Bloessl},
+           familyi={B\bibinitperiod},
+           given={Bastian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=9eea3638fa9a97f4054f44f5e740579c}{%
+           family={Steinmetz},
+           familyi={S\bibinitperiod},
+           given={Ralf},
+           giveni={R\bibinitperiod}}}%
+        {{hash=4c8995f42a6a2e4a5997d105c6463290}{%
+           family={Mezini},
+           familyi={M\bibinitperiod},
+           given={Mira},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8af9b80a41d7a3239ae3b8d7ff9286d4}
+      \strng{fullhash}{cc53a9da30c0c8b860bd032ba09470eb}
+      \strng{fullhashraw}{cc53a9da30c0c8b860bd032ba09470eb}
+      \strng{bibnamehash}{cc53a9da30c0c8b860bd032ba09470eb}
+      \strng{authorbibnamehash}{cc53a9da30c0c8b860bd032ba09470eb}
+      \strng{authornamehash}{8af9b80a41d7a3239ae3b8d7ff9286d4}
+      \strng{authorfullhash}{cc53a9da30c0c8b860bd032ba09470eb}
+      \strng{authorfullhashraw}{cc53a9da30c0c8b860bd032ba09470eb}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 IEEE Global Humanitarian Technology Conference (GHTC)}
+      \field{title}{LoRAgent: A DTN-based Location-aware Communication System using LoRa}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+    \endentry
+    \entry{AboutMeshtastic}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=54c3265daedcd4e9f97fe63e102c3307}{%
+           family={Austin},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{fullhash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{fullhashraw}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{bibnamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorbibnamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authornamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorfullhash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorfullhashraw}{54c3265daedcd4e9f97fe63e102c3307}
+      \field{extraname}{1}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://meshtastic.org/docs/about/}}
+      \field{note}{[Accessed 26-06-2025]}
+      \field{title}{About Meshtastic}
+    \endentry
+    \entry{meshtasticATAKPlugin}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=54c3265daedcd4e9f97fe63e102c3307}{%
+           family={Austin},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{fullhash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{fullhashraw}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{bibnamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorbibnamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authornamehash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorfullhash}{54c3265daedcd4e9f97fe63e102c3307}
+      \strng{authorfullhashraw}{54c3265daedcd4e9f97fe63e102c3307}
+      \field{extraname}{2}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://meshtastic.org/docs/software/integrations/integrations-atak-plugin/}}
+      \field{note}{[Accessed 26-06-2025]}
+      \field{title}{ATAK Plugin}
+    \endentry
+    \entry{ATAK}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0e1a58b3c58e4b7854bce98d880c17e1}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={ATAK},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{fullhash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{fullhashraw}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{bibnamehash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{authorbibnamehash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{authornamehash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{authorfullhash}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \strng{authorfullhashraw}{0e1a58b3c58e4b7854bce98d880c17e1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{6}
+      \field{note}{[Online; accessed 2025-06-27]}
+      \field{title}{Android Team Awareness Kit (ATAK) - A Tactical Situational Awareness Application}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.civtak.org/atak-about/
+      \endverb
+      \verb{url}
+      \verb https://www.civtak.org/atak-about/
+      \endverb
+    \endentry
+    \entry{Linde2022EmergencyAT}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=9eb873075c03b28af7874da5364f5a80}{%
+           family={Linde},
+           familyi={L\bibinitperiod},
+           given={Mira},
+           giveni={M\bibinitperiod},
+           prefix={von\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=f5a49f8b462c835e5472aa7adf3ab6d1}{%
+           family={Nospickel},
+           familyi={N\bibinitperiod},
+           given={Paulin\bibnamedelima M.},
+           giveni={P\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=d92dc5e522f85126335c042d898e3324}{%
+           family={Göcke},
+           familyi={G\bibinitperiod},
+           given={Melanie},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a5715cb7df58cedc5c5f04fee0a5ecc3}{%
+           family={Thielsch},
+           familyi={T\bibinitperiod},
+           given={Meinald\bibnamedelima T.},
+           giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b666c18ec50f70bb6a7a1e0ed343e60}
+      \strng{fullhash}{a74dbfbad4298523df1d37d524e72ba7}
+      \strng{fullhashraw}{a74dbfbad4298523df1d37d524e72ba7}
+      \strng{bibnamehash}{a74dbfbad4298523df1d37d524e72ba7}
+      \strng{authorbibnamehash}{a74dbfbad4298523df1d37d524e72ba7}
+      \strng{authornamehash}{5b666c18ec50f70bb6a7a1e0ed343e60}
+      \strng{authorfullhash}{a74dbfbad4298523df1d37d524e72ba7}
+      \strng{authorfullhashraw}{a74dbfbad4298523df1d37d524e72ba7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of Mensch und Computer 2022}
+      \field{title}{Emergency Alerting Through Smartphone Apps: Functions, Usage and Usability Issues From the First Responder's Point of View}
+      \field{year}{2022}
+    \endentry
+    \entry{Domres2000TheGA}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=410915733e5bcb87a2e966ffdc760b2d}{%
+           family={Domres},
+           familyi={D\bibinitperiod},
+           given={Bernd\bibnamedelima D.},
+           giveni={B\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=06d90fbd86f5db7f0ca50d3e436af8e6}{%
+           family={Schauwecker},
+           familyi={S\bibinitperiod},
+           given={H.\bibnamedelimi H.},
+           giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=34351c2c4830ae45742a92ed692cffd0}{%
+           family={Rohrmann},
+           familyi={R\bibinitperiod},
+           given={Kris},
+           giveni={K\bibinitperiod}}}%
+        {{hash=e3686ddaf594e32f349346844058b600}{%
+           family={Roller},
+           familyi={R\bibinitperiod},
+           given={Goetz},
+           giveni={G\bibinitperiod}}}%
+        {{hash=63a710836c54d69b846780a1cbda01eb}{%
+           family={Maier},
+           familyi={M\bibinitperiod},
+           given={Günter\bibnamedelima W.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=affe2d544a946e4809c70d4585690f79}{%
+           family={Manger},
+           familyi={M\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{f3cccb4910563e0951bc605ffb94a37f}
+      \strng{fullhash}{a629645bd36162f677251e15779fbf8e}
+      \strng{fullhashraw}{a629645bd36162f677251e15779fbf8e}
+      \strng{bibnamehash}{a629645bd36162f677251e15779fbf8e}
+      \strng{authorbibnamehash}{a629645bd36162f677251e15779fbf8e}
+      \strng{authornamehash}{f3cccb4910563e0951bc605ffb94a37f}
+      \strng{authorfullhash}{a629645bd36162f677251e15779fbf8e}
+      \strng{authorfullhashraw}{a629645bd36162f677251e15779fbf8e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medicinski arhiv}
+      \field{title}{The German approach to emergency/disaster management.}
+      \field{volume}{54 4}
+      \field{year}{2000}
+      \field{pages}{201\bibrangedash 3}
+      \range{pages}{3}
+    \endentry
+    \entry{Jacoby2014AfterAR}{inproceedings}{}{}
+      \name{author}{7}{}{%
+        {{hash=1998c5a945e4d8ec6b570e989eb6aca7}{%
+           family={Jacoby},
+           familyi={J\bibinitperiod},
+           given={Jon},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1a87d93cc35b383aa208f5ba905c5991}{%
+           family={Bonanno},
+           familyi={B\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=caa639e2ca1577cc4a55645229442f7f}{%
+           family={Carozza},
+           familyi={C\bibinitperiod},
+           given={Ernie},
+           giveni={E\bibinitperiod}}}%
+        {{hash=1c88a095e25407b972fc39add0a26ce0}{%
+           family={Cokus},
+           familyi={C\bibinitperiod},
+           given={Michael\bibnamedelima S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=6a4081a3d687a85b264b32e51d658924}{%
+           family={DeYoung},
+           familyi={D\bibinitperiod},
+           given={Elizabeth},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ca8591780a41bb0a8597ca7050d427be}{%
+           family={Dinsmore},
+           familyi={D\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ddc61e8ae55c1d4f7981c4452bbd4e8e}{%
+           family={McHugh},
+           familyi={M\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{949253f3f6493ffd26478cbe5808ec83}
+      \strng{fullhash}{1c4b1668db21b7e0a38883920a8eb531}
+      \strng{fullhashraw}{1c4b1668db21b7e0a38883920a8eb531}
+      \strng{bibnamehash}{1c4b1668db21b7e0a38883920a8eb531}
+      \strng{authorbibnamehash}{1c4b1668db21b7e0a38883920a8eb531}
+      \strng{authornamehash}{949253f3f6493ffd26478cbe5808ec83}
+      \strng{authorfullhash}{1c4b1668db21b7e0a38883920a8eb531}
+      \strng{authorfullhashraw}{1c4b1668db21b7e0a38883920a8eb531}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{After Action Report: Cursor On Target International User Group Meeting (2nd). Held on 1-2 April 2014}
+      \field{year}{2014}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

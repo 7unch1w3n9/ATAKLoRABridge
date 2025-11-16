@@ -1,6 +1,6 @@
-\subsection{FutureSDR and Java Native Interface (JNI)}
+\section{FutureSDR and Java Native Interface (JNI)}
 
-    However, systems such as LoRAgent and Meshtastic typically rely on proprietary communication stacks or dedicated hardware chipsets, which constrains flexibility and limits deeper customization. To fully leverage LoRa's capabilities and integrate it seamlessly into a wide range of mobile devices, a portable, efficient, and open-source Software -Defined Radio (SDR) framework for underlying signal processing is essential.
+    While existing LoRa-based communication systems demonstrate the practicality of low-power, long-range connectivity, their implementations are typically tied to fixed radio chipsets and hardware-specific protocol stacks. As a result, they offer limited flexibility for adapting to alternative or evolving physical layers. In contrast, Software-Defined Radio (SDR) frameworks provide a programmable and hardware-agnostic approach to implementing wireless communication, enabling signal processing pipelines to be modified or replaced without redesigning the underlying hardware.
 
     Traditional SDR frameworks face challenges in platform adaptability, real-time performance, and runtime configuration, often falling short of the low-latency, cross-platform, and dynamically controllable requirements of real-world deployments. For instance, GNU Radio assigns each signal processing block, such as those for modulation, demodulation, and filtering, a dedicated thread and relies on buffered inter-thread communication for data transfer. While this model offers clarity and modularity, it incurs substantial thread-switching overhead, lacks support for fine-grained scheduling or heterogeneous hardware, and is generally ill-suited for embedded systems.
 
@@ -13,3 +13,5 @@
     JNI also provides a complete type-mapping mechanism. Primitive Java types, for example int and double, are mapped to native equivalents such as jint and jdouble, while Java objects are handled via the jobject hierarchy. Memory management combines both local and global references. Local references are automatically reclaimed after native method execution, making them ideal for short-lived objects. Global references persist until explicitly released and are suitable for long-lived cross-context references. This dual model balances ease of use with safe memory practices.
 
     Additionally, JNI supports full exception handling, allowing native code to catch, check, or throw Java exceptions. The specification also enforces thread locality of JNI interface pointers, preventing their use across threads and ensuring thread-safe operation in concurrent environments\cite{TODO}. Together, these characteristics establish JNI as a reliable and efficient bridge between Java applications and native libraries, forming a solid technical basis for integrating ATAK plugins with FutureSDR flowgraphs.
+
+    

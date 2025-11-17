@@ -1,0 +1,20 @@
+\section{System Requirements}
+
+Building upon the execution-environment constraints and physical-layer integration considerations outlined in the preceding section, this subsection synthesizes the functional requirements that the system must fulfill.
+
+\subsection{Functional Requirements}
+
+Building upon the execution-environment constraints and physical-layer integration considerations outlined in the preceding section, this subsection synthesizes the functional requirements that the system must fulfill. At the functional level, the system must support end-to-end message exchange among ATAK devices in environments lacking conventional communication infrastructure. The plugin shall be capable of capturing or generating CoT events from ATAK's internal event stream, enabling local messages to be correctly mapped to canonical CoT structures when interfacing with GeoChat or the COP.
+
+Internally, the system employs a custom message format as its primary representation for storage and user interface presentation. As a result, a reversible, bidirectional, and unambiguous transformation mechanism must be maintained between this internal format and CoT XML, ensuring that semantically relevant fields such as message content, sender and recipient identifiers, timestamps, and chat-room affiliation remain intact and faithfully preserved during conversion. In addition, the system must ensure semantic consistency across three representations: the internal message format, the physical-layer transmission payload, and CoT events. This guarantees a unified data model and coherent behavior across local storage, wireless transmission, and ATAK's native interface.
+
+\subsection{Non-Functional Requirements}
+
+The system must operate independently of Wi-Fi, LTE, MANET, or any form of IP-based connectivity, thereby meeting the infrastructure-independence requirements critical in disaster and infrastructure-denied scenarios. The plugin shall run reliably on standard, non-rooted Android devices without necessitating system-level modifications. Although this work employs LoRa as the exemplar physical layer, the overall system architecture must remain agnostic to the underlying physical technology. This design principle enables seamless future substitution with alternative communication methods including acoustic modems, FSK, BLE long-range mode, or other SDR-based waveforms. Furthermore, the plugin must adhere to ATAK's established CoT event flow, internal data structures, and lifecycle management protocols to ensure compatibility and interoperability with existing plugins and core ATAK components.
+
+
+\subsection{Implementation Constraints}
+
+All application-layer logic must execute within ATAK's Java-based Android user space and therefore must avoid blocking the main thread or relying on restricted hardware interfaces. Since continuous I/Q stream processing, LoRa modulation and demodulation, and FutureSDR flowgraph execution constitute time-sensitive physical-layer tasks, these operations must be performed within external native runtimes or dedicated SDR hardware rather than inside the plugin itself. Communication between the plugin and these native components shall rely on portable and stable interfaces such as UDP, TCP, or, where appropriate, WebAssembly-exported functions to ensure cross-platform portability and reliable interoperability.
+
+In addition, the system must support a staged validation workflow that includes loopback testing, external SDR-based communication verification, and over-the-air link experiments. These procedures must be accompanied by comprehensive logging and debugging facilities to enable systematic fault identification and rigorous evaluation throughout the development process.

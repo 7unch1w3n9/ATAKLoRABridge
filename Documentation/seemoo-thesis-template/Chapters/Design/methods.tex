@@ -1,0 +1,35 @@
+\section{Development Phases}
+This study adopts the Waterfall development model as the methodological framework for system implementation.
+The model structures the development process into a sequence of consecutively executed phases, each guided by clearly defined objectives and completed before serving as the input to the next stage. Given the project's strict requirements on system stability, semantic consistency of messages, and coordination across application and physical layers, the Waterfall model provides the necessary level of procedural structure, enabling each subsystem to be constructed and validated within well-defined phase boundaries.
+
+The implementation process consists of four core phases, beginning with application-layer CoT event handling and progressively extending to embedded signal-processing integration, external SDR communication, and full system-level evaluation. The output of each phase functions as a prerequisite for the subsequent stage, ensuring that correctness and behavioral consistency are maintained throughout the system's construction.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 0: ATAK Chat Interface Integration}\par
+This phase focuses on application-layer handling of CoT events.
+The plugin must observe, capture, and display GeoChat messages originating from ATAK's internal event stream. This step validates that all essential semantic fields, including message content, sender and recipient identifiers, and timestamps, are correctly extracted.
+The outcome provides a stable foundation for designing the internal data model, establishing bidirectional message transformation, and preparing for subsequent physical-layer integration.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 1: Embedded WASM Flowgraph Integration}\par
+In this stage, a static FutureSDR flowgraph is compiled to WASM and embedded directly into the plugin. The plugin interacts with the WASM module through controlled function calls and shared-memory buffers, enabling deterministic and reproducible testing within the Android runtime.
+
+Rather than performing full physical-layer modulation or demodulation, this phase validates the round-trip conversion between the internal message format and the compact binary payload used for physical-layer transport. This ensures that the message model, serialization layout, and plugin-side processing logic behave consistently before integrating an actual RF stack. The WASM-based loopback therefore provides a lightweight and hardware-independent prototype environment for debugging, data-model alignment, and early-stage verification of the end-to-end processing chain.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 2: External SDR and CoT Integration}\par
+In scenarios requiring real over-the-air communication, the system interfaces with external SDR hardware running a native FutureSDR flowgraph, using a HackRF One as the RF front-end. Outgoing messages are first stored in the plugin's internal message format, then serialized into a compact binary payload and forwarded via UDP to the external runtime, which modulates and transmits the payload over a LoRa link. On the receiving side, the flowgraph demodulates the signal, returns the recovered binary payload to the plugin over UDP, and the plugin decodes it back into the internal message format. From there, observers reconstruct and inject the corresponding CoT events into ATAK, ensuring that messages appear in GeoChat or the Common Operating Picture in a manner consistent with native behavior.
+
+%\vspace{0.5em}
+%\noindent\textbf{Phase 3: Dummy MAC (Multi-device)}\par
+%To support multiple ATAK devices sharing the same LoRa channel, a simplified static MAC layer will be implemented. To enable basic filtering, each message will prepend a lightweight protocol header containing sender and receiver UIDs. This allows the receiving side to discard irrelevant traffic early in the processing pipeline without parsing the full CoT payload. Although this MAC scheme is non-adaptive and stateless, it provides lightweight addressability and serves as a baseline for future protocol upgrades.
+
+\vspace{0.5em}
+\noindent\textbf{Phase 4: System Evaluation and Fallback Mechanism Testing}\par
+After the preceding phases are completed and stabilized, the final phase evaluates system performance under infrastructure-deprived conditions. The assessment focuses on three aspects:
+\begin{itemize}
+    \item End-to-end message exchange across multiple ATAK devices, ensuring correct and stable multi-device operation.
+    \item Verification that decoded and injected CoT events remain indistinguishable from native GeoChat messages, confirming semantic and behavioral consistency.
+    \item Cross-device consistency, verifying that the system maintains equivalent functionality across heterogeneous Android architectures and hardware platforms.
+\end{itemize}
+This phase corresponds to the test and validation stage of the Waterfall model and ensures that the final system maintains reliable behavior under realistic deployment conditions.

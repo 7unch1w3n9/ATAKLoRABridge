@@ -1,0 +1,11 @@
+\section{Design Constraints of Direct Physical-Layer Integration}
+
+    Direct implementation of LoRa communication inside an ATAK plugin is infeasible due to limitations at both the hardware and execution-environment levels. Commodity smartphones lack Sub-GHz  trans-ceivers and thus cannot generate or receive LoRa waveforms; their built-in wireless interfaces (LTE, Wi-Fi, Bluetooth) expose no mechanisms for producing or capturing arbitrary baseband samples required for chirp-based modulation.
+
+    Even when external RF hardware is available, ATAK plugins execute entirely within the managed Android runtime. This environment features nondeterministic thread scheduling and periodic garbage-collection pauses, neither of which can provide the timing guarantees required for continuous I/Q streaming and real-time demodulation. Although UI and signal-processing workloads can, in principle, coexist within one process, the Android runtime is not designed to sustain long-running, latency-bounded DSP pipelines.
+
+    The Rust-based FutureSDR framework also cannot be embedded as a conventional Java library, as it depends on a native scheduler, direct memory control, and zero-copy buffer management—all incompatible with the constraints of the Android managed environment.
+
+    Taken together, these factors indicate that ATAK plugins are well suited for application-layer responsibilities such as Cursor-on-Target event handling, but not for hosting physical-layer signal processing. This motivates the modular architecture adopted in the subsequent sections, where LoRa modulation and demodulation are executed in a dedicated native runtime outside the plugin.
+
+

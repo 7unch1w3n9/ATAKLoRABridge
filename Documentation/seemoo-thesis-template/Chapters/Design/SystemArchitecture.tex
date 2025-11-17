@@ -1,0 +1,18 @@
+\section{System Architecture}
+
+Building on the execution-environment constraints and system requirements outlined in the preceding sections, this subsection presents the overall architecture designed to enable infrastructure-independent communication within ATAK. The system follows a layered and modular design that separates application-layer logic, internal message representation, and physical-layer processing. This separation ensures that each component operates within an appropriate runtime environment while maintaining a coherent and unified data flow across the entire communication pipeline.
+
+The architecture consists of three principal components:
+\begin{enumerate}
+    \item the ATAK plugin operating in the Android Java user space;
+    \item a custom internal message representation serving as the system's canonical format; and
+    \item an external native runtime or SDR device responsible for all physical-layer operations.
+\end{enumerate}
+
+The ATAK plugin handles all application-layer responsibilities. Running entirely within ATAK's managed Android environment, it observes the internal CoT event stream, captures outgoing GeoChat messages, and injects decoded messages back into ATAK in a manner indistinguishable from native events. The plugin does not perform any modulation or demodulation tasks; instead, it focuses on CoT parsing, conversion to the internal message format, local storage, and user interface presentation.
+
+At the core of the system lies a custom internal message format, which serves as the unified representation for plugin-internal storage and UI rendering. Since CoT is verbose and not well suited for frequent manipulation on the UI layer, this internal representation provides a lightweight and structured format for chat messages. It supports a reversible, bidirectional, and unambiguous transformation to and from CoT XML, ensuring that all semantically relevant fields, including message content, sender and recipient identifiers, timestamps, and chat-group affiliation, remain intact throughout the conversion process. The same representation also serves as the basis for constructing compact binary payloads suitable for transmission over low-bandwidth physical layers such as LoRa.
+
+All physical-layer signal processing tasks are delegated to an external native runtime or dedicated SDR hardware. This component performs real-time operations such as LoRa modulation and demodulation, execution of FutureSDR flowgraphs, and continuous I/Q streaming. Communication between the ATAK plugin and the native runtime is realized through portable interfaces such as UDP or TCP sockets, enabling deployment on different hardware architectures. Outgoing messages are serialized into binary payloads and delivered to the native runtime for transmission, while incoming radio signals are demodulated externally and then returned to the plugin for reconstruction and subsequent injection as CoT events.
+
+Through this layered and loosely coupled architecture, ATAK's application logic remains isolated from the timing-critical demands of physical-layer processing, while the external runtime efficiently handles real-time signal operations. The resulting design provides robustness in infrastructure-denied environments, supports future substitution of different physical-layer technologies, and establishes a clean foundation for the implementation and evaluation described in the subsequent chapters.

@@ -1,18 +1,74 @@
 \section{Limitations, and Risk Management}
-This project explicitly does not address issues related to message encryption and authentication, secure communication protocols, long-range transmission optimization, or power consumption control. The primary research focus is the development of a extensible working prototype that demonstrates end-to-end LoRa communication through the integration of FutureSDR and ATAK.
+This section summarizes the primary limitations of the implemented system, identifies potential risks that may affect its stability and correctness during operation, and outlines mitigation strategies adopted in this work.
 
-While the physical-layer signal processing flowgraph is provided as a static component at the project's outset, several technical risks related to integration persist.
+\subsection{System Limitations}
 
-One primary concern involves the compatibility of the WebAssembly (WASM) runtime within the Android environment. This ecosystem is still maturing, and potential issues could lead to abnormal communication or degraded performance between the plugin and the embedded flowgraph.
+The system exhibits limitations across functional scope, physical-layer design, and software architecture.
+
+\subsubsection{Functional Limitations}
+\begin{itemize}
+    \item No encryption, authentication, or secure key management is implemented; all communication is transmitted in plaintext for experimental purposes.
+    \item The system does not provide reliable transport mechanisms such as retransmission, congestion control, duplicate suppression, or message-order enforcement, and therefore cannot offer quality-of-service guarantees.
+    \item No MAC-layer logic is implemented, such as collision avoidance, link scheduling, or multi-hop routing, which restricts the system to basic single-hop operation without mesh capabilities.
+\end{itemize}
+
+
+\subsubsection{Physical-Layer and Hardware Limitations}
+\begin{itemize}
+    \item The system relies on an external SDR device (HackRF One) to perform modulation, demodulation, and I/Q processing, meaning the physical layer cannot operate solely on the smartphone.
+    \item HackRF One is a half-duplex device and cannot transmit and receive simultaneously, which limits real-time performance and throughput.
+    \item LoRa parameters such as spreading factor, bandwidth, and coding rate must be manually configured and do not adapt to changing environmental conditions.
+    \item The FutureSDR flowgraph is compiled as a static configuration, preventing runtime reconfiguration of the physical-layer processing chain.
+\end{itemize}
+
+\subsubsection{Software and Data-Model Limitations}
+\begin{itemize}
+    \item Communication between the ATAK plugin and the external native runtime uses UDP, which does not provide reliability, ordering guarantees, or fragmentation/reassembly support.
+    \item The mapping between the internal message format and CoT XML depends on strict structural consistency, making it sensitive to malformed fields or unexpected formats.
+    \item The system does not implement event ordering, deduplication, or conflict resolution, which may affect message consistency under high load.
+\end{itemize}
+
+\subsection{Potential Risks}
+During operation, the system may encounter several classes of risks:
+\subsubsection{Runtime Risks}
+\begin{itemize}
+    \item Android vendor-specific scheduling or background-process policies may delay processing or terminate the plugin.
+    \item UDP-based communication may suffer from packet loss, port conflicts, or message reordering.
+    \item LoRa performance may degrade in low-SNR conditions, resulting in demodulation failures.
+    \item USB-based SDR connectivity may be unstable, causing interruptions in the physical-layer link.
+\end{itemize}
+
+
+\subsubsection{Compatibility and Semantic Risks}
+\begin{itemize}
+    \item Behavioral differences may arise across heterogeneous CPU architectures (arm64-v8a, x86\_64) or Android distributions.
+    \item Reconstructed CoT events may fail ATAK’s internal validation if required fields are missing or inconsistent.
+\end{itemize}
+
+
+\subsection{Risk Mitigation Strategies}
+To improve system robustness, the following mitigation strategies are incorporated:
+\begin{itemize}
+    \item Strict structural validation is performed when converting between the internal message format and CoT XML to avoid malformed or incomplete events.
+    \item Diagnostic logging, sequence identifiers, and additional metadata support debugging and detection of inconsistent message flow.
+    \item Cross-device and cross-architecture testing is conducted to increase compatibility and reduce platform-specific variability.
+    \item If event injection into ATAK fails, messages remain accessible through the internal representation, ensuring minimal usability under degraded conditions.
+\end{itemize}
+
+
+
+%While the physical-layer signal processing flowgraph is provided as a static component at the project's outset, several technical risks related to integration persist.
+
+%One primary concern involves the compatibility of the WebAssembly (WASM) runtime within the Android environment. This ecosystem is still maturing, and potential issues could lead to abnormal communication or degraded performance between the plugin and the embedded flowgraph.
 %Another significant risk arises during the process of reconstructing Cursor-on-Target (CoT) messages after the plugin receives demodulated data. This reconstruction relies heavily on XML parsing and structural mapping. Any inconsistencies in format or failures during parsing could result in message loss or rejection by the GeoChat module, hindering effective communication.
 
-To mitigate these risks, the project defines two fallback solutions:
+%To mitigate these risks, the project defines two fallback solutions:
 
-\newpage
+%\newpage
 %\vspace{0.5em}
-\noindent\textbf{WASM Module Failure Fallback}\par
-Should WASM runtime compatibility issues arise within the Android environment during Phase 1—manifesting as invocation failures or memory access conflicts, for instance—the system will pivot to an alternative approach. It will then interact with a locally running non-WASM software flowgraph via inter-process communication interfaces, such as TCP or UDP. This setup will continue to simulate the modulation and demodulation processes of CoT messages. It's important to note this alternative won't activate an actual radio frequency link; its sole purpose is to validate the correct integration of the plugin with the underlying physical layer interface logic.
+%\noindent\textbf{WASM Module Failure Fallback}\par
+%Should WASM runtime compatibility issues arise within the Android environment during Phase 1—manifesting as invocation failures or memory access conflicts, for instance—the system will pivot to an alternative approach. It will then interact with a locally running non-WASM software flowgraph via inter-process communication interfaces, such as TCP or UDP. This setup will continue to simulate the modulation and demodulation processes of CoT messages. It's important to note this alternative won't activate an actual radio frequency link; its sole purpose is to validate the correct integration of the plugin with the underlying physical layer interface logic.
 
- \vspace{0.5em}
-\noindent\textbf{RF Module Failure Fallback}\par
-Should SDR hardware connectivity fail during Phase 2, or if the RF link proves unstable under specific test conditions, the system will revert to the loopback simulation path established in Phase 1. This fallback involves the plugin utilizing the embedded WASM flowgraph to simulate physical channel behavior. This ensures continued validation of core functionalities, including message format conversion, Cursor-on-Target (CoT) structure generation, and GeoChat display, even without a live RF connection.
+%\vspace{0.5em}
+%\noindent\textbf{RF Module Failure Fallback}\par
+%Should SDR hardware connectivity fail during Phase 2, or if the RF link proves unstable under specific test conditions, the system will revert to the loopback simulation path established in Phase 1. This fallback involves the plugin utilizing the embedded WASM flowgraph to simulate physical channel behavior. This ensures continued validation of core functionalities, including message format conversion, Cursor-on-Target (CoT) structure generation, and GeoChat display, even without a live RF connection.

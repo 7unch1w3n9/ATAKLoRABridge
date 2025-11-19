@@ -7,3 +7,6 @@
 [submodule "atak-docker/third_party/libusb"]
 	path = atak-docker/third_party/libusb
 	url = https://github.com/libusb/libusb.git
+[submodule "atak-docker/third_party/SoapySDR"]
+	path = atak-docker/third_party/SoapySDR
+	url = git@dev.seemoo.tu-darmstadt.de:stud-theses/bsc-junchi-weng-soapysdr.git

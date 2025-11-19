@@ -1,0 +1,9 @@
+[submodule "atak-docker/third_party/hackrf"]
+	path = atak-docker/third_party/hackrf
+	url = git@dev.seemoo.tu-darmstadt.de:stud-theses/bsc-junchi-weng-hackrf.git
+[submodule "atak-docker/third_party/SoapyHackRF"]
+	path = atak-docker/third_party/SoapyHackRF
+	url = git@dev.seemoo.tu-darmstadt.de:stud-theses/bsc-junchi-weng-soapyhackrf.git
+[submodule "atak-docker/third_party/libusb"]
+	path = atak-docker/third_party/libusb
+	url = https://github.com/libusb/libusb.git

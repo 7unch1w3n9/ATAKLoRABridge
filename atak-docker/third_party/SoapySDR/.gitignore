@@ -1,5 +1,0 @@
-# Ignore CMake generated output
-build/
-*~
-*.swp
-__pycache__
